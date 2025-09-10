@@ -43,7 +43,7 @@ const HeroSection = () => {
             
             <div className="aspect-[3/4] rounded-2xl mt-8 overflow-hidden">
               <img 
-                src="/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png" 
+                src="https://i.ibb.co/sJPrJVxL/Generated-Image-September-10-2025-4-10-PM.png" 
                 alt="Traditional African native wear - green Agbada outfit showcase"
                 className="w-full h-full object-cover"
               />
