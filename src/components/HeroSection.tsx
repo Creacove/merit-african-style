@@ -41,8 +41,12 @@ const HeroSection = () => {
               </span>
             </div>
             
-            <div className="aspect-[3/4] bg-muted rounded-2xl mt-8 flex items-center justify-center">
-              <span className="text-muted-foreground font-inter">Hero Image</span>
+            <div className="aspect-[3/4] rounded-2xl mt-8 overflow-hidden">
+              <img 
+                src="/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png" 
+                alt="Traditional African native wear - green Agbada outfit showcase"
+                className="w-full h-full object-cover"
+              />
             </div>
             
             {/* Circular CTA */}
