@@ -14,7 +14,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
-              Luxury native wears — Agbada, Buba, and Shokoto — crafted with precision for Lagos' finest.
+              Fine fabric and exacting cuts, hand-finished tailoring with attention to every seam.
             </p>
             
             <div className="flex items-center gap-3 max-w-md">
