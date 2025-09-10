@@ -14,7 +14,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
-              Fine fabric and exacting cuts, hand-finished tailoring with attention to every seam.
+              Fine fabrics and exacting cuts, hand-finished tailoring with attention to every seam.
             </p>
             
             <div className="flex items-center gap-3 max-w-md">
