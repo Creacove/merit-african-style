@@ -1,40 +1,73 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, ChevronDown } from "lucide-react";
 
 const HeroSection = () => {
+  const titleWords = ["Bespoke", "Tailoring", "for", "the", "Modern", "Gentleman"];
+  
   return (
-    <section className="relative min-h-screen px-6 lg:px-12 py-12">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-start">
+    <section className="relative min-h-screen px-6 lg:px-12 py-16 overflow-hidden">
+      {/* Floating Geometric Overlays */}
+      <div className="overlay-shape top-20 left-10 w-32 h-32 opacity-15">
+        <svg viewBox="0 0 100 100" className="w-full h-full text-secondary">
+          <path d="M20,20 L80,20 L60,80 L40,80 Z" fill="currentColor" opacity="0.3"/>
+          <circle cx="30" cy="40" r="8" fill="none" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      </div>
+      <div className="overlay-shape top-40 right-20 w-24 h-24 opacity-15" style={{animationDelay: '5s'}}>
+        <svg viewBox="0 0 100 100" className="w-full h-full text-accent">
+          <polygon points="50,15 85,75 15,75" fill="currentColor" opacity="0.4"/>
+          <line x1="30" y1="30" x2="70" y2="70" stroke="currentColor" strokeWidth="3"/>
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-start relative z-10">
         {/* Left Column - 7/12 */}
         <div className="lg:col-span-7 space-y-8">
           <div className="space-y-6">
-            <h1 className="font-playfair font-bold text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] tracking-tight text-foreground">
-              Bespoke Tailoring for the Modern Gentleman
+            <h1 className="hero-title font-playfair font-bold text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] tracking-tight text-foreground">
+              {titleWords.map((word, index) => (
+                <span key={index} className="inline-block mr-4">
+                  {word}
+                </span>
+              ))}
             </h1>
             
-            <p className="font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
+            <p className="hero-subtitle font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
               Fine fabrics and exacting cuts, hand-finished tailoring with attention to every seam.
             </p>
             
-            <div className="flex items-center gap-3 max-w-md">
-              <div className="relative flex-1">
-                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input 
-                  placeholder="(0xx) xxxx xxxx"
-                  className="pl-10 bg-input border-border text-foreground rounded-full"
-                />
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 max-w-md">
+                <div className="relative flex-1">
+                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input 
+                    placeholder="(0xx) xxxx xxxx"
+                    className="pl-10 bg-input border-border text-foreground rounded-full"
+                  />
+                </div>
+                <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-inter font-semibold px-6 rounded-full">
+                  Call Me
+                </Button>
               </div>
-              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-inter font-semibold px-6 rounded-full">
-                Call Me
-              </Button>
+              
+              {/* Additional CTA */}
+              <div className="flex items-center gap-4">
+                <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-inter font-semibold px-8 py-3 rounded-full">
+                  Book a Fitting
+                </Button>
+                <div className="scroll-indicator flex flex-col items-center text-muted-foreground">
+                  <span className="text-xs mb-1">Scroll</span>
+                  <ChevronDown className="w-4 h-4" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
         
         {/* Right Column - 5/12 */}
         <div className="lg:col-span-5 relative">
-          <div className="relative bg-secondary rounded-3xl p-8 shadow-2xl">
+          <div className="hero-image relative bg-secondary rounded-3xl p-8 shadow-2xl">
                         
             <div className="aspect-[3/4] rounded-2xl mt-8 overflow-hidden">
               <img 
