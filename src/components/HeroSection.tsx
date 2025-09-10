@@ -10,7 +10,7 @@ const HeroSection = () => {
         <div className="lg:col-span-7 space-y-8">
           <div className="space-y-6">
             <h1 className="font-playfair font-bold text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] tracking-tight text-foreground">
-              Bespoke African Tailoring for the Modern Gentleman
+              Bespoke Tailoring for the Modern Gentleman
             </h1>
             
             <p className="font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
@@ -37,7 +37,7 @@ const HeroSection = () => {
           <div className="relative bg-secondary rounded-3xl p-8 shadow-2xl">
             <div className="absolute top-6 left-6">
               <span className="text-xs font-inter uppercase tracking-wide text-secondary-foreground/70">
-                2005 — Lagos, Nigeria
+                2025 — Lagos, Nigeria
               </span>
             </div>
             
