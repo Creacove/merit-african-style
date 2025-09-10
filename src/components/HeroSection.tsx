@@ -35,15 +35,10 @@ const HeroSection = () => {
         {/* Right Column - 5/12 */}
         <div className="lg:col-span-5 relative">
           <div className="relative bg-secondary rounded-3xl p-8 shadow-2xl">
-            <div className="absolute top-6 left-6">
-              <span className="text-xs font-inter uppercase tracking-wide text-secondary-foreground/70">
-                2025 — Lagos, Nigeria
-              </span>
-            </div>
-            
+                        
             <div className="aspect-[3/4] rounded-2xl mt-8 overflow-hidden">
               <img 
-                src="/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png" 
+                src="https://i.ibb.co/sJPrJVxL/Generated-Image-September-10-2025-4-10-PM.png" 
                 alt="Traditional African native wear - green Agbada outfit showcase"
                 className="w-full h-full object-cover"
               />
@@ -83,5 +78,6 @@ const HeroSection = () => {
     </section>
   );
 };
+
 
 export default HeroSection;
