@@ -5,7 +5,7 @@ const Navigation = () => {
     <nav className="relative z-50 flex items-center justify-between px-6 py-6 lg:px-12">
       <div className="flex items-center">
         <span className="text-xl font-playfair font-bold text-foreground">
-          MeritGold Clothings
+          Merit Good
         </span>
       </div>
       
