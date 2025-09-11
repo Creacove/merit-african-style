@@ -66,23 +66,23 @@ const HeroSection = () => {
         </div>
         
         {/* Right Column - 5/12 - Layered 3D Hero Image */}
-        <div className="lg:col-span-5 relative">
-          <div className="hero-3d-container relative w-full h-[600px] lg:h-[700px]">
-            {/* Background Image Layer */}
-            <div className="absolute inset-0 w-full h-full rounded-b-[40px] overflow-hidden z-[1]">
+        <div className="lg:col-span-5 relative overflow-visible">
+          <div className="hero-3d-container relative w-full h-[600px] lg:h-[700px] overflow-visible">
+            {/* Background Image Layer - Smaller to allow cloth extension */}
+            <div className="background-layer absolute top-[15%] left-[5%] w-[90%] h-[70%] rounded-b-[40px] overflow-hidden z-[1]">
               <img 
                 src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
                 alt="Nigerian cultural background with geometric patterns"
-                className="w-full h-full object-cover"
+                className="background-image w-full h-full object-cover"
               />
             </div>
             
-            {/* Mannequin Image Layer */}
-            <div className="mannequin-container absolute top-[20%] left-1/2 transform -translate-x-1/2 z-[2] h-auto max-h-[800px]">
+            {/* Mannequin Image Layer - Dramatically Taller */}
+            <div className="mannequin-container absolute top-[-10%] left-1/2 transform -translate-x-1/2 z-[2] overflow-visible">
               <img 
                 src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                 alt="Mannequin wearing traditional green African attire"
-                className="mannequin-image h-auto max-h-[800px] w-auto"
+                className="mannequin-image h-auto w-auto min-h-[900px] lg:min-h-[1100px]"
               />
             </div>
             
