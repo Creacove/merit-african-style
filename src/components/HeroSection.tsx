@@ -142,7 +142,7 @@ const HeroSection = () => {
                 src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                 alt="Mannequin wearing traditional green African attire"
                 className="mannequin-image h-auto w-auto"
-                style={{ minHeight: '850px', minWidth: '500px' }}
+                style={{ minHeight: '850px' }}
               />
             </div>
             
