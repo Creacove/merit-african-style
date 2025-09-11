@@ -65,20 +65,29 @@ const HeroSection = () => {
           </div>
         </div>
         
-        {/* Right Column - 5/12 */}
+        {/* Right Column - 5/12 - Layered 3D Hero Image */}
         <div className="lg:col-span-5 relative">
-          <div className="hero-image relative bg-secondary rounded-3xl p-8 shadow-2xl">
-                        
-            <div className="aspect-[3/4] rounded-2xl mt-8 overflow-hidden">
+          <div className="hero-3d-container relative w-full h-[600px] lg:h-[700px]">
+            {/* Background Image Layer */}
+            <div className="absolute inset-0 w-full h-full rounded-b-[40px] overflow-hidden z-[1]">
               <img 
-                src="https://i.ibb.co/sJPrJVxL/Generated-Image-September-10-2025-4-10-PM.png" 
-                alt="Traditional African native wear - green Agbada outfit showcase"
+                src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
+                alt="Nigerian cultural background with geometric patterns"
                 className="w-full h-full object-cover"
               />
             </div>
             
+            {/* Mannequin Image Layer */}
+            <div className="mannequin-container absolute top-[20%] left-1/2 transform -translate-x-1/2 z-[2] h-auto max-h-[800px]">
+              <img 
+                src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
+                alt="Mannequin wearing traditional green African attire"
+                className="mannequin-image h-auto max-h-[800px] w-auto"
+              />
+            </div>
+            
             {/* Circular CTA */}
-            <div className="absolute -left-8 top-1/2 transform -translate-y-1/2">
+            <div className="absolute -left-8 top-1/2 transform -translate-y-1/2 z-[3]">
               <Button
                 size="lg"
                 className="w-16 h-16 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:scale-105 transition-all duration-300"
