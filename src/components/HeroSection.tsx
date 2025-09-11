@@ -21,6 +21,65 @@ const HeroSection = () => {
         </svg>
       </div>
 
+      {/* Tailoring SVG Background Shapes */}
+      <div className="tailoring-shapes">
+        {/* Sewing Machine Icon */}
+        <div className="absolute top-16 left-1/4 w-20 h-20 opacity-20 z-[5]" style={{animationDelay: '2s'}}>
+          <svg width="80" height="80" viewBox="0 0 120 120" className="text-secondary animate-drift">
+            <g transform="translate(10,10)">
+              <rect x="0" y="60" width="80" height="30" rx="5" fill="currentColor" opacity="0.8"/>
+              <rect x="30" y="20" width="40" height="40" rx="10" fill="currentColor"/>
+              <line x1="50" y1="20" x2="50" y2="0" stroke="#fff" strokeWidth="2"/>
+              <circle cx="50" cy="10" r="5" fill="#fff"/>
+            </g>
+          </svg>
+        </div>
+
+        {/* Needle and Thread Icon */}
+        <div className="absolute top-1/3 right-1/4 w-16 h-16 opacity-15 z-[5]" style={{animationDelay: '4s'}}>
+          <svg width="64" height="64" viewBox="0 0 120 120" className="text-accent animate-drift">
+            <g transform="translate(10,70)">
+              <line x1="0" y1="0" x2="80" y2="80" stroke="currentColor" strokeWidth="3"/>
+              <path d="M80,80 Q85,75 80,70" fill="none" stroke="currentColor" strokeWidth="3"/>
+              <circle cx="80" cy="80" r="3" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+
+        {/* Fabric Scissors Icon */}
+        <div className="absolute bottom-1/3 left-16 w-12 h-12 opacity-20 z-[5]" style={{animationDelay: '6s'}}>
+          <svg width="48" height="48" viewBox="0 0 120 120" className="text-muted animate-drift">
+            <g transform="translate(60,10)">
+              <path d="M0,0 L40,40 M40,0 L0,40" stroke="currentColor" strokeWidth="4" fill="none"/>
+              <circle cx="20" cy="20" r="5" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+
+        {/* Traditional Bead Icon */}
+        <div className="absolute top-2/3 right-12 w-14 h-14 opacity-15 z-[5]" style={{animationDelay: '8s'}}>
+          <svg width="56" height="56" viewBox="0 0 120 120" className="text-secondary animate-drift">
+            <g transform="translate(60,70)">
+              <circle cx="20" cy="20" r="15" fill="currentColor"/>
+              <circle cx="20" cy="20" r="10" fill="currentColor" opacity="0.7"/>
+              <circle cx="20" cy="20" r="5" fill="#fff"/>
+              <line x1="20" y1="0" x2="20" y2="40" stroke="currentColor" strokeWidth="2" strokeDasharray="4"/>
+            </g>
+          </svg>
+        </div>
+
+        {/* Adire Pattern Wheel Icon */}
+        <div className="absolute bottom-16 right-1/3 w-18 h-18 opacity-20 z-[5]" style={{animationDelay: '10s'}}>
+          <svg width="72" height="72" viewBox="0 0 120 120" className="text-accent animate-drift">
+            <g transform="translate(100,40)">
+              <circle cx="20" cy="20" r="20" fill="none" stroke="currentColor" strokeWidth="2"/>
+              <path d="M20,0 A20,20 0 0,1 40,20 A20,20 0 0,1 20,40 A20,20 0 0,1 0,20 A20,20 0 0,1 20,0" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="5"/>
+              <circle cx="20" cy="20" r="3" fill="currentColor"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-start relative z-10">
         {/* Left Column - 7/12 */}
         <div className="lg:col-span-7 space-y-8">
@@ -68,8 +127,8 @@ const HeroSection = () => {
         {/* Right Column - 5/12 - Layered 3D Hero Image */}
         <div className="lg:col-span-5 relative overflow-visible">
           <div className="hero-3d-container relative w-full h-[600px] lg:h-[700px] overflow-visible">
-            {/* Background Image Layer - Smaller to allow cloth extension */}
-            <div className="background-layer absolute top-[15%] left-[5%] w-[90%] h-[70%] rounded-b-[40px] overflow-hidden z-[1]">
+            {/* Background Image Layer - Full size with proper radius */}
+            <div className="background-layer absolute inset-0 w-full h-full rounded-b-[40px] overflow-hidden z-[1]">
               <img 
                 src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
                 alt="Nigerian cultural background with geometric patterns"
@@ -77,12 +136,13 @@ const HeroSection = () => {
               />
             </div>
             
-            {/* Mannequin Image Layer - Dramatically Taller */}
-            <div className="mannequin-container absolute top-[-10%] left-1/2 transform -translate-x-1/2 z-[2] overflow-visible">
+            {/* Mannequin Image Layer - Properly proportioned */}
+            <div className="mannequin-container absolute top-[-8%] left-1/2 transform -translate-x-1/2 z-[2] overflow-visible">
               <img 
                 src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                 alt="Mannequin wearing traditional green African attire"
-                className="mannequin-image h-auto w-auto min-h-[900px] lg:min-h-[1100px]"
+                className="mannequin-image h-auto w-auto"
+                style={{ minHeight: '850px', minWidth: '400px' }}
               />
             </div>
             
