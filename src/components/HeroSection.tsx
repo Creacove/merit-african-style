@@ -8,13 +8,13 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen px-6 lg:px-12 py-16 overflow-hidden">
       {/* Floating Geometric Overlays */}
-      <div className="overlay-shape top-20 left-10 w-32 h-32 opacity-15 animate-drift">
+      <div className="overlay-shape top-20 left-10 w-32 h-32 opacity-15">
         <svg viewBox="0 0 100 100" className="w-full h-full text-secondary">
           <path d="M20,20 L80,20 L60,80 L40,80 Z" fill="currentColor" opacity="0.3"/>
           <circle cx="30" cy="40" r="8" fill="none" stroke="currentColor" strokeWidth="2"/>
         </svg>
       </div>
-      <div className="overlay-shape top-40 right-20 w-24 h-24 opacity-15 animate-drift" style={{ animationDelay: '5s' }}>
+      <div className="overlay-shape top-40 right-20 w-24 h-24 opacity-15" style={{animationDelay: '5s'}}>
         <svg viewBox="0 0 100 100" className="w-full h-full text-accent">
           <polygon points="50,15 85,75 15,75" fill="currentColor" opacity="0.4"/>
           <line x1="30" y1="30" x2="70" y2="70" stroke="currentColor" strokeWidth="3"/>
@@ -86,7 +86,7 @@ const HeroSection = () => {
           <div className="space-y-6">
             <h1 className="hero-title font-playfair font-bold text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] tracking-tight text-foreground">
               {titleWords.map((word, index) => (
-                <span key={index} className="inline-block mr-4 animate-fadeIn" style={{ animationDelay: `${index * 0.2}s` }}>
+                <span key={index} className="inline-block mr-4">
                   {word}
                 </span>
               ))}
@@ -117,7 +117,7 @@ const HeroSection = () => {
                 </Button>
                 <div className="scroll-indicator flex flex-col items-center text-muted-foreground">
                   <span className="text-xs mb-1">Scroll</span>
-                  <ChevronDown className="w-4 h-4 animate-bounce" />
+                  <ChevronDown className="w-4 h-4" />
                 </div>
               </div>
             </div>
@@ -141,14 +141,8 @@ const HeroSection = () => {
               <img 
                 src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                 alt="Mannequin wearing traditional green African attire"
-                className="mannequin-image object-contain"
-                style={{ 
-                  maxHeight: '750px', 
-                  maxWidth: '500px', 
-                  transform: 'perspective(1000px) rotateX(5deg)', 
-                  transformOrigin: 'bottom center',
-                  boxShadow: '0 40px 60px rgba(0,0,0,0.4)'
-                }}
+                className="mannequin-image h-auto w-auto"
+                style={{ minHeight: '750px', minWidth: '500px' }}
               />
             </div>
             
@@ -187,37 +181,5 @@ const HeroSection = () => {
   );
 };
 
-// Add these CSS styles in your Lovable custom CSS section or a global stylesheet
-const styles = `
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes drift {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(20px, -10px); }
-    100% { transform: translate(0, 0); }
-  }
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-  }
-  .animate-fadeIn { animation: fadeIn 0.8s ease-out forwards; }
-  .animate-drift { animation: drift 6s infinite ease-in-out; }
-  .animate-bounce { animation: bounce 2s infinite; }
-  .mannequin-image:hover {
-    transform: perspective(1000px) rotateX(3deg) scaleY(1.05);
-    transition: transform 0.3s ease-out;
-  }
-  @media (max-width: 768px) {
-    .mannequin-image {
-      maxHeight: 500px;
-      maxWidth: 350px;
-      transform: perspective(1000px) rotateX(3deg);
-    }
-    .hero-3d-container { height: 500px; }
-  }
-`;
 
 export default HeroSection;
