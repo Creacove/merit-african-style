@@ -116,19 +116,19 @@ const HeroSection = () => {
           
           {/* Hero Image - Second on Mobile */}
           <div className="lg:col-span-5 relative order-2 w-full">
-            <div className="hero-3d-container relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[600px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+            <div className="hero-3d-container relative w-full h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
               
-              {/* Mannequin Image Layer - Positioned Above Background */}
-              <div className="mannequin-container absolute top-[-80px] sm:top-[-100px] md:top-[-120px] lg:top-[-150px] left-1/2 transform -translate-x-1/2 z-[2]">
+              {/* Mannequin Image Layer - Centered and Taller */}
+              <div className="mannequin-container absolute top-[-60px] sm:top-[-70px] md:top-[-80px] lg:top-[-100px] left-1/2 transform -translate-x-1/2 z-[2]">
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Mannequin wearing traditional green African attire"
-                  className="h-[480px] sm:h-[550px] md:h-[620px] lg:h-[750px] w-auto object-contain"
+                  className="h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] w-auto object-contain"
                 />
               </div>
               
-              {/* Background Image Layer - Positioned Below Mannequin */}
-              <div className="background-layer absolute top-[60px] sm:top-[80px] md:top-[100px] lg:top-[120px] left-0 w-full h-[290px] sm:h-[320px] md:h-[350px] lg:h-[480px] rounded-3xl lg:rounded-b-[40px] overflow-hidden z-[1] shadow-2xl">
+              {/* Background Image Layer - Starts at Sleeve Level */}
+              <div className="background-layer absolute top-[120px] sm:top-[140px] md:top-[160px] lg:top-[200px] left-0 w-full h-[330px] sm:h-[360px] md:h-[390px] lg:h-[450px] rounded-3xl lg:rounded-b-[40px] overflow-hidden z-[1] shadow-2xl">
                 <img 
                   src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
                   alt="Nigerian cultural background with geometric patterns"
