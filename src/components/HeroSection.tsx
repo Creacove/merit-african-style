@@ -80,94 +80,96 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8 items-start relative z-10">
-        {/* Left Column - 7/12 */}
-        <div className="lg:col-span-7 space-y-8">
-          <div className="space-y-6">
-            <h1 className="hero-title font-playfair font-bold text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.98] tracking-tight text-foreground">
-              {titleWords.map((word, index) => (
-                <span key={index} className="inline-block mr-4">
-                  {word}
-                </span>
-              ))}
-            </h1>
-            
-            <p className="hero-subtitle font-inter text-lg lg:text-xl text-muted-foreground max-w-2xl">
-              Fine fabrics and exacting cuts, hand-finished tailoring with attention to every seam.
-            </p>
-            
-            <div className="space-y-4">
-              <div className="flex items-center gap-3 max-w-md">
-                <div className="relative flex-1">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input 
-                    placeholder="(0xx) xxxx xxxx"
-                    className="pl-10 bg-input border-border text-foreground rounded-full"
-                  />
-                </div>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-inter font-semibold px-6 rounded-full">
-                  Call Me
-                </Button>
-              </div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Mobile-First Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column - Content */}
+          <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
+            <div className="space-y-6">
+              <h1 className="hero-title font-playfair font-bold text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[0.98] tracking-tight text-foreground">
+                {titleWords.map((word, index) => (
+                  <span key={index} className="inline-block mr-3 lg:mr-4">
+                    {word}
+                  </span>
+                ))}
+              </h1>
               
-              {/* Additional CTA */}
-              <div className="flex items-center gap-4">
-                <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-inter font-semibold px-8 py-3 rounded-full">
-                  Book a Fitting
-                </Button>
-                <div className="scroll-indicator flex flex-col items-center text-muted-foreground">
-                  <span className="text-xs mb-1">Scroll</span>
-                  <ChevronDown className="w-4 h-4" />
+              <p className="hero-subtitle font-inter text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl">
+                Fine fabrics and exacting cuts, hand-finished tailoring with attention to every seam.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 max-w-md">
+                  <div className="relative flex-1">
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input 
+                      placeholder="(0xx) xxxx xxxx"
+                      className="pl-10 bg-input border-border text-foreground rounded-full"
+                    />
+                  </div>
+                  <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-inter font-semibold px-4 lg:px-6 rounded-full">
+                    Call Me
+                  </Button>
+                </div>
+                
+                {/* Additional CTA */}
+                <div className="flex items-center gap-4">
+                  <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-inter font-semibold px-6 lg:px-8 py-3 rounded-full">
+                    Book a Fitting
+                  </Button>
+                  <div className="scroll-indicator flex flex-col items-center text-muted-foreground">
+                    <span className="text-xs mb-1">Scroll</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Right Column - 5/12 - Layered 3D Hero Image */}
-        <div className="lg:col-span-5 relative overflow-visible">
-          <div className="hero-3d-container relative w-full h-[600px] lg:h-[700px] overflow-visible">
-            {/* Background Image Layer - Full size with proper radius */}
-            <div className="background-layer absolute inset-0 w-full h-full rounded-b-[40px] overflow-hidden z-[1]">
-              <img 
-                src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
-                alt="Nigerian cultural background with geometric patterns"
-                className="background-image w-full h-full object-cover"
-              />
-            </div>
-            
-            {/* Mannequin Image Layer - Properly proportioned */}
-            <div className="mannequin-container absolute top-[-8%] left-1/2 transform -translate-x-1/2 z-[2] overflow-visible">
-              <img 
-                src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
-                alt="Mannequin wearing traditional green African attire"
-                className="mannequin-image h-auto w-auto"
-                style={{ minHeight: '750px', minWidth: '500px' }}
-              />
-            </div>
-            
-            {/* Circular CTA */}
-            <div className="absolute -left-8 top-1/2 transform -translate-y-1/2 z-[3]">
-              <Button
-                size="lg"
-                className="w-16 h-16 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:scale-105 transition-all duration-300"
-              >
-                <ArrowRight className="w-6 h-6" />
-              </Button>
+          
+          {/* Right Column - 3D Hero Image */}
+          <div className="lg:col-span-5 relative order-1 lg:order-2">
+            <div className="hero-3d-container relative w-full h-[450px] md:h-[550px] lg:h-[700px] mx-auto max-w-md lg:max-w-none">
+              {/* Background Image Layer */}
+              <div className="background-layer absolute inset-0 w-full h-full rounded-b-[40px] overflow-hidden z-[1]">
+                <img 
+                  src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
+                  alt="Nigerian cultural background with geometric patterns"
+                  className="background-image w-full h-full object-cover"
+                />
+              </div>
+              
+              {/* Mannequin Image Layer */}
+              <div className="mannequin-container absolute top-[-5%] md:top-[-8%] left-1/2 transform -translate-x-1/2 z-[2]">
+                <img 
+                  src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
+                  alt="Mannequin wearing traditional green African attire"
+                  className="mannequin-image h-auto w-auto"
+                />
+              </div>
+              
+              {/* Circular CTA - Hidden on mobile to avoid overlap */}
+              <div className="absolute -left-4 lg:-left-8 top-1/2 transform -translate-y-1/2 z-[3] hidden lg:block">
+                <Button
+                  size="lg"
+                  className="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:scale-105 transition-all duration-300"
+                >
+                  <ArrowRight className="w-4 h-4 lg:w-6 lg:h-6" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       
-      {/* Small Floating Card */}
-      <div className="absolute bottom-12 left-6 lg:left-12 max-w-xs">
-        <div className="bg-accent rounded-2xl p-4 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-muted rounded-full flex-shrink-0 flex items-center justify-center">
+      {/* Small Floating Card - Repositioned to avoid overlap */}
+      <div className="absolute bottom-6 md:bottom-12 right-6 lg:left-12 max-w-xs z-20">
+        <div className="bg-accent rounded-2xl p-3 md:p-4 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-muted rounded-full flex-shrink-0 flex items-center justify-center">
               <span className="text-xs text-muted-foreground">👤</span>
             </div>
             <div>
-              <p className="font-inter font-medium text-accent-foreground text-sm">
+              <p className="font-inter font-medium text-accent-foreground text-xs md:text-sm">
                 Suit for wedding events
               </p>
               <button className="text-xs font-inter text-accent-foreground/70 hover:text-accent-foreground underline">
