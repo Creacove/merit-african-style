@@ -116,14 +116,14 @@ const HeroSection = () => {
           
           {/* Hero Image - Second on Mobile */}
           <div className="lg:col-span-5 relative order-2 w-full">
-            <div className="hero-3d-container relative w-full h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
-              
+            <div className="hero-3d-container relative w-full h-[900px] sm:h-[1000px] md:h-[1100px] lg:h-[1300px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+    
               {/* Mannequin Image Layer - Centered and Taller */}
-              <div className="mannequin-container absolute top-[-60px] sm:top-[-70px] md:top-[-80px] lg:top-[-100px] left-1/2 transform -translate-x-1/2 z-[2]">
+              <div className="mannequin-container absolute top-[-120px] sm:top-[-140px] md:top-[-160px] lg:top-[-200px] left-1/2 transform -translate-x-1/2 z-[2]">
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Mannequin wearing traditional green African attire"
-                  className="h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] w-auto object-contain"
+                  className="h-[900px] sm:h-[1000px] md:h-[1100px] lg:h-[1300px] w-auto object-contain"
                 />
               </div>
               
