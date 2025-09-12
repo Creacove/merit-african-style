@@ -114,12 +114,12 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Hero Image - Second on Mobile - MUCH LARGER CONTAINER */}
+          {/* Hero Image - Second on Mobile */}
           <div className="lg:col-span-5 relative order-2 w-full">
-            <div className="hero-3d-container relative w-full h-[700px] sm:h-[800px] md:h-[900px] lg:h-[1000px] mx-auto max-w-lg sm:max-w-xl lg:max-w-none">
+            <div className="hero-3d-container relative w-full h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
               
-              {/* Mannequin Image Layer - DOUBLED IN SIZE and Centered */}
-              <div className="mannequin-container absolute top-[-120px] sm:top-[-140px] md:top-[-160px] lg:top-[-200px] left-1/2 transform -translate-x-1/2 z-[2]">
+              {/* Mannequin Image Layer - 200% BIGGER - Centered and Taller */}
+              <div className="mannequin-container absolute top-[-60px] sm:top-[-70px] md:top-[-80px] lg:top-[-100px] left-1/2 transform -translate-x-1/2 z-[2]">
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Mannequin wearing traditional green African attire"
@@ -127,8 +127,8 @@ const HeroSection = () => {
                 />
               </div>
               
-              {/* Background Image Layer - Adjusted to start at sleeve level of larger mannequin */}
-              <div className="background-layer absolute top-[240px] sm:top-[280px] md:top-[320px] lg:top-[400px] left-0 w-full h-[460px] sm:h-[520px] md:h-[580px] lg:h-[600px] rounded-3xl lg:rounded-b-[40px] overflow-hidden z-[1] shadow-2xl">
+              {/* Background Image Layer - SAME AS ORIGINAL - Starts at Sleeve Level */}
+              <div className="background-layer absolute top-[120px] sm:top-[140px] md:top-[160px] lg:top-[200px] left-0 w-full h-[330px] sm:h-[360px] md:h-[390px] lg:h-[450px] rounded-3xl lg:rounded-b-[40px] overflow-hidden z-[1] shadow-2xl">
                 <img 
                   src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
                   alt="Nigerian cultural background with geometric patterns"
@@ -136,7 +136,7 @@ const HeroSection = () => {
                 />
               </div>
               
-              {/* Circular CTA - Desktop Only - Repositioned for larger image */}
+              {/* Circular CTA - Desktop Only */}
               <div className="absolute -left-6 lg:-left-8 top-1/2 transform -translate-y-1/2 z-[3] hidden lg:block">
                 <Button
                   size="lg"
