@@ -123,7 +123,7 @@ const HeroSection = () => {
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Mannequin wearing traditional green African attire"
-                  className="h-[450px] sm:h-[500px] md:h-[550px] lg:h-[650px] w-auto object-contain"
+                  className="h-[650px] sm:h-[700px] md:h-[750px] lg:h-[850px] w-auto object-contain"
                 />
               </div>
               
