@@ -200,17 +200,14 @@ All colors MUST be HSL.
   animation-fill-mode: backwards;
 }
 
-.mannequin-image {
+/* Clean Mannequin Image - No Shadows, Auto Width */
+.mannequin-image-clean {
   transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1);
   transform-origin: bottom center;
-  width: 320px;
+  width: auto;
   height: auto;
-  min-height: 500px;
-  box-shadow: 
-    0 40px 80px rgba(0, 0, 0, 0.4),
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 10px 20px rgba(15, 78, 8, 0.2);
-  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.3));
+  min-height: 450px;
+  max-width: none;
   animation: 
     mannequinEntrance 1.8s ease-out 0.6s,
     mannequinZoomOut 2s ease-out 2.5s,
@@ -219,12 +216,27 @@ All colors MUST be HSL.
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Legacy mannequin class for any remaining references */
+.mannequin-image {
+  transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1);
+  transform-origin: bottom center;
+  width: auto;
+  height: auto;
+  min-height: 450px;
+  animation: 
+    mannequinEntrance 1.8s ease-out 0.6s,
+    mannequinZoomOut 2s ease-out 2.5s,
+    gentleSway 6s ease-in-out infinite 4.5s;
+  animation-fill-mode: backwards;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mannequin-image-clean:hover {
+  transform: translateX(-50%) perspective(1200px) rotateX(3deg) scaleY(1.05) rotateZ(1deg);
+}
+
 .mannequin-image:hover {
-  transform: translateX(-50%) perspective(1200px) rotateX(3deg) scaleY(1.08) rotateZ(1deg);
-  box-shadow: 
-    0 50px 100px rgba(0, 0, 0, 0.5),
-    0 25px 50px rgba(0, 0, 0, 0.4),
-    0 15px 30px rgba(15, 78, 8, 0.3);
+  transform: translateX(-50%) perspective(1200px) rotateX(3deg) scaleY(1.05) rotateZ(1deg);
 }
 
 .background-image {
@@ -245,37 +257,57 @@ All colors MUST be HSL.
 }
 
 /* Mobile responsive adjustments */
-@media (max-width: 768px) {
-  .mannequin-image {
-    transform: translateX(-50%) perspective(1000px) rotateX(3deg) scale(1);
-    width: 280px;
-    min-height: 400px;
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.4),
-      0 15px 30px rgba(0, 0, 0, 0.3);
+@media (max-width: 640px) {
+  .mannequin-image-clean {
+    transform: translateX(-50%) perspective(800px) rotateX(2deg) scale(1);
+    min-height: 350px;
   }
   
-  .mannequin-image:hover {
-    transform: translateX(-50%) perspective(1000px) rotateX(2deg) scaleY(1.05) scale(1);
+  .mannequin-image-clean:hover {
+    transform: translateX(-50%) perspective(800px) rotateX(1deg) scaleY(1.03) scale(1);
   }
   
   .hero-3d-container {
-    height: 450px !important;
-    overflow: visible;
+    height: 400px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .mannequin-image-clean {
+    transform: translateX(-50%) perspective(1000px) rotateX(3deg) scale(1);
+    min-height: 420px;
+  }
+  
+  .mannequin-image-clean:hover {
+    transform: translateX(-50%) perspective(1000px) rotateX(2deg) scaleY(1.04) scale(1);
+  }
+  
+  .hero-3d-container {
+    height: 480px !important;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .mannequin-image {
-    width: 380px;
-    min-height: 550px;
+  .mannequin-image-clean {
+    min-height: 500px;
   }
 }
 
 @media (min-width: 1025px) {
+  .mannequin-image-clean {
+    min-height: 600px;
+  }
+}
+
+/* Legacy responsive adjustments */
+@media (max-width: 768px) {
   .mannequin-image {
-    width: 450px;
-    min-height: 650px;
+    transform: translateX(-50%) perspective(1000px) rotateX(3deg) scale(1);
+    min-height: 400px;
+  }
+  
+  .mannequin-image:hover {
+    transform: translateX(-50%) perspective(1000px) rotateX(2deg) scaleY(1.04) scale(1);
   }
 }
 
