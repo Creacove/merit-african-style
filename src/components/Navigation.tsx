@@ -4,9 +4,11 @@ const Navigation = () => {
   return (
     <nav className="relative z-50 flex items-center justify-between px-6 py-6 lg:px-12">
       <div className="flex items-center">
-        <span className="text-xl font-playfair font-bold text-foreground">
-          MeritGold Clothings
-        </span>
+        <img 
+          src="/logo.png" 
+          alt="MeritGold Clothings Logo" 
+          className="h-8 lg:h-10 w-auto"
+        />
       </div>
       
       <div className="hidden md:flex items-center space-x-8">
