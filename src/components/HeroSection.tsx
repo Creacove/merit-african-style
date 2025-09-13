@@ -158,8 +158,9 @@ const HeroSection = () => {
               {/* Mannequin Foreground Layer - 2X SCALED AND CENTERED */}
               <div 
                 ref={mannequinRef}
-                className="hero-mannequin absolute top-[20px] sm:top-[10px] md:top-[0px] lg:top-[-20px] left-1/2 transform -translate-x-1/2 scale-[2] z-[2]"
+                className="hero-mannequin absolute top-[20px] sm:top-[10px] md:top-[0px] lg:top-[-20px] left-1/2 z-[2]"
                 style={{
+                  transform: 'translateX(-50%) scale(2)',
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
                 }}
               >
