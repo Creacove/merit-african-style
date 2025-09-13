@@ -155,20 +155,18 @@ const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
               </div>
               
-              {/* Mannequin Foreground Layer - FORCE 2X SCALING */}
+              {/* Mannequin Foreground Layer - 2X SCALED AND CENTERED */}
               <div 
                 ref={mannequinRef}
-                className="hero-mannequin absolute top-[-40px] sm:top-[-60px] md:top-[-80px] lg:top-[-100px] left-1/2 z-[2]"
+                className="hero-mannequin absolute top-[20px] sm:top-[10px] md:top-[0px] lg:top-[-20px] left-1/2 transform -translate-x-1/2 scale-[2] z-[2]"
                 style={{
-                  transform: 'translateX(-50%) scale(2.5) !important',
-                  transformOrigin: 'center center',
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
                 }}
               >
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Elegant mannequin in bespoke tailoring"
-                  className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] w-auto object-contain"
+                  className="h-[250px] sm:h-[275px] md:h-[300px] lg:h-[350px] w-auto object-contain"
                   style={{
                     filter: 'brightness(1.1) contrast(1.1) saturate(1.05)',
                   }}
