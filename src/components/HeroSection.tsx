@@ -1,4 +1,226 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, ChevronDown } from "lucide-react";
+
+const HeroSection = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const mannequinRef = useRef<HTMLDivElement>(null);
+  const shimmerRef = useRef<HTMLDivElement>(null);
+  const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Trigger entrance animations
+    setIsLoaded(true);
+
+    // Handle parallax scroll
+    const handleScroll = () => {
+      setScrollY(window.pageYOffset);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Calculate parallax offsets
+  const bgParallax = scrollY * -0.02;
+  const mannequinParallax = scrollY * -0.04;
+
+  return (
+    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 overflow-hidden bg-background">
+      <style jsx>{`
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(1.08) translateX(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateX(0);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(60px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-120%) skewX(-15deg);
+          }
+          100% {
+            transform: translateX(120%) skewX(-15deg);
+          }
+        }
+
+        .hero-bg-animated {
+          animation: fadeInScale 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .hero-mannequin-animated {
+          opacity: 0;
+          animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) 0.4s forwards;
+        }
+
+        .shimmer-effect {
+          animation: shimmer 0.6s cubic-bezier(0.42, 0, 0.58, 1) 1.3s forwards;
+        }
+      `}</style>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center lg:items-start min-h-screen">
+          
+          {/* Hero Content */}
+          <div className="lg:col-span-7 space-y-6 lg:space-y-8 text-center lg:text-left order-1 flex flex-col justify-center">
+            <div className="space-y-4 lg:space-y-6">
+              {/* Headline with "Tailoring" emphasis */}
+              <h1 className="hero-title font-playfair font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.02] lg:leading-[1.05] tracking-tight text-foreground">
+                <span className="inline-block">Bespoke</span>
+                <br />
+                <span 
+                  className="inline-block relative text-[1.25em] font-black bg-gradient-to-r from-[hsl(42,65%,48%)] to-[hsl(45,70%,55%)] bg-clip-text text-transparent animate-pulse"
+                  style={{
+                    backgroundSize: '200% 100%',
+                    animation: 'goldTextShimmer 3s ease-in-out infinite'
+                  }}
+                >
+                  Tailoring
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-[hsl(42,65%,48%,0.3)] to-transparent opacity-0 animate-pulse"></span>
+                </span>
+                <span className="inline-block"> for the Modern Gentleman</span>
+              </h1>
+              
+              {/* Subhead */}
+              <p className="hero-subtitle font-inter text-base sm:text-lg lg:text-xl text-muted-foreground max-w-lg lg:max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Hand-finished techniques. Tailored to your posture and presence.
+              </p>
+              
+              {/* Premium CTA */}
+              <div className="pt-4 lg:pt-6">
+                <Button 
+                  variant="luxury" 
+                  size="xl"
+                  className="font-inter px-8 sm:px-10 lg:px-12"
+                >
+                  Book a Fitting
+                </Button>
+              </div>
+              
+              {/* Scroll Indicator - Desktop Only */}
+              <div className="scroll-indicator hidden lg:flex flex-col items-center lg:items-start text-muted-foreground pt-6">
+                <span className="text-xs mb-2 font-inter">Scroll to explore</span>
+                <ChevronDown className="w-4 h-4 animate-bounce" />
+              </div>
+            </div>
+          </div>
+          
+          {/* Hero Image Composition - ADJUSTED FOR LARGER MANNEQUIN */}
+          <div className="lg:col-span-5 relative order-2 w-full">
+            <div className="hero-composition relative w-full h-[700px] sm:h-[800px] md:h-[900px] lg:h-[1000px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+              
+              {/* Background Stage Layer */}
+              <div 
+                ref={bgRef}
+                className={`hero-bg absolute top-[200px] sm:top-[250px] md:top-[300px] lg:top-[350px] left-0 w-full h-[400px] sm:h-[430px] md:h-[460px] lg:h-[520px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl ${isLoaded ? 'hero-bg-animated' : ''}`}
+                style={{
+                  filter: 'brightness(0.85) contrast(0.9)',
+                  transform: `translateY(${bgParallax}px)`,
+                  transition: 'transform 0.1s ease-out'
+                }}
+              >
+                <img 
+                  src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
+                  alt="Luxurious tailoring workshop background"
+                  className="w-full h-full object-cover"
+                  style={{ filter: 'blur(2px)' }}
+                />
+                
+                {/* Fabric grain overlay */}
+                <div 
+                  className="absolute inset-0 opacity-[0.06] mix-blend-multiply"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                    backgroundSize: '60px 60px'
+                  }}
+                />
+                
+                {/* Vertical blending gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+              </div>
+              
+              {/* Mannequin Foreground Layer - PROPERLY SCALED 2X AND CENTERED */}
+              <div 
+                ref={mannequinRef}
+                className={`hero-mannequin absolute top-[0px] sm:top-[20px] md:top-[40px] lg:top-[60px] left-1/2 z-[2] ${isLoaded ? 'hero-mannequin-animated' : ''}`}
+                style={{
+                  transform: `translateX(-50%) scale(2) translateY(${mannequinParallax}px)`,
+                  transformOrigin: 'center top',
+                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
+                  width: 'auto',
+                  height: 'auto',
+                  transition: 'transform 0.1s ease-out'
+                }}
+              >
+                <img 
+                  src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
+                  alt="Elegant mannequin in bespoke tailoring"
+                  className="w-auto object-contain"
+                  style={{
+                    height: '400px',
+                    filter: 'brightness(1.1) contrast(1.1) saturate(1.05)',
+                  }}
+                />
+                
+                {/* Fabric shimmer overlay */}
+                <div 
+                  ref={shimmerRef}
+                  className={`absolute inset-0 bg-gradient-to-r from-transparent via-[hsl(42,65%,48%,0.15)] to-transparent w-full h-full opacity-0 pointer-events-none ${isLoaded ? 'shimmer-effect' : ''}`}
+                  style={{
+                    width: '120%',
+                  }}
+                />
+              </div>
+              
+              {/* Circular Navigation CTA - Desktop Only */}
+              <div className="absolute -left-6 lg:-left-8 top-1/2 transform -translate-y-1/2 z-[3] hidden lg:block">
+                <Button
+                  size="icon"
+                  className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+                >
+                  <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Sticky Mobile CTA */}
+      <div className="fixed bottom-4 left-4 right-4 z-50 lg:hidden">
+        <Button 
+          variant="luxury" 
+          size="lg"
+          className="w-full backdrop-blur-sm bg-gradient-to-b from-[hsl(0,56%,27%,0.95)] to-[hsl(0,56%,22%,0.95)] font-inter"
+        >
+          Book a Fitting
+        </Button>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { gsap } from "gsap";
