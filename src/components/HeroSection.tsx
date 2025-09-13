@@ -40,7 +40,8 @@ const HeroSection = () => {
       opacity: 0,
       y: 60,
       duration: 0.8,
-      ease: "power3.out"
+      ease: "power3.out",
+      clearProps: "transform"
     }, "-=0.8");
 
     // Fabric shimmer - tactile finish
@@ -62,7 +63,11 @@ const HeroSection = () => {
         gsap.to(bgRef.current, { y: rate, duration: 0.1 });
       }
       if (mannequinRef.current) {
-        gsap.to(mannequinRef.current, { y: ratefast, duration: 0.1 });
+        gsap.to(mannequinRef.current, { 
+          y: ratefast, 
+          duration: 0.1,
+          transformOrigin: "center center"
+        });
       }
     };
 
@@ -76,7 +81,7 @@ const HeroSection = () => {
   return (
     <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-center lg:items-start min-h-screen">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-start lg:items-center lg:min-h-screen">
           
           {/* Hero Content */}
           <div className="lg:col-span-7 space-y-6 lg:space-y-8 text-center lg:text-left order-1 flex flex-col justify-center">
@@ -127,9 +132,9 @@ const HeroSection = () => {
             <div className="hero-composition relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[700px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
               
               {/* Background Stage Layer */}
-              <div 
+              <div
                 ref={bgRef}
-                className="hero-bg absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[400px] sm:h-[430px] md:h-[460px] lg:h-[520px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
+                className="hero-bg absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[320px] sm:h-[344px] md:h-[368px] lg:h-[416px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
                 style={{
                   filter: 'brightness(0.85) contrast(0.9)',
                 }}
@@ -151,25 +156,31 @@ const HeroSection = () => {
                 />
                 
                 {/* Vertical blending gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%)'
+                  }}
+                ></div>
               </div>
-              
-              {/* Mannequin Foreground Layer - FORCE 2X SCALING */}
-              <div 
+
+              {/* Mannequin Foreground Layer - 2X SCALING */}
+              <div
                 ref={mannequinRef}
-                className="hero-mannequin absolute top-[-40px] sm:top-[-60px] md:top-[-80px] lg:top-[-100px] left-1/2 z-[2]"
+                className="hero-mannequin absolute top-[-2%] z-[2] w-full flex justify-center"
                 style={{
-                  transform: 'translateX(-50%) scale(2.5) !important',
                   transformOrigin: 'center center',
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
                 }}
               >
-                <img 
-                  src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
+                <img
+                  src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png"
                   alt="Elegant mannequin in bespoke tailoring"
                   className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] w-auto object-contain"
                   style={{
                     filter: 'brightness(1.1) contrast(1.1) saturate(1.05)',
+                    transform: 'scale(1)',
+                    transformOrigin: 'center center',
                   }}
                 />
                 
