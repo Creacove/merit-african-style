@@ -36,6 +36,7 @@ const HeroSection = () => {
     });
 
     // Mannequin entrance - crisp authoritative 
+    // REMOVED scale transform to prevent conflicts
     tl.from(mannequinRef.current, {
       opacity: 0,
       y: 60,
@@ -52,7 +53,7 @@ const HeroSection = () => {
       }, "+=0.15");
     }
 
-    // Parallax on scroll
+    // Parallax on scroll - modified to preserve scale
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.02;
@@ -62,7 +63,15 @@ const HeroSection = () => {
         gsap.to(bgRef.current, { y: rate, duration: 0.1 });
       }
       if (mannequinRef.current) {
-        gsap.to(mannequinRef.current, { y: ratefast, duration: 0.1 });
+        // Only animate Y, preserve the scale transform
+        gsap.to(mannequinRef.current, { 
+          y: ratefast, 
+          duration: 0.1,
+          // Preserve existing transforms
+          onUpdate: function() {
+            mannequinRef.current.style.transform = `translateX(-50%) scale(2) translateY(${this.targets()[0]._gsap.y}px)`;
+          }
+        });
       }
     };
 
@@ -122,14 +131,14 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Hero Image Composition */}
+          {/* Hero Image Composition - ADJUSTED FOR LARGER MANNEQUIN */}
           <div className="lg:col-span-5 relative order-2 w-full">
-            <div className="hero-composition relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[700px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
+            <div className="hero-composition relative w-full h-[700px] sm:h-[800px] md:h-[900px] lg:h-[1000px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
               
               {/* Background Stage Layer */}
               <div 
                 ref={bgRef}
-                className="hero-bg absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[400px] sm:h-[430px] md:h-[460px] lg:h-[520px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
+                className="hero-bg absolute top-[200px] sm:top-[250px] md:top-[300px] lg:top-[350px] left-0 w-full h-[400px] sm:h-[430px] md:h-[460px] lg:h-[520px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
                 style={{
                   filter: 'brightness(0.85) contrast(0.9)',
                 }}
@@ -154,21 +163,24 @@ const HeroSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
               </div>
               
-              {/* Mannequin Foreground Layer - FORCE 2X SCALING */}
+              {/* Mannequin Foreground Layer - PROPERLY SCALED 2X */}
               <div 
                 ref={mannequinRef}
-                className="hero-mannequin absolute top-[-40px] sm:top-[-60px] md:top-[-80px] lg:top-[-100px] left-1/2 z-[2]"
+                className="hero-mannequin absolute top-[0px] sm:top-[20px] md:top-[40px] lg:top-[60px] left-1/2 z-[2]"
                 style={{
-                  transform: 'translateX(-50%) scale(2.5) !important',
-                  transformOrigin: 'center center',
+                  transform: 'translateX(-50%) scale(2)',
+                  transformOrigin: 'center top',
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
+                  width: 'auto',
+                  height: 'auto',
                 }}
               >
                 <img 
                   src="/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png" 
                   alt="Elegant mannequin in bespoke tailoring"
-                  className="h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] w-auto object-contain"
+                  className="w-auto object-contain"
                   style={{
+                    height: '400px',
                     filter: 'brightness(1.1) contrast(1.1) saturate(1.05)',
                   }}
                 />
