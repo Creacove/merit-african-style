@@ -39,7 +39,6 @@ const HeroSection = () => {
     tl.from(mannequinRef.current, {
       opacity: 0,
       y: 60,
-      scale: 0.98,
       duration: 0.8,
       ease: "power3.out"
     }, "-=0.8");
