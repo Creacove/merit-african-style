@@ -8,43 +8,36 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Luxury Tailoring Brand Colors (exact HSL values) */
-    --deep-chocolate: 15 34% 13%;      /* #2B1714 - Deep chocolate background */
-    --gold-accent: 42 65% 48%;         /* #C79A2B - Gold metallic accent */
-    --deep-burgundy: 0 56% 27%;        /* #6A1F1F - Deep burgundy CTA */
-    --warm-ivory: 36 37% 95%;          /* #F7EFE7 - Warm ivory text */
-    --olive-secondary: 81 15% 25%;     /* #3A4A35 - Olive secondary */
+    /* Merit Good Clothing Brand Colors */
+    --background: 15 78% 8%;  /* Deep burgundy background */
+    --foreground: 18 20% 94%; /* Light cream text */
 
-    /* Design System Mapping */
-    --background: var(--deep-chocolate);
-    --foreground: var(--warm-ivory);
+    --card: 4 62% 26%;        /* Rich red panel */
+    --card-foreground: 18 20% 94%;
 
-    --card: var(--deep-burgundy);
-    --card-foreground: var(--warm-ivory);
+    --popover: 15 78% 8%;
+    --popover-foreground: 18 20% 94%;
 
-    --popover: var(--deep-chocolate);
-    --popover-foreground: var(--warm-ivory);
+    --primary: 15 78% 8%;     /* Deep burgundy primary */
+    --primary-foreground: 18 20% 94%;
 
-    --primary: var(--gold-accent);
-    --primary-foreground: var(--deep-chocolate);
+    --secondary: 4 62% 26%;   /* Rich red secondary */
+    --secondary-foreground: 18 20% 94%;
 
-    --secondary: var(--deep-burgundy);
-    --secondary-foreground: var(--warm-ivory);
+    --muted: 18 16% 34%;      /* Soft brown muted */
+    --muted-foreground: 18 10% 70%;
 
-    --muted: var(--olive-secondary);
-    --muted-foreground: 36 18% 75%;
-
-    --accent: var(--warm-ivory);
-    --accent-foreground: var(--deep-chocolate);
+    --accent: 35 43% 93%;     /* Cream accent */
+    --accent-foreground: 15 78% 8%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: var(--warm-ivory);
+    --destructive-foreground: 18 20% 94%;
 
-    --border: var(--olive-secondary);
-    --input: 15 34% 18%;
-    --ring: var(--gold-accent);
+    --border: 18 16% 34%;
+    --input: 18 16% 24%;
+    --ring: 35 43% 93%;
 
-    --radius: 2.5rem;
+    --radius: 1.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -64,40 +57,34 @@ All colors MUST be HSL.
   }
 
   .dark {
-    /* Dark mode - enhanced luxury palette */
-    --deep-chocolate: 15 34% 8%;
-    --gold-accent: 42 65% 52%;
-    --deep-burgundy: 0 56% 22%;
-    --warm-ivory: 36 37% 97%;
-    --olive-secondary: 81 15% 20%;
+    /* Dark mode uses same luxury palette */
+    --background: 15 78% 6%;
+    --foreground: 18 20% 96%;
 
-    --background: var(--deep-chocolate);
-    --foreground: var(--warm-ivory);
+    --card: 4 62% 24%;
+    --card-foreground: 18 20% 96%;
 
-    --card: var(--deep-burgundy);
-    --card-foreground: var(--warm-ivory);
+    --popover: 15 78% 6%;
+    --popover-foreground: 18 20% 96%;
 
-    --popover: var(--deep-chocolate);
-    --popover-foreground: var(--warm-ivory);
+    --primary: 18 20% 96%;
+    --primary-foreground: 15 78% 8%;
 
-    --primary: var(--gold-accent);
-    --primary-foreground: var(--deep-chocolate);
+    --secondary: 4 62% 20%;
+    --secondary-foreground: 18 20% 96%;
 
-    --secondary: var(--deep-burgundy);
-    --secondary-foreground: var(--warm-ivory);
+    --muted: 18 16% 20%;
+    --muted-foreground: 18 10% 75%;
 
-    --muted: var(--olive-secondary);
-    --muted-foreground: 36 18% 78%;
-
-    --accent: var(--warm-ivory);
-    --accent-foreground: var(--deep-chocolate);
+    --accent: 35 43% 90%;
+    --accent-foreground: 15 78% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: var(--warm-ivory);
+    --destructive-foreground: 18 20% 96%;
 
-    --border: var(--olive-secondary);
-    --input: 15 34% 12%;
-    --ring: var(--gold-accent);
+    --border: 18 16% 20%;
+    --input: 18 16% 16%;
+    --ring: 35 43% 90%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -119,47 +106,7 @@ All colors MUST be HSL.
   }
 }
 
-/* Luxury Hero Animations */
-@keyframes bgEntrance {
-  from { 
-    opacity: 0; 
-    transform: scale(1.08) translateX(-10px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1) translateX(0); 
-  }
-}
-
-@keyframes mannequinEntrance {
-  from { 
-    opacity: 0; 
-    transform: translateY(60px) scale(0.98); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0) scale(1); 
-  }
-}
-
-@keyframes fabricShimmer {
-  from { 
-    transform: translateX(-120%); 
-  }
-  to { 
-    transform: translateX(120%); 
-  }
-}
-
-@keyframes goldTextShimmer {
-  0%, 100% { 
-    background-position: -200% center; 
-  }
-  50% { 
-    background-position: 200% center; 
-  }
-}
-
+/* Hero Animations */
 @keyframes fadeInUp {
   from { 
     opacity: 0; 
@@ -169,6 +116,12 @@ All colors MUST be HSL.
     opacity: 1; 
     transform: translateY(0); 
   }
+}
+
+@keyframes drift {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(50px) translateY(-20px); }
+  100% { transform: translateX(0) translateY(0); }
 }
 
 @keyframes bounce {
@@ -181,49 +134,209 @@ All colors MUST be HSL.
   to { opacity: 1; }
 }
 
-/* Luxury Hero Component Styles */
+/* 3D Mannequin Animations */
+@keyframes mannequinEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(100px) perspective(1200px) rotateX(8deg) scale(1.4);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) perspective(1200px) rotateX(5deg) scale(1);
+  }
+}
+
+@keyframes mannequinZoomOut {
+  0% { 
+    transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1.2);
+  }
+  100% { 
+    transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1);
+  }
+}
+
+@keyframes gentleSway {
+  0%, 100% { 
+    transform: translateX(-50%) perspective(1200px) rotateX(5deg) rotateZ(-1deg) scale(1);
+  }
+  50% { 
+    transform: translateX(-50%) perspective(1200px) rotateX(5deg) rotateZ(1deg) scale(1.02);
+  }
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    opacity: 0.95;
+  }
+  50% { 
+    transform: scale(1.05) rotate(0.5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes backgroundSlide {
+  0% {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .hero-title {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .hero-subtitle {
+  animation: fadeInUp 1s ease-out 0.2s;
+  animation-fill-mode: backwards;
+}
+
+.hero-3d-container {
+  animation: fadeInUp 1.2s ease-out 0.4s;
+  animation-fill-mode: backwards;
+}
+
+/* Clean Mannequin Image - No Shadows, Auto Width */
+.mannequin-image-clean {
+  transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1);
+  transform-origin: bottom center;
+  width: auto;
+  height: auto;
+  min-height: 450px;
+  max-width: none;
+  animation: 
+    mannequinEntrance 1.8s ease-out 0.6s,
+    mannequinZoomOut 2s ease-out 2.5s,
+    gentleSway 6s ease-in-out infinite 4.5s;
+  animation-fill-mode: backwards;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Legacy mannequin class for any remaining references */
+.mannequin-image {
+  transform: translateX(-50%) perspective(1200px) rotateX(5deg) scale(1);
+  transform-origin: bottom center;
+  width: auto;
+  height: auto;
+  min-height: 450px;
+  animation: 
+    mannequinEntrance 1.8s ease-out 0.6s,
+    mannequinZoomOut 2s ease-out 2.5s,
+    gentleSway 6s ease-in-out infinite 4.5s;
+  animation-fill-mode: backwards;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mannequin-image-clean:hover {
+  transform: translateX(-50%) perspective(1200px) rotateX(3deg) scaleY(1.05) rotateZ(1deg);
+}
+
+.mannequin-image:hover {
+  transform: translateX(-50%) perspective(1200px) rotateX(3deg) scaleY(1.05) rotateZ(1deg);
+}
+
+.background-image {
+  animation: 
+    backgroundSlide 1.2s ease-out 0.8s,
+    backgroundPulse 8s ease-in-out infinite 3s;
+  animation-fill-mode: backwards;
+  transition: all 0.3s ease-out;
+}
+
+.background-layer {
+  border-radius: 0 0 40px 40px;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
+}
+
+.background-layer:hover .background-image {
+  transform: scale(1.02);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 640px) {
+  .mannequin-image-clean {
+    transform: translateX(-50%) perspective(800px) rotateX(2deg) scale(1);
+    min-height: 350px;
+  }
+  
+  .mannequin-image-clean:hover {
+    transform: translateX(-50%) perspective(800px) rotateX(1deg) scaleY(1.03) scale(1);
+  }
+  
+  .hero-3d-container {
+    height: 400px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .mannequin-image-clean {
+    transform: translateX(-50%) perspective(1000px) rotateX(3deg) scale(1);
+    min-height: 420px;
+  }
+  
+  .mannequin-image-clean:hover {
+    transform: translateX(-50%) perspective(1000px) rotateX(2deg) scaleY(1.04) scale(1);
+  }
+  
+  .hero-3d-container {
+    height: 480px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .mannequin-image-clean {
+    min-height: 500px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mannequin-image-clean {
+    min-height: 600px;
+  }
+}
+
+/* Legacy responsive adjustments */
+@media (max-width: 768px) {
+  .mannequin-image {
+    transform: translateX(-50%) perspective(1000px) rotateX(3deg) scale(1);
+    min-height: 400px;
+  }
+  
+  .mannequin-image:hover {
+    transform: translateX(-50%) perspective(1000px) rotateX(2deg) scaleY(1.04) scale(1);
+  }
+}
+
+.hero-title span {
   opacity: 0;
-  animation: fadeInUp 1s ease-out 0.2s forwards;
+  animation: reveal 0.5s forwards;
 }
 
-.hero-composition {
-  opacity: 0;
-  animation: fadeInUp 1.2s ease-out 0.4s forwards;
+.hero-title span:nth-child(1) { animation-delay: 0s; }
+.hero-title span:nth-child(2) { animation-delay: 0.2s; }
+.hero-title span:nth-child(3) { animation-delay: 0.4s; }
+.hero-title span:nth-child(4) { animation-delay: 0.6s; }
+.hero-title span:nth-child(5) { animation-delay: 0.8s; }
+.hero-title span:nth-child(6) { animation-delay: 1s; }
+
+.overlay-shape {
+  position: absolute;
+  opacity: 0.15;
+  animation: drift 20s linear infinite;
 }
 
-.hero-bg {
-  will-change: transform, opacity;
+.tailoring-shapes .absolute {
+  animation: drift 25s ease-in-out infinite;
 }
 
-.hero-mannequin {
-  will-change: transform, opacity;
+.animate-drift {
+  animation: drift 15s ease-in-out infinite;
 }
 
 .scroll-indicator {
   animation: bounce 2s infinite;
-}
-
-/* Responsive motion preferences */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-bg { 
-    animation: bgEntrance 1.2s cubic-bezier(.22,.9,.35,1) forwards; 
-  }
-  .hero-mannequin { 
-    animation: mannequinEntrance 0.8s cubic-bezier(.2,.9,.2,1) 0.4s forwards; 
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-bg,
-  .hero-mannequin {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
 }
