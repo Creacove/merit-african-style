@@ -150,7 +150,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 overflow-hidden bg-background">
+    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 pb-24 overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-start lg:items-center lg:min-h-screen">
           
