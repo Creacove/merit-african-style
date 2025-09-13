@@ -7,7 +7,7 @@ const Navigation = () => {
         <img 
           src="/logo.png" 
           alt="MeritGold Clothings Logo" 
-          className="h-8 lg:h-10 w-auto"
+          className="h-12 lg:h-14 w-auto"
         />
       </div>
       
