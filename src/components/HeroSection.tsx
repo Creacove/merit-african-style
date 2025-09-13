@@ -205,17 +205,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      
-      {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-4 left-4 right-4 z-50 lg:hidden">
-        <Button 
-          variant="luxury" 
-          size="lg"
-          className="w-full backdrop-blur-sm bg-gradient-to-b from-[hsl(0,56%,27%,0.95)] to-[hsl(0,56%,22%,0.95)] font-inter"
-        >
-          Book a Fitting
-        </Button>
-      </div>
     </section>
   );
 };
