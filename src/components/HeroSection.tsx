@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 
 const HeroSection = () => {
@@ -118,12 +118,6 @@ const HeroSection = () => {
                   Book a Fitting
                 </Button>
               </div>
-              
-              {/* Scroll Indicator - Desktop Only */}
-              <div className="scroll-indicator hidden lg:flex flex-col items-center lg:items-start text-muted-foreground pt-6">
-                <span className="text-xs mb-2 font-inter">Scroll to explore</span>
-                <ChevronDown className="w-4 h-4 animate-bounce" />
-              </div>
             </div>
           </div>
           
@@ -134,9 +128,11 @@ const HeroSection = () => {
               {/* Background Stage Layer */}
               <div
                 ref={bgRef}
-                className="hero-bg absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[320px] sm:h-[344px] md:h-[368px] lg:h-[416px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
+                className="hero-bg background-image absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[320px] sm:h-[344px] md:h-[368px] lg:h-[416px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
                 style={{
                   filter: 'brightness(0.85) contrast(0.9)',
+                  animation: 'fade 7s infinite linear',
+                  animationDelay: '0.5s'
                 }}
               >
                 <img 
@@ -167,10 +163,11 @@ const HeroSection = () => {
               {/* Mannequin Foreground Layer - 2X SCALING */}
               <div
                 ref={mannequinRef}
-                className="hero-mannequin absolute top-[-2%] z-[2] w-full flex justify-center"
+                className="hero-mannequin mannequin-image absolute top-[-2%] z-[2] w-full flex justify-center"
                 style={{
-                  transformOrigin: 'center center',
+                  transformOrigin: 'center bottom',
                   filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3)) drop-shadow(0 0 20px rgba(199,154,43,0.1))',
+                  animation: 'tilt 5s infinite ease-in-out'
                 }}
               >
                 <img

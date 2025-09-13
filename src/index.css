@@ -121,53 +121,53 @@ All colors MUST be HSL.
 
 /* Luxury Hero Animations */
 @keyframes bgEntrance {
-  from { 
-    opacity: 0; 
-    transform: scale(1.08) translateX(-10px); 
+  from {
+    opacity: 0;
+    transform: scale(1.08) translateX(-10px);
   }
-  to { 
-    opacity: 1; 
-    transform: scale(1) translateX(0); 
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
   }
 }
 
 @keyframes mannequinEntrance {
-  from { 
-    opacity: 0; 
-    transform: translateY(60px) scale(0.98); 
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.98);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0) scale(1); 
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes fabricShimmer {
-  from { 
-    transform: translateX(-120%); 
+  from {
+    transform: translateX(-120%);
   }
-  to { 
-    transform: translateX(120%); 
+  to {
+    transform: translateX(120%);
   }
 }
 
 @keyframes goldTextShimmer {
-  0%, 100% { 
-    background-position: -200% center; 
+  0%, 100% {
+    background-position: -200% center;
   }
-  50% { 
-    background-position: 200% center; 
+  50% {
+    background-position: 200% center;
   }
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -179,6 +179,18 @@ All colors MUST be HSL.
 
 @keyframes reveal {
   to { opacity: 1; }
+}
+
+@keyframes tilt {
+  0% { transform: rotateZ(-1deg); }
+  50% { transform: rotateZ(1deg); }
+  100% { transform: rotateZ(-1deg); }
+}
+
+@keyframes fade {
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.95; }
 }
 
 /* Luxury Hero Component Styles */
