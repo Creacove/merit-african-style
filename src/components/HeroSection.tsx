@@ -8,13 +8,14 @@ const HeroSection = () => {
   const bgRef = useRef<HTMLDivElement>(null);
   const mannequinRef = useRef<HTMLDivElement>(null);
   const shimmerRef = useRef<HTMLDivElement>(null);
+  const tailoringRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!heroRef.current || !bgRef.current || !mannequinRef.current) return;
 
     // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     if (prefersReducedMotion) {
       // Simple fade-in for reduced motion
       gsap.timeline()
@@ -35,7 +36,7 @@ const HeroSection = () => {
       ease: "power2.out"
     });
 
-    // Mannequin entrance - crisp authoritative 
+    // Mannequin entrance - crisp authoritative
     tl.from(mannequinRef.current, {
       opacity: 0,
       y: 60,
@@ -58,21 +59,70 @@ const HeroSection = () => {
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.02;
       const ratefast = scrolled * -0.04;
-      
+
       if (bgRef.current) {
         gsap.to(bgRef.current, { y: rate, duration: 0.1 });
       }
       if (mannequinRef.current) {
-        gsap.to(mannequinRef.current, { 
-          y: ratefast, 
+        gsap.to(mannequinRef.current, {
+          y: ratefast,
           duration: 0.1,
           transformOrigin: "center center"
         });
       }
     };
 
+    // Luxury tailoring text animation
+    if (tailoringRef.current) {
+      // Create floating particles around the text
+      const createParticles = () => {
+        const particles = [];
+        for (let i = 0; i < 6; i++) {
+          particles.push({
+            x: gsap.utils.random(-50, 50),
+            y: gsap.utils.random(-30, 30),
+            delay: gsap.utils.random(0, 2),
+            duration: gsap.utils.random(3, 6)
+          });
+        }
+        return particles;
+      };
+
+      // Multi-layer animation timeline for tailoring text
+      const tailoringTl = gsap.timeline({ repeat: -1, yoyo: false });
+
+      tailoringTl
+        .fromTo(tailoringRef.current,
+          {
+            backgroundPosition: "0% 50%"
+          },
+          {
+            backgroundPosition: "400% 50%",
+            duration: 3,
+            ease: "none"
+          }, 0)
+        .fromTo(tailoringRef.current,
+          {
+            filter: "brightness(1) contrast(1)"
+          },
+          {
+            filter: "brightness(1.2) contrast(1.1) saturate(1.2)",
+            duration: 1.5,
+            ease: "power2.inOut"
+          }, 0)
+        .fromTo(tailoringRef.current,
+          {
+            textShadow: "0 0 0 hsla(42, 65%, 48%, 0)"
+          },
+          {
+            textShadow: "0 0 10px hsla(42, 65%, 48%, 0.3), 0 0 20px hsla(42, 65%, 48%, 0.2)",
+            duration: 2,
+            ease: "power2.inOut"
+          }, 0.5);
+    }
+
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -90,8 +140,7 @@ const HeroSection = () => {
               <h1 className="hero-title font-playfair font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.02] lg:leading-[1.05] tracking-tight text-foreground">
                 <span className="inline-block">Bespoke</span>
                 <br />
-                <span 
-                  className="inline-block relative text-[1.25em] font-black bg-gradient-to-r from-[hsl(42,65%,48%)] to-[hsl(45,70%,55%)] bg-clip-text text-transparent animate-pulse"
+                <span className="inline-block relative text-[1.25em] font-black tailoring-text-animated bg-gradient-to-r from-[hsl(42,65%,48%)] to-[hsl(45,70%,55%)] bg-clip-text text-transparent animate-pulse" ref={tailoringRef}
                   style={{
                     backgroundSize: '200% 100%',
                     animation: 'goldTextShimmer 3s ease-in-out infinite'
@@ -128,36 +177,20 @@ const HeroSection = () => {
               {/* Background Stage Layer */}
               <div
                 ref={bgRef}
-                className="hero-bg background-image absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[320px] sm:h-[344px] md:h-[368px] lg:h-[416px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
-                style={{
-                  filter: 'brightness(0.85) contrast(0.9)',
-                  animation: 'fade 7s infinite linear',
-                  animationDelay: '0.5s'
-                }}
+                className="hero-bg absolute top-[100px] sm:top-[120px] md:top-[140px] lg:top-[180px] left-0 w-full h-[320px] sm:h-[344px] md:h-[368px] lg:h-[416px] rounded-[2.5rem] overflow-hidden z-[1] shadow-2xl"
               >
-                <img 
-                  src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png" 
+                <img
+                  src="/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png"
                   alt="Luxurious tailoring workshop background"
                   className="w-full h-full object-cover"
-                  style={{ filter: 'blur(2px)' }}
-                />
-                
-                {/* Fabric grain overlay */}
-                <div 
-                  className="absolute inset-0 opacity-[0.06] mix-blend-multiply"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                    backgroundSize: '60px 60px'
+                    filter: 'brightness(0.85) contrast(0.9)'
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #2B1714 0%, #1a0f0a 100%)';
                   }}
                 />
-                
-                {/* Vertical blending gradient */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%)'
-                  }}
-                ></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               </div>
 
               {/* Mannequin Foreground Layer - 2X SCALING */}

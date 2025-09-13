@@ -176,12 +176,69 @@ All colors MUST be HSL.
   }
 }
 
+/* Enhanced Gold Text Animation System */
 @keyframes goldTextShimmer {
-  0%, 100% {
+  0% {
     background-position: -200% center;
+    filter: brightness(1) contrast(1) saturate(1);
+  }
+  25% {
+    background-position: 0% center;
+    filter: brightness(1.05) contrast(1.02) saturate(1.1);
   }
   50% {
     background-position: 200% center;
+    filter: brightness(1.1) contrast(1.05) saturate(1.2);
+  }
+  75% {
+    background-position: 400% center;
+    filter: brightness(1.05) contrast(1.02) saturate(1.1);
+  }
+  100% {
+    background-position: 600% center;
+    filter: brightness(1) contrast(1) saturate(1);
+  }
+}
+
+@keyframes tailoringParticles {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(0.8);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-8px) translateX(4px) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-12px) translateX(0px) scale(0.9);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-6px) translateX(-4px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes tailoringGlowPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes tailoringGradientShift {
+  0%, 100% {
+    background-position: 0% 50%, 100% 50%, 200% 50%;
+  }
+  33% {
+    background-position: 100% 50%, 200% 50%, 0% 50%;
+  }
+  66% {
+    background-position: 200% 50%, 0% 50%, 100% 50%;
   }
 }
 
@@ -218,6 +275,54 @@ All colors MUST be HSL.
   100% { opacity: 0.95; }
 }
 
+/* Glass Button Light Animation System */
+@keyframes lightSweep {
+  0% {
+    background-position: -200% -200%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 200% 200%;
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    background-position: 400% 400%;
+    opacity: 0;
+  }
+}
+
+@keyframes borderGlowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(8px);
+  }
+}
+
+@keyframes innerLightShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+}
+
 /* Luxury Hero Component Styles */
 .hero-title {
   opacity: 0;
@@ -232,10 +337,27 @@ All colors MUST be HSL.
 .hero-composition {
   opacity: 0;
   animation: fadeInUp 1.2s ease-out 0.4s forwards;
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 
 .hero-bg {
   will-change: transform, opacity;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.background-image {
+  background-image: url('/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png');
+}
+
+.mannequin-image {
+  background-image: url('/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-mannequin {
@@ -244,6 +366,115 @@ All colors MUST be HSL.
 
 .scroll-indicator {
   animation: bounce 2s infinite;
+}
+
+/* Luxury Animated Tailoring Text Styling */
+.tailoring-text-animated {
+  /* Enhanced gradient for premium look */
+  background: linear-gradient(135deg, hsl(42, 65%, 48%) 0%, hsl(42, 75%, 55%) 25%, hsl(45, 70%, 60%) 50%, hsl(40, 80%, 65%) 75%, hsl(42, 65%, 48%) 100%);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: hsl(42, 65%, 48%); /* Fallback color */
+
+  /* Premium typography effects */
+  text-shadow:
+    0 0 5px hsla(42, 65%, 48%, 0.1),
+    0 0 10px hsla(42, 65%, 48%, 0.05),
+    0 0 15px hsla(42, 65%, 48%, 0.03);
+
+  /* Smooth font rendering for luxury feel */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Prevent text selection on animated elements */
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* Enable will-change for optimal performance */
+  will-change: background-position, filter, text-shadow, transform;
+
+  /* Multiple animation layers working together */
+  /* Remove animation here since it's now handled by GSAP and inline styles */
+
+  /* Responsive animation - disable on reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  /* Container for relative positioning */
+  position: relative;
+  display: inline-block;
+}
+
+/* Keyframe animations for luxury tailoring text */
+@keyframes tailoringLuxuryPulse {
+  0%, 100% {
+    filter: brightness(1) contrast(1) saturate(1);
+    text-shadow: 0 0 5px hsla(42, 65%, 48%, 0.1);
+    transform: scale(1);
+  }
+  25% {
+    filter: brightness(1.1) contrast(1.05) saturate(1.2);
+    text-shadow: 0 0 8px hsla(42, 65%, 48%, 0.2), 0 0 16px hsla(42, 65%, 48%, 0.1);
+    transform: scale(1.008);
+  }
+  50% {
+    filter: brightness(1.15) contrast(1.1) saturate(1.3);
+    text-shadow: 0 0 12px hsla(42, 65%, 48%, 0.3), 0 0 24px hsla(42, 65%, 48%, 0.15);
+    transform: scale(1.012);
+  }
+  75% {
+    filter: brightness(1.1) contrast(1.05) saturate(1.2);
+    text-shadow: 0 0 8px hsla(42, 65%, 48%, 0.2), 0 0 16px hsla(42, 65%, 48%, 0.1);
+    transform: scale(1.008);
+  }
+}
+
+/* Hover effect with enhanced animation */
+.tailoring-text-animated:hover {
+  animation-duration: 4s;
+  filter: brightness(1.2) contrast(1.1) saturate(1.4);
+}
+
+/* Responsive design for smaller screens */
+/* Enhanced Tailoring Text Shimmer Overlay */
+.tailoring-text-animated .absolute {
+  will-change: opacity;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
+  background-size: 200% 200%;
+  background-position: -100% 50%;
+  animation: shimmerPulse 4s ease-in-out infinite;
+}
+
+@keyframes shimmerPulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+  75% {
+    opacity: 0.3;
+    transform: scale(1.02);
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .tailoring-text-animated {
+    animation-duration: 8s; /* Slower on mobile for better performance */
+  }
+
+  .tailoring-text-animated .absolute {
+    animation-duration: 6s; /* Sync shimmer with slower base animation */
+  }
 }
 
 /* ========== GLASS BUTTON STYLES ========== */
@@ -305,24 +536,36 @@ All colors MUST be HSL.
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   pointer-events: auto;
   z-index: 3;
-  background: linear-gradient(
-    -75deg,
-    hsla(0, 0%, 100%, 0.05),
-    hsla(0, 0%, 100%, 0.2),
-    hsla(0, 0%, 100%, 0.05)
-  );
+  background:
+    linear-gradient(
+      -75deg,
+      hsla(0, 0%, 100%, 0.05),
+      hsla(0, 0%, 100%, 0.2),
+      hsla(0, 0%, 100%, 0.05)
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      hsla(42, 100%, 70%, 0.08) 0%,
+      hsla(42, 100%, 70%, 0.04) 25%,
+      transparent 50%
+    );
+  background-size: 100% 100%, 400% 400%;
+  background-position: 0% 0%, 0% 50%;
   border-radius: 999vw;
   box-shadow:
     inset 0 0.125em 0.125em hsla(0, 0%, 0%, 0.05),
     inset 0 -0.125em 0.125em hsla(36, 100%, 100%, 0.5),
     0 0.25em 0.125em -0.125em hsla(0, 0%, 0%, 0.2),
     0 0 0.1em 0.25em inset hsla(36, 100%, 100%, 0.2),
-    0 0 0 0 hsla(36, 100%, 100%, 1);
+    0 0 0 0 hsla(36, 100%, 100%, 1),
+    /* Border Glow Layer */
+    0 0 0 1px hsla(42, 100%, 70%, 0.2);
   backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
   transition: all var(--glass-anim-hover-time) var(--glass-anim-hover-ease);
+  animation: innerLightShift 8s ease-in-out infinite;
 }
 
 .glass-button:hover {
@@ -399,6 +642,30 @@ All colors MUST be HSL.
   transition: background-position calc(var(--glass-anim-hover-time) * 1.25)
       var(--glass-anim-hover-ease),
     --button-angle-2 calc(var(--glass-anim-hover-time) * 1.25) var(--glass-anim-hover-ease);
+}
+
+/* Light Sweep Surface Effect */
+.glass-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999vw;
+  z-index: 2;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 0%,
+      hsla(42, 100%, 70%, 0.1) 25%,
+      hsla(42, 100%, 70%, 0.15) 50%,
+      hsla(42, 100%, 70%, 0.1) 75%,
+      transparent 100%
+    );
+  background-size: 300% 300%;
+  background-position: -100% -100%;
+  animation: lightSweep 6s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .glass-button:hover span::after {
@@ -501,13 +768,106 @@ All colors MUST be HSL.
   text-shadow: 0.025em 0.25em 0.05em hsla(0, 0%, 0%, 0.12);
 }
 
+/* Premium Navigation Enhancements */
+@keyframes navItemGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsla(42, 65%, 48%, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px hsla(42, 65%, 48%, 0.2), 0 0 40px hsla(42, 65%, 48%, 0.1);
+  }
+}
+
+@keyframes mobileMenuSlide {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmerTravel {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Luxury Navigation Styles */
+.nav-item-luxury:hover {
+  animation: navItemGlow 2s ease-in-out infinite;
+}
+
+.mobile-menu-luxury {
+  animation: mobileMenuSlide 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.shimmer-luxury {
+  animation: shimmerTravel 3s ease-in-out infinite;
+}
+
+/* Enhanced focus states for accessibility */
+.nav-link:focus-visible {
+  outline: 2px solid hsl(var(--gold-accent));
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .nav-item-luxury:hover,
+  .mobile-menu-luxury,
+  .shimmer-luxury {
+    animation: none !important;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Glass Button Performance Optimizations */
+.glass-button {
+  will-change: transform, backdrop-filter;
+}
+
+.glass-button::before,
+.glass-button::after {
+  will-change: background-position, opacity;
+}
+
+.glass-button span::after {
+  will-change: background-position, --button-angle-2;
+}
+
+/* Light Sweep Optimization */
+.glass-button::before {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Border Animation Optimization */
+.glass-button::after {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 /* Responsive motion preferences */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-bg { 
-    animation: bgEntrance 1.2s cubic-bezier(.22,.9,.35,1) forwards; 
+  .hero-bg {
+    animation: bgEntrance 1.2s cubic-bezier(.22,.9,.35,1) forwards;
   }
-  .hero-mannequin { 
-    animation: mannequinEntrance 0.8s cubic-bezier(.2,.9,.2,1) 0.4s forwards; 
+  .hero-mannequin {
+    animation: mannequinEntrance 0.8s cubic-bezier(.2,.9,.2,1) 0.4s forwards;
   }
 }
 
@@ -517,5 +877,30 @@ All colors MUST be HSL.
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  /* Disable Glass Button Animations */
+  .glass-button {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .glass-button::before,
+  .glass-button::after {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .glass-button span::after {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .glass-button-wrap {
+    animation: none !important;
+  }
+
+  .glass-button-shadow {
+    animation: none !important;
   }
 }
