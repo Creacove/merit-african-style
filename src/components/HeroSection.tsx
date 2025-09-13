@@ -110,10 +110,10 @@ const HeroSection = () => {
               
               {/* Premium CTA */}
               <div className="pt-4 lg:pt-6">
-                <Button 
-                  variant="luxury" 
+                <Button
+                  variant="glass"
                   size="xl"
-                  className="font-inter px-8 sm:px-10 lg:px-12"
+                  className="font-inter"
                 >
                   Book a Fitting
                 </Button>

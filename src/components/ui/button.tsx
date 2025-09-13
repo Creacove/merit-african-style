@@ -15,7 +15,8 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md",
         ghost: "hover:bg-accent hover:text-accent-foreground rounded-md",
         link: "text-primary underline-offset-4 hover:underline",
-        luxury: "bg-gradient-to-b from-[hsl(0,56%,27%)] to-[hsl(0,56%,22%)] text-[hsl(36,37%,95%)] font-semibold shadow-[0_10px_30px_rgba(106,31,31,0.45)] hover:shadow-[0_10px_30px_rgba(106,31,31,0.45),0_0_20px_rgba(199,154,43,0.3)] hover:-translate-y-1 hover:scale-105 active:scale-98 active:translate-y-0 rounded-[2.5rem] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[hsl(42,65%,48%)] focus-visible:ring-offset-2",
+      luxury: "bg-gradient-to-b from-[hsl(0,56%,27%)] to-[hsl(0,56%,22%)] text-[hsl(36,37%,95%)] font-semibold shadow-[0_10px_30px_rgba(106,31,31,0.45)] hover:shadow-[0_10px_30px_rgba(106,31,31,0.45),0_0_20px_rgba(199,154,43,0.3)] hover:-translate-y-1 hover:scale-105 active:scale-98 active:translate-y-0 rounded-[2.5rem] min-h-[44px] focus-visible:ring-2 focus-visible:ring-[hsl(42,65%,48%)] focus-visible:ring-offset-2",
+      glass: "",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -39,8 +40,25 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
+
+    // Handle glass variant with custom structure
+    if (variant === "glass") {
+      return (
+        <div className={cn("glass-button-wrap", className)}>
+          <Comp
+            className="glass-button"
+            ref={ref}
+            {...props}
+          >
+            <span>{children}</span>
+          </Comp>
+          <div className="glass-button-shadow" />
+        </div>
+      );
+    }
+
     return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
   },
 );
