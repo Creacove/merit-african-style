@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Keyboard, A11y } from 'swiper/modules';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Button } from "@/components/ui/button";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -14,35 +15,35 @@ const originalStyleCategories = [
     id: 1,
     title: "Agbada Elegance",
     descriptor: "Ceremonial presence",
-    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
+    image: "https://i.ibb.co/Xxrw7pQM/Generated-Image-September-14-2025-10-01-AM.png",
     alt: "Agbada — ceremonial tailoring"
   },
   {
     id: 2,
     title: "Kaftan Classics",
     descriptor: "Everyday distinguished",
-    image: "/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png",
+    image: "https://i.ibb.co/ds3jgFpy/Generated-Image-September-14-2025-10-49-AM.png",
     alt: "Kaftan — distinguished everyday wear"
   },
   {
     id: 3,
     title: "Buba & Sokoto",
     descriptor: "Rooted tradition",
-    image: "/lovable-uploads/fa1bcab1-df72-4fd9-b3f5-465190ca17ee.png",
+    image: "https://i.ibb.co/pBD6FQjT/Generated-Image-September-14-2025-10-24-AM.png",
     alt: "Buba & Sokoto — traditional tailoring"
   },
   {
     id: 4,
     title: "Contemporary Fusion",
     descriptor: "Tailored modernity",
-    image: "/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png",
+    image: "https://i.ibb.co/fdnTMW1s/SUIT.png",
     alt: "Contemporary fusion — modern tailoring"
   },
   {
     id: 5,
     title: "Daima Elegance",
     descriptor: "Modern inspiration",
-    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
+    image: "https://i.ibb.co/V0Cb49Yk/Generated-Image-September-14-2025-10-05-AM.png",
     alt: "Daima — modern African elegance"
   }
 ];
@@ -161,8 +162,16 @@ const SignatureStyles = () => {
   }, []);
 
   const handleBookConsultation = () => {
+    // Send WhatsApp message
+    const phoneNumber = '+2348147480222';
+    const message = 'Hello! I would like to discuss my style preferences for bespoke tailoring.';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
     // Analytics event - can be connected to your analytics service
-    console.log('Book consultation clicked from signature styles section');
+    console.log('WhatsApp message sent from signature styles section');
   };
 
   return (
@@ -172,21 +181,41 @@ const SignatureStyles = () => {
       aria-labelledby="styles-title"
     >
       <div className="container max-w-[1200px] mx-auto">
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 
-            ref={titleRef}
-            id="styles-title" 
-            className="font-playfair font-bold text-[28px] lg:text-[48px] leading-[1.05] text-[hsl(var(--ivory))] mb-4"
-          >
-            <span>Discover Your </span>
-            <span className="text-[hsl(var(--gold))]">Style</span>
-          </h2>
-          <p 
-            ref={subtitleRef}
-            className="styles-sub font-inter text-[16px] lg:text-[18px] leading-[1.5] text-[hsl(var(--muted-ivory))] max-w-2xl mx-auto"
-          >
-            From ceremonial Agbada to modern kaftans — each design is tailored to your posture, your presence, and your life.
-          </p>
+        <div className="text-center mb-12 lg:mb-16 relative">
+          {/* Yellow decorative line over text */}
+          <div className="absolute top-[20px] lg:top-[35px] left-1/2 transform -translate-x-1/2 w-[200px] lg:w-[320px] z-10">
+            <div className="h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent opacity-80"></div>
+          </div>
+
+          {/* Title container with line overlay effect */}
+          <div className="relative z-20">
+            <h2
+              ref={titleRef}
+              id="styles-title"
+              className="font-playfair font-bold text-[28px] lg:text-[48px] leading-[1.05] text-[hsl(var(--ivory))] mb-4 relative"
+            >
+              <span className="relative inline-block">
+                Discover Your
+                {/* Subtle text shadow/line effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[hsl(var(--gold),0.1)] to-transparent opacity-30 blur-sm transform scale-y-125"></div>
+              </span>
+              <span className="text-[hsl(var(--gold))] relative inline-block">
+                Style
+                {/* Decorative line accent on "Style" */}
+                <div className="absolute -bottom-[2px] left-0 w-full h-[1px] bg-[hsl(var(--gold))] opacity-60"></div>
+              </span>
+            </h2>
+          </div>
+
+          {/* Subtitle positioned under the line */}
+          <div className="relative z-0 mt-8 lg:mt-12">
+            <p
+              ref={subtitleRef}
+              className="styles-sub font-inter text-[16px] lg:text-[18px] leading-[1.5] text-[hsl(var(--muted-ivory))] max-w-2xl mx-auto"
+            >
+              From ceremonial Agbada to modern kaftans — each design is tailored to your posture, your presence, and your life.
+            </p>
+          </div>
         </div>
 
         <div ref={carouselRef} className="styles-carousel mb-12 lg:mb-16">
@@ -257,13 +286,15 @@ const SignatureStyles = () => {
                   </div>
                   
                   <div className="card-copy absolute bottom-6 left-6 right-6 text-[hsl(var(--ivory))]">
+                    {/* Gold line positioned above text */}
+                    <div className="gold-underline h-0.5 bg-[hsl(var(--gold))] w-0 group-hover:w-full group-focus:w-full transition-all duration-300 ease-out mb-4"></div>
+
                     <h3 className="font-playfair font-bold text-[20px] lg:text-[24px] leading-[1.1] mb-1">
                       {category.title}
                     </h3>
                     <p className="font-inter text-[14px] lg:text-[16px] text-[hsl(var(--muted-ivory))] mb-3">
                       {category.descriptor}
                     </p>
-                    <div className="gold-underline h-0.5 bg-[hsl(var(--gold))] w-0 group-hover:w-[56%] group-focus:w-[56%] transition-all duration-240 ease-out"></div>
                   </div>
                 </div>
               </SwiperSlide>
@@ -273,12 +304,14 @@ const SignatureStyles = () => {
         </div>
 
         <div ref={ctaRef} className="styles-cta text-center">
-          <button 
+          <Button
+            variant="glass"
+            size="xl"
+            className="font-inter mb-4"
             onClick={handleBookConsultation}
-            className="btn-primary bg-gradient-to-b from-[hsl(var(--burg))] to-[hsl(var(--burg))] text-[hsl(var(--ivory))] font-semibold px-8 py-4 rounded-[40px] shadow-[0_10px_30px_rgba(106,31,31,0.45)] hover:shadow-[0_10px_30px_rgba(106,31,31,0.45),0_0_20px_rgba(199,154,43,0.3)] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.98] active:translate-y-0 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--gold))] focus:ring-offset-2 min-h-[44px] mb-4"
           >
-            Book Your Consultation →
-          </button>
+            Let's Talk Style →
+          </Button>
           <p className="micro-note font-inter text-[12px] lg:text-[14px] text-[hsl(var(--muted-ivory))]">
             Not off-the-rack. Each garment is made-to-measure.
           </p>

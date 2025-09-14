@@ -11,6 +11,19 @@ const HeroSection = () => {
   const tailoringRef = useRef<HTMLSpanElement>(null);
   const badgeRef = useRef<HTMLDivElement>(null);
 
+  const handleBookFitting = () => {
+    // Send WhatsApp message
+    const phoneNumber = '+2348147480222';
+    const message = 'Hello! I would like to discuss my style preferences for bespoke tailoring.';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+
+    // Analytics event - can be connected to your analytics service
+    console.log('WhatsApp message sent from hero section');
+  };
+
   useEffect(() => {
     if (!heroRef.current || !bgRef.current || !mannequinRef.current) return;
 
@@ -184,6 +197,7 @@ const HeroSection = () => {
                   variant="glass"
                   size="xl"
                   className="font-inter"
+                  onClick={handleBookFitting}
                 >
                   Book a Fitting
                 </Button>
