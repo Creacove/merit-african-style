@@ -175,9 +175,9 @@ const SignatureStyles = () => {
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      className="styles-section bg-[hsl(var(--bg-section))] px-5 py-12 lg:px-16 lg:py-18"
+      className="styles-section bg-[hsl(var(--bg-section))] px-0 py-12 lg:px-16 lg:py-18"
       aria-labelledby="styles-title"
     >
       <div className="container max-w-[1200px] mx-auto">
