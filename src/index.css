@@ -61,6 +61,15 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* Signature Styles Section Tokens */
+    --bg-hero: 16 35% 13%;
+    --bg-section: 18 33% 18%;
+    --card-bg: 16 35% 11%;
+    --gold: 45 65% 48%;
+    --burg: 0 56% 27%;
+    --ivory: 36 37% 95%;
+    --muted-ivory: 36 37% 95%;
   }
 
   .dark {
