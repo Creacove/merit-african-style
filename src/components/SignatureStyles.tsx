@@ -33,9 +33,16 @@ const styleCategories = [
   },
   {
     id: 4,
+    title: "Daima Elegance",
+    descriptor: "Modern inspiration",
+    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
+    alt: "Daima — modern African elegance"
+  },
+  {
+    id: 5,
     title: "Contemporary Fusion",
     descriptor: "Tailored modernity",
-    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
+    image: "/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png",
     alt: "Contemporary fusion — modern tailoring"
   }
 ];
@@ -46,7 +53,22 @@ const SignatureStyles = () => {
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<any>(null);
+
+  const handleInit = (swiper: any) => {
+    console.log('🚀 Swiper initialized with continuous scrolling');
+
+    // Trigger initial shimmer after Swiper is ready
+    setTimeout(() => {
+      // Shimmer all cards on load
+      document.querySelectorAll('.shimmer-overlay').forEach((shimmer, index) => {
+        const delay = index * 0.2; // Stagger shimmer effects
+        gsap.fromTo(shimmer,
+          { x: '-40%', opacity: 0.06 },
+          { x: '120%', opacity: 0, duration: 0.64, ease: 'power1.inOut', delay }
+        );
+      });
+    }, 100);
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -77,15 +99,6 @@ const SignatureStyles = () => {
         ease: "cubic-bezier(.22,.9,.35,1)"
       }, "-=0.43");
 
-      // Carousel cards staggered entrance
-      tl.from(".styles-card", {
-        opacity: 0,
-        y: 28,
-        duration: 0.42,
-        stagger: 0.1,
-        ease: "cubic-bezier(.22,.9,.35,1)"
-      }, "-=0.35");
-
       // CTA gentle pulse
       tl.from(ctaRef.current, {
         scale: 0.98,
@@ -93,33 +106,26 @@ const SignatureStyles = () => {
         ease: "power2.out"
       }, "-=0.2");
 
-      // Shimmer effect on center card (only on first load)
-      const mediaQuery = window.matchMedia('(prefers-reduced-motion: no-preference)');
-      if (mediaQuery.matches) {
-        tl.to(".shimmer-overlay", {
-          x: "120%",
-          duration: 0.64,
-          ease: "power1.inOut",
-          delay: 0.3
-        }, "-=0.1");
-      }
+      // Delay carousel entrance to ensure Swiper is ready
+      setTimeout(() => {
+        const carouselTl = gsap.timeline();
+
+        // Carousel cards staggered entrance
+        carouselTl.from(".styles-card", {
+          opacity: 0,
+          y: 28,
+          duration: 0.42,
+          stagger: 0.1,
+          ease: "cubic-bezier(.22,.9,.35,1)"
+        });
+      }, 100);
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
-
-  const handleSlideChange = () => {
-    const slides = document.querySelectorAll('.styles-card');
-    slides.forEach((slide, index) => {
-      const isActive = slide.classList.contains('swiper-slide-active');
-      gsap.to(slide, {
-        scale: isActive ? 1 : 0.88,
-        y: isActive ? -8 : 0,
-        duration: 0.36,
-        ease: "power3.out"
-      });
-    });
-  };
 
   const handleBookConsultation = () => {
     // Analytics event - can be connected to your analytics service
@@ -151,36 +157,52 @@ const SignatureStyles = () => {
         </div>
 
         <div ref={carouselRef} className="styles-carousel mb-12 lg:mb-16">
-          <Swiper
-            ref={swiperRef}
-            modules={[Autoplay, Keyboard, A11y]}
-            centeredSlides={true}
-            slidesPerView={1.18}
-            spaceBetween={24}
-            breakpoints={{
-              900: {
-                slidesPerView: 3,
-                spaceBetween: 24
-              }
-            }}
-            autoplay={{
-              delay: 4200,
-              disableOnInteraction: true,
-              pauseOnMouseEnter: true
-            }}
-            loop={true}
-            keyboard={{
-              enabled: true,
-              onlyInViewport: true
-            }}
-            a11y={{
-              enabled: true
-            }}
-            onSlideChangeTransitionStart={handleSlideChange}
-            className="!overflow-visible"
-            aria-roledescription="carousel"
-            aria-label="Signature style carousel"
-          >
+          {/* Constrained centered container */}
+          <div className="max-w-full overflow-hidden mx-auto">
+            <Swiper
+              modules={[Autoplay, Keyboard, A11y]}
+              centeredSlides={true}
+              slidesPerView={1.18}
+              spaceBetween={24}
+              initialSlide={1} // Start with 2nd item centered (mobile)
+              breakpoints={{
+                900: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                  initialSlide: 2  // 3rd item centered on desktop
+                },
+                1200: {
+                  slidesPerView: 3,
+                  spaceBetween: 24,
+                  initialSlide: 2
+                },
+                1600: {
+                  slidesPerView: 4,
+                  spaceBetween: 24,
+                  initialSlide: 2
+                }
+              }}
+              autoplay={{
+                delay: 4200,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true
+              }}
+              loop={true}
+              loopAdditionalSlides={4}
+              watchOverflow={true}
+              speed={600}
+              keyboard={{
+                enabled: true,
+                onlyInViewport: true
+              }}
+              a11y={{
+                enabled: true
+              }}
+              onInit={handleInit}
+              className="relative w-full"
+              aria-roledescription="carousel"
+              aria-label="Signature style carousel"
+            >
             {styleCategories.map((category) => (
               <SwiperSlide key={category.id} className="!h-auto">
                 <div 
@@ -213,6 +235,7 @@ const SignatureStyles = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+          </div>
         </div>
 
         <div ref={ctaRef} className="styles-cta text-center">

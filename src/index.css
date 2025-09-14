@@ -948,3 +948,62 @@ All colors MUST be HSL.
     animation: none !important;
   }
 }
+
+/* ============= CAROUSEL ACTIVE/INACTIVE STYLING ============= */
+
+/* active/inactive card base styles */
+.styles-card {
+  transition: transform .36s cubic-bezier(.2,.9,.2,1), opacity .36s ease, filter .36s ease;
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 1;
+}
+
+/* inactive overlay (present visually; pointer-events: none for good performance) */
+.styles-card:not(.active-card)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: rgba(0,0,0,0.25);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* active card tuning (overrides base styles) */
+.styles-card.active-card {
+  opacity: 1;
+  filter: none;
+  transform: translateY(-8px) scale(1);
+  z-index: 5;
+  position: relative;
+}
+
+/* inactive fallback (if you prefer filter instead of overlay) */
+.styles-card:not(.active-card) {
+  transform: translateY(0) scale(0.88);
+  opacity: 0.75;
+  filter: none;
+  z-index: 1;
+}
+
+/* gold underline styling for carousel cards */
+.gold-underline {
+  height: 3px;
+  background: linear-gradient(90deg, hsl(45, 65%, 48%), hsl(40, 70%, 55%));
+  width: 0;
+  transition: width .24s cubic-bezier(.25, 1, .5, 1);
+  border-radius: 2px;
+  position: absolute;
+  left: 18px;
+  bottom: 20px;
+  z-index: 3;
+}
+
+/* ensure the active card is keyboard focus friendly */
+.styles-card:focus {
+  outline: 3px solid rgba(199, 154, 43, 0.16);
+  outline-offset: 6px;
+  transform: translateY(-8px) scale(1);
+  z-index: 10;
+}
