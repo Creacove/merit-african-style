@@ -9,7 +9,7 @@ import 'swiper/css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const styleCategories = [
+const originalStyleCategories = [
   {
     id: 1,
     title: "Agbada Elegance",
@@ -33,18 +33,25 @@ const styleCategories = [
   },
   {
     id: 4,
-    title: "Daima Elegance",
-    descriptor: "Modern inspiration",
-    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
-    alt: "Daima — modern African elegance"
-  },
-  {
-    id: 5,
     title: "Contemporary Fusion",
     descriptor: "Tailored modernity",
     image: "/lovable-uploads/e6c969f7-79b5-41a0-85a5-69eb63eb293d.png",
     alt: "Contemporary fusion — modern tailoring"
+  },
+  {
+    id: 5,
+    title: "Daima Elegance",
+    descriptor: "Modern inspiration",
+    image: "/lovable-uploads/c4b18a22-ab38-42d8-a546-26bc827d56a4.png",
+    alt: "Daima — modern African elegance"
   }
+];
+
+// Create multiple duplicates for smooth infinite loop (need ~12+ slides for perfect 3-view loop)
+const styleCategories = [
+  ...originalStyleCategories,
+  ...originalStyleCategories.map(item => ({ ...item, id: item.id + 100 })),
+  ...originalStyleCategories.map(item => ({ ...item, id: item.id + 200 })),
 ];
 
 const SignatureStyles = () => {
@@ -56,9 +63,35 @@ const SignatureStyles = () => {
 
   const handleInit = (swiper: any) => {
     console.log('🚀 Swiper initialized with continuous scrolling');
+    
+    // Set up slide change animations
+    swiper.on('slideChangeTransitionStart', () => {
+      const slides = document.querySelectorAll('.styles-card');
+      slides.forEach((slide: any, index) => {
+        const isActive = slide.classList.contains('swiper-slide-active');
+        gsap.to(slide, {
+          scale: isActive ? 1.0 : 0.88,
+          y: isActive ? -8 : 0,
+          opacity: isActive ? 1 : 0.86,
+          duration: 0.36,
+          ease: "power3.out"
+        });
+      });
+    });
 
     // Trigger initial shimmer after Swiper is ready
     setTimeout(() => {
+      // Set initial active state
+      const slides = document.querySelectorAll('.styles-card');
+      slides.forEach((slide: any, index) => {
+        const isActive = slide.classList.contains('swiper-slide-active');
+        gsap.set(slide, {
+          scale: isActive ? 1.0 : 0.88,
+          y: isActive ? -8 : 0,
+          opacity: isActive ? 1 : 0.86
+        });
+      });
+
       // Shimmer all cards on load
       document.querySelectorAll('.shimmer-overlay').forEach((shimmer, index) => {
         const delay = index * 0.2; // Stagger shimmer effects
@@ -162,24 +195,24 @@ const SignatureStyles = () => {
             <Swiper
               modules={[Autoplay, Keyboard, A11y]}
               centeredSlides={true}
-              slidesPerView={1.18}
+              slidesPerView={1.2}
               spaceBetween={24}
-              initialSlide={1} // Start with 2nd item centered (mobile)
+              initialSlide={5} // Start in middle of duplicated items
               breakpoints={{
                 900: {
                   slidesPerView: 3,
                   spaceBetween: 24,
-                  initialSlide: 2  // 3rd item centered on desktop
+                  initialSlide: 5  // Start in middle
                 },
                 1200: {
                   slidesPerView: 3,
                   spaceBetween: 24,
-                  initialSlide: 2
+                  initialSlide: 5
                 },
                 1600: {
-                  slidesPerView: 4,
+                  slidesPerView: 3,
                   spaceBetween: 24,
-                  initialSlide: 2
+                  initialSlide: 5
                 }
               }}
               autoplay={{
@@ -188,9 +221,9 @@ const SignatureStyles = () => {
                 pauseOnMouseEnter: true
               }}
               loop={true}
-              loopAdditionalSlides={4}
-              watchOverflow={true}
-              speed={600}
+              loopAdditionalSlides={3}
+              watchOverflow={false}
+              speed={700}
               keyboard={{
                 enabled: true,
                 onlyInViewport: true
@@ -203,13 +236,14 @@ const SignatureStyles = () => {
               aria-roledescription="carousel"
               aria-label="Signature style carousel"
             >
-            {styleCategories.map((category) => (
-              <SwiperSlide key={category.id} className="!h-auto">
+            {styleCategories.map((category, index) => (
+              <SwiperSlide key={`${category.id}-${index}`} className="!h-auto">
                 <div 
-                  className="styles-card relative aspect-[3/4] bg-[hsl(var(--card-bg))] rounded-[18px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.45)] cursor-pointer transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-[3px] focus:ring-[hsl(var(--gold))]/18 focus:outline-offset-[6px] group"
+                  className="styles-card relative aspect-[3/4] bg-[hsl(var(--card-bg))] rounded-[18px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.45)] cursor-pointer transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-[3px] focus:ring-[hsl(var(--gold))]/18 focus:outline-offset-[6px] group opacity-86"
                   role="group"
                   aria-label={`${category.title}: ${category.descriptor}`}
                   tabIndex={0}
+                  style={{ transform: 'scale(0.88) translateY(0px)' }}
                 >
                   <div className="image-wrap relative w-full h-full overflow-hidden rounded-[18px]">
                     <img 

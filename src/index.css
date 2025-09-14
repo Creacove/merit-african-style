@@ -1007,3 +1007,34 @@ All colors MUST be HSL.
   transform: translateY(-8px) scale(1);
   z-index: 10;
 }
+
+/* Swiper carousel specific styles */
+.styles-carousel .swiper-slide {
+  opacity: 0.86;
+  transform: scale(0.88) translateY(0px);
+  transition: all 0.36s cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.styles-carousel .swiper-slide-active {
+  opacity: 1;
+  transform: scale(1.0) translateY(-8px);
+  z-index: 2;
+}
+
+.styles-carousel .swiper-slide-prev,
+.styles-carousel .swiper-slide-next {
+  opacity: 0.86;
+  transform: scale(0.88) translateY(0px);
+}
+
+/* Override GSAP animations when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  .styles-carousel .swiper-slide {
+    transform: none;
+    opacity: 1;
+  }
+  
+  .styles-carousel .swiper-slide-active {
+    transform: none;
+  }
+}
