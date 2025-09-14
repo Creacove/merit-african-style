@@ -8,21 +8,21 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    title: "Traditional Agbada",
-    description: "Elegant flowing robes perfect for ceremonies and special occasions",
-    textIcon: "♔",
+    title: "Custom Design & Pattern Making",
+    description: "Bespoke design consultation and custom pattern creation tailored to your unique measurements and style preferences",
+    textIcon: "📐",
     statusIcon: "☆"
   },
   {
-    title: "Modern Buba & Shokoto",
-    description: "Contemporary takes on classic Nigerian formal wear",
-    textIcon: "♕",
+    title: "Precision Sewing & Construction",
+    description: "Expert craftsmanship using traditional African techniques combined with modern precision for flawless garment construction",
+    textIcon: "🧵",
     statusIcon: "●"
   },
   {
-    title: "Custom Formal Wear",
-    description: "Bespoke suits blending African aesthetics with modern tailoring",
-    textIcon: "♛",
+    title: "Alterations & Restyling",
+    description: "Professional garment modifications, repairs, and creative restyling to give new life to your existing wardrobe",
+    textIcon: "✂️",
     statusIcon: "◇"
   },
 ];
@@ -36,13 +36,22 @@ const ServicesPreview = () => {
   useEffect(() => {
     if (!sectionRef.current) return;
 
+    // Initialize cards as visible to prevent them staying hidden
+    cardRefs.current.forEach((cardEl) => {
+      if (cardEl) {
+        gsap.set(cardEl, { opacity: 1, y: 0, scale: 1 });
+      }
+    });
+
     const ctx = gsap.context(() => {
-      // Entrance animations
+      // Set up ScrollTrigger animation timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          once: true
+          end: "bottom 20%",
+          toggleActions: "play none none reverse",
+          once: false // Allow re-triggering
         }
       });
 
@@ -53,29 +62,43 @@ const ServicesPreview = () => {
         ease: "power2.out"
       });
 
-      // Title entrance
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 25,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.3");
+      // Title entrance with improved visibility handling
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current, {
+          opacity: 0,
+          y: 25
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out"
+        }, "-=0.3");
+      }
 
       // Paragraph entrance
-      tl.from(paragraphRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.2");
+      if (paragraphRef.current) {
+        tl.fromTo(paragraphRef.current, {
+          opacity: 0,
+          y: 20
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out"
+        }, "-=0.2");
+      }
 
-      // Cards entrance with stagger
+      // Cards entrance with stagger and visibility guarantee
       cardRefs.current.forEach((cardEl, index) => {
         if (cardEl) {
-          tl.from(cardEl, {
+          tl.fromTo(cardEl, {
             opacity: 0,
             y: 40,
-            scale: 0.9,
+            scale: 0.9
+          }, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
             duration: 0.6,
             ease: "power3.out"
           }, `-=${0.8 - index * 0.1}`);
@@ -120,7 +143,7 @@ const ServicesPreview = () => {
             ref={paragraphRef}
             className="font-inter text-lg lg:text-xl text-[hsl(var(--muted-ivory))] max-w-3xl mx-auto leading-relaxed"
           >
-            From traditional <span className="text-[hsl(var(--gold))] font-semibold">Agbada</span> to modern formal wear, we craft each piece with meticulous attention to detail and unparalleled craftsmanship.
+            From <span className="text-[hsl(var(--gold))] font-semibold">bespoke design</span> to expert construction and creative restyling, we bring your vision to life with meticulous attention to detail and unparalleled craftsmanship.
           </p>
         </div>
 
@@ -157,56 +180,40 @@ const ServicesPreview = () => {
                 });
               }}
             >
-              <CardContent className="p-8 h-full flex flex-col">
-                {/* Gold accent line at top */}
-                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))]/50 to-transparent mb-6 relative">
-                  {/* Animated shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[hsl(var(--white))]/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
-                </div>
-
-                <div className="aspect-[3/4] bg-gradient-to-br from-[hsl(var(--deep-chocolate))] to-[hsl(var(--olive-secondary))]/20 rounded-2xl mb-8 flex items-center justify-center relative overflow-hidden">
-                  {/* Icon display with luxury styling */}
-                  <div className="text-center relative z-10">
-                    <div className="text-6xl mb-4 opacity-95 group-hover:opacity-100 transition-opacity duration-300">
+              <CardContent className="p-6 h-full flex flex-col">
+                {/* Compact icon top section */}
+                <div className="flex items-center justify-center mb-5 relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[hsl(var(--gold))]/10 to-[hsl(var(--gold))]/5 rounded-full flex items-center justify-center group-hover:bg-[hsl(var(--gold))]/20 transition-colors duration-300">
+                    <span className="text-3xl group-hover:scale-110 transition-transform duration-300">
                       {service.textIcon || "✦"}
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-[hsl(var(--gold))]/20 rounded-full flex items-center justify-center text-sm">
-                      {service.statusIcon || "•"}
-                    </div>
+                    </span>
                   </div>
-
-                  {/* Subtle glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--gold))]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                  {/* Decorative corner elements */}
-                  <div className="absolute top-4 right-4 w-6 h-6 border-t border-r border-[hsl(var(--gold))]/30 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 w-6 h-6 border-b border-l border-[hsl(var(--gold))]/30 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Subtle status indicator */}
+                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-[hsl(var(--gold))]/80 rounded-full flex items-center justify-center text-xs text-[hsl(var(--deep-chocolate))]">
+                    {service.statusIcon || "•"}
+                  </div>
                 </div>
 
-                <div className="flex-1 flex flex-col">
-                  <h3 className="font-playfair font-bold text-xl lg:text-2xl text-[hsl(var(--ivory))] mb-4 group-hover:text-[hsl(var(--gold))] transition-colors duration-300">
+                <div className="flex-1 flex flex-col space-y-4">
+                  <h3 className="font-playfair font-bold text-lg lg:text-xl text-[hsl(var(--ivory))] text-center group-hover:text-[hsl(var(--gold))] transition-colors duration-300 leading-tight">
                     {service.title}
                   </h3>
-                  <p className="font-inter text-[hsl(var(--muted-ivory))] mb-8 leading-relaxed flex-1">
+
+                  <p className="font-inter text-[hsl(var(--muted-ivory))]/90 text-sm lg:text-base leading-relaxed text-center flex-1">
                     {service.description}
                   </p>
 
-                  {/* Luxury button */}
+                  {/* Compact button */}
                   <Button
                     variant="outline"
-                    className="w-full border-[hsl(var(--gold))]/50 hover:border-[hsl(var(--gold))] text-[hsl(var(--ivory))] hover:text-[hsl(var(--deep-chocolate))] font-inter font-medium hover:bg-[hsl(var(--gold))] transition-all duration-300 relative overflow-hidden group/button"
+                    className="w-full border-[hsl(var(--gold))]/50 hover:border-[hsl(var(--gold))] text-[hsl(var(--ivory))] hover:text-[hsl(var(--deep-chocolate))] font-inter font-medium hover:bg-[hsl(var(--gold))] transition-all duration-300 text-sm py-2 h-auto"
                   >
-                    {/* Button background animation */}
-                    <div className="absolute inset-0 bg-[hsl(var(--gold))] scale-x-0 group-hover/button:scale-x-100 transition-transform duration-300 origin-left"></div>
-                    <span className="relative z-10 flex items-center justify-center gap-2">
-                      Learn More
-                      <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
-                    </span>
+                    Learn More →
                   </Button>
                 </div>
 
-                {/* Bottom accent line */}
-                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))]/30 to-transparent mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {/* Subtle bottom accent */}
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))]/20 to-transparent mt-4 group-hover:opacity-60 opacity-30"></div>
               </CardContent>
             </Card>
           ))}

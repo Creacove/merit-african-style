@@ -224,8 +224,8 @@ const SignatureStyles = () => {
             <Swiper
               modules={[Autoplay, Keyboard, A11y]}
               centeredSlides={true}
-              slidesPerView={1.2}
-              spaceBetween={24}
+              slidesPerView={1.4}
+              spaceBetween={16}
               initialSlide={5} // Start in middle of duplicated items
               breakpoints={{
                 900: {

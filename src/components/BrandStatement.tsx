@@ -112,24 +112,19 @@ const BrandStatement = () => {
               `
             }}
           >
-            {/* Luxurious founder portrait placeholder */}
-            <div className="w-full h-full flex flex-col items-center justify-center relative p-8">
-              {/* Elegant decorative frame effect */}
-              <div className="absolute inset-4 border-2 border-[hsl(var(--gold))]/30 rounded-[1.5rem]"></div>
-              <div className="absolute inset-6 border border-[hsl(var(--white))]/20 rounded-[1rem]"></div>
+            {/* Founder portrait image */}
+            <img
+              src="https://i.ibb.co/wh44mJtW/Generated-Image-September-14-2025-12-46-PM.png"
+              alt="Founder of Merit African Style"
+              className="w-full h-full object-cover rounded-[1.5rem]"
+              style={{ objectPosition: 'center' }}
+            />
 
-              {/* Center content */}
-              <div className="text-center relative z-10">
-                <div className="w-24 h-24 bg-[hsl(var(--gold))]/20 rounded-full mx-auto mb-6 flex items-center justify-center mb-4">
-                  <span className="text-3xl">👑</span>
-                </div>
-                <h3 className="font-playfair font-bold text-2xl text-[hsl(var(--ivory))] mb-2">Founder</h3>
-                <p className="font-inter text-[hsl(var(--muted-ivory))] text-sm">Legacy Of African Elegance</p>
-              </div>
+            {/* Elegant decorative frame effect */}
+            <div className="absolute inset-4 border-2 border-[hsl(var(--gold))]/30 rounded-[1.5rem]"></div>
 
-              {/* Subtle shimmer overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[hsl(var(--gold))]/5 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100"></div>
-            </div>
+            {/* Subtle shimmer overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[hsl(var(--gold))]/5 to-transparent opacity-0 transition-opacity duration-500 hover:opacity-100 rounded-[1.5rem]"></div>
           </div>
 
           {/* Decorative corner elements */}

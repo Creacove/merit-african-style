@@ -192,11 +192,12 @@ const Footer = () => {
 
         {/* Elegant bottom divider */}
         <div className="footer-copyright mt-16 pt-8 border-t border-[hsl(var(--gold))]/10">
-          <div className="text-center">
+          <div className="text-center space-y-2">
             <p className="font-inter text-[hsl(var(--muted-ivory))]/70 text-sm lg:text-base">
-              © 2024 MeritGold Clothings. All rights reserved.
-              <span className="text-[hsl(var(--gold))]/60 mx-4">•</span>
-              <span className="text-[hsl(var(--muted-ivory))]/60">Crafted with 🧡 for the discerning gentleman</span>
+              © 2025 MeritGold Clothings. All rights reserved.
+            </p>
+            <p className="font-inter text-[hsl(var(--muted-ivory))]/50 text-xs">
+              Website designed & developed by <span className="text-[hsl(var(--gold))]/80 font-medium">Creacove</span>
             </p>
           </div>
         </div>
