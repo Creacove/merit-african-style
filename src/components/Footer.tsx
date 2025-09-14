@@ -77,18 +77,27 @@ const Footer = () => {
           {/* Decorative top line */}
           <div className="footer-decorative-line w-24 h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))]/60 to-transparent mb-8"></div>
 
-          {/* Company signature */}
+          {/* Company logo and signature */}
           <div className="text-center mb-12">
-            <h3
+            <div
               ref={titleRef}
-              className="font-playfair font-bold text-3xl lg:text-4xl xl:text-5xl text-[hsl(var(--ivory))] mb-4 relative"
+              className="flex items-center justify-center gap-4 mb-6"
             >
-              Merit <span className="text-[hsl(var(--gold))] relative">
-                Good
-                {/* Decorative underline */}
-                <div className="absolute -bottom-[2px] left-0 w-full h-[1px] bg-[hsl(var(--gold))] opacity-80"></div>
-              </span> Clothing
-            </h3>
+              <img
+                src="/logo.png"
+                alt="MeritGold Clothings Logo"
+                className="h-12 lg:h-16 xl:h-20 w-auto object-contain filter brightness-0 invert"
+                style={{
+                  filter: 'brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(25deg) brightness(1.2)'
+                }}
+              />
+              <h3 className="font-playfair font-bold text-3xl lg:text-4xl xl:text-5xl text-[hsl(var(--ivory))] relative">
+                <span className="text-transparent bg-gradient-to-r from-[hsl(var(--ivory))] via-[hsl(var(--gold))] to-[hsl(var(--ivory))] bg-clip-text">
+                  MeritGold Clothings
+                </span>
+                <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent opacity-80"></div>
+              </h3>
+            </div>
 
             <p className="font-inter text-[hsl(var(--muted-ivory))] text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed mb-8">
               Bespoke African tailoring for <span className="text-[hsl(var(--gold))]/90 font-semibold">the modern gentleman</span>. Creating luxury native wears that celebrate tradition and embrace contemporary style.
@@ -162,7 +171,7 @@ const Footer = () => {
                 <div className="w-8 h-8 bg-[hsl(var(--gold))]/20 rounded-full flex items-center justify-center group-hover:bg-[hsl(var(--gold))] transition-colors duration-300">
                   <span className="text-[hsl(var(--ivory))] text-sm">✉️</span>
                 </div>
-                <span className="font-inter text-[hsl(var(--muted-ivory))]/90 group-hover:text-[hsl(var(--ivory))] transition-colors">info@meritgood.com</span>
+                <span className="font-inter text-[hsl(var(--muted-ivory))]/90 group-hover:text-[hsl(var(--ivory))] transition-colors">info@meritgold.com</span>
               </div>
             </div>
 
@@ -185,7 +194,7 @@ const Footer = () => {
         <div className="footer-copyright mt-16 pt-8 border-t border-[hsl(var(--gold))]/10">
           <div className="text-center">
             <p className="font-inter text-[hsl(var(--muted-ivory))]/70 text-sm lg:text-base">
-              © 2024 Merit Good Clothing. All rights reserved.
+              © 2024 MeritGold Clothings. All rights reserved.
               <span className="text-[hsl(var(--gold))]/60 mx-4">•</span>
               <span className="text-[hsl(var(--muted-ivory))]/60">Crafted with 🧡 for the discerning gentleman</span>
             </p>

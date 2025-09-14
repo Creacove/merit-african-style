@@ -164,12 +164,21 @@ const HeroSection = () => {
 
   return (
     <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 pb-48 overflow-hidden bg-background">
+      {/* Subtle gold ambient background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-[hsl(var(--gold))] to-transparent blur-3xl"></div>
+        <div className="absolute bottom-40 right-20 w-40 h-40 rounded-full bg-gradient-to-l from-[hsl(var(--gold))] to-transparent blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/3 w-24 h-24 rounded-full bg-[hsl(var(--gold))] blur-2xl opacity-30"></div>
+        <div className="absolute top-2/3 right-1/3 w-32 h-32 rounded-full bg-gradient-to-br from-[hsl(var(--gold))] to-transparent blur-3xl"></div>
+      </div>
+
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-12 items-start lg:items-center lg:min-h-screen">
-          
+
           {/* Hero Content */}
           <div className="lg:col-span-7 space-y-6 lg:space-y-8 text-center lg:text-left order-1 flex flex-col justify-center">
             <div className="space-y-4 lg:space-y-6">
+
               {/* Headline with "Tailoring" emphasis */}
               <h1 className="hero-title font-playfair font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.02] lg:leading-[1.05] tracking-tight text-foreground">
                 <span className="inline-block">Bespoke</span>
@@ -185,12 +194,12 @@ const HeroSection = () => {
                 </span>
                 <span className="inline-block"> for the Modern Gentleman</span>
               </h1>
-              
+
               {/* Subhead */}
               <p className="hero-subtitle font-inter text-base sm:text-lg lg:text-xl text-muted-foreground max-w-lg lg:max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                 Hand-finished techniques. Tailored to your posture and presence.
               </p>
-              
+
               {/* Premium CTA */}
               <div className="pt-4 lg:pt-6">
                 <Button
