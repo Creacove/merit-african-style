@@ -163,7 +163,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-16 pb-48 overflow-hidden bg-background">
+    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-12 lg:py-16 pb-24 overflow-hidden bg-background">
       {/* Subtle gold ambient background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-[hsl(var(--gold))] to-transparent blur-3xl"></div>
@@ -180,10 +180,10 @@ const HeroSection = () => {
             <div className="space-y-4 lg:space-y-6">
 
               {/* Headline with "Tailoring" emphasis */}
-              <h1 className="hero-title font-playfair font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.02] lg:leading-[1.05] tracking-tight text-foreground">
+              <h1 className="hero-title font-playfair font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.02] lg:leading-[1.05] tracking-tight text-foreground">
                 <span className="inline-block">Bespoke</span>
                 <br />
-                <span className="inline-block relative text-[1.25em] font-black tailoring-text-animated bg-gradient-to-r from-[hsl(42,65%,48%)] to-[hsl(45,70%,55%)] bg-clip-text text-transparent animate-pulse" ref={tailoringRef}
+                <span className="inline-block relative text-[1.15em] font-black tailoring-text-animated bg-gradient-to-r from-[hsl(42,65%,48%)] to-[hsl(45,70%,55%)] bg-clip-text text-transparent animate-pulse" ref={tailoringRef}
                   style={{
                     backgroundSize: '200% 100%',
                     animation: 'goldTextShimmer 3s ease-in-out infinite'

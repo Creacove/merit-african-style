@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'playfair': ['Playfair Display', 'serif'],
-        'inter': ['Inter', 'sans-serif'],
+        'playfair': ['Snowburst One', 'serif'],
+        'inter': ['Lato', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

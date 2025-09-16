@@ -115,13 +115,15 @@ const ServicesPreview = () => {
   return (
     <section
       ref={sectionRef}
-      className="px-6 lg:px-12 py-16 lg:py-24 bg-background relative overflow-hidden"
+      className="px-6 lg:px-12 py-12 lg:py-16 bg-background relative overflow-hidden"
     >
-      {/* Background gold accents */}
-      <div className="absolute inset-0 opacity-3">
+      {/* Enhanced background for glass effect */}
+      <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 right-10 w-40 h-40 rounded-full bg-[hsl(var(--gold))] blur-3xl"></div>
         <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-[hsl(var(--gold))] blur-3xl"></div>
         <div className="absolute top-1/3 right-1/3 w-24 h-24 rounded-full bg-[hsl(var(--gold))] blur-3xl"></div>
+        {/* Subtle texture overlay for glass depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--deep-chocolate))]/5 via-transparent to-[hsl(var(--gold))]/5 opacity-20"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -130,7 +132,7 @@ const ServicesPreview = () => {
 
           <h2
             ref={titleRef}
-            className="font-playfair font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
+            className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
           >
             Our <span className="text-[hsl(var(--gold))] relative">
               Services
@@ -152,31 +154,43 @@ const ServicesPreview = () => {
             <Card
               key={index}
               ref={el => (cardRefs.current[index] = el)}
-              className="bg-gradient-to-br from-[hsl(var(--card-bg))] to-[hsl(var(--deep-chocolate))] border-[hsl(var(--gold))]/30 shadow-xl hover:shadow-2xl transition-all duration-500 group relative overflow-hidden"
+              className="transition-all duration-700 group relative overflow-hidden frosted-glass-card"
               style={{
-                boxShadow: `
-                  0 20px 40px rgba(0,0,0,0.3),
-                  0 0 0 1px rgba(184,134,11,0.2),
-                  inset 0 1px 0 rgba(255,255,255,0.1)
-                `,
                 transform: 'translateY(0)',
                 transformOrigin: 'center',
-                border:'2px solid hsl(var(--gold) / 0.3)'
+                backdropFilter: 'blur(20px) saturate(180%) contrast(120%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%) contrast(120%)'
               }}
               onMouseEnter={(e) => {
                 gsap.to(e.currentTarget, {
-                  y: -8,
-                  scale: 1.02,
-                  duration: 0.3,
-                  ease: "power3.out"
+                  y: -12,
+                  scale: 1.03,
+                  duration: 0.4,
+                  ease: "power3.out",
+                  backdropFilter: 'blur(16px) saturate(200%)',
+                  boxShadow: `
+                    0 35px 70px hsla(15,34%,13%,0.2),
+                    0 15px 40px hsla(15,34%,13%,0.15),
+                    inset 0 1px 0 hsla(255,255,255,0.2),
+                    inset 0 -1px 0 hsla(42,65%,48%,0.08),
+                    0 0 0 2px hsla(42,65%,48%,0.12)
+                  `
                 });
               }}
               onMouseLeave={(e) => {
                 gsap.to(e.currentTarget, {
                   y: 0,
                   scale: 1,
-                  duration: 0.3,
-                  ease: "power3.out"
+                  duration: 0.4,
+                  ease: "power3.out",
+                  backdropFilter: 'blur(12px) saturate(180%)',
+                  boxShadow: `
+                    0 25px 50px hsla(15,34%,13%,0.15),
+                    0 10px 30px hsla(15,34%,13%,0.1),
+                    inset 0 1px 0 hsla(255,255,255,0.15),
+                    inset 0 -1px 0 hsla(42,65%,48%,0.05),
+                    0 0 0 2px hsla(42,65%,48%,0.08)
+                  `
                 });
               }}
             >
@@ -195,11 +209,11 @@ const ServicesPreview = () => {
                 </div>
 
                 <div className="flex-1 flex flex-col space-y-4">
-                  <h3 className="font-playfair font-bold text-lg lg:text-xl text-[hsl(var(--ivory))] text-center group-hover:text-[hsl(var(--gold))] transition-colors duration-300 leading-tight">
+                  <h3 className="font-playfair font-bold text-lg lg:text-xl text-white/95 text-center group-hover:text-[hsl(var(--gold))] transition-colors duration-300 leading-tight drop-shadow-sm">
                     {service.title}
                   </h3>
 
-                  <p className="font-inter text-[hsl(var(--muted-ivory))]/90 text-sm lg:text-base leading-relaxed text-center flex-1">
+                  <p className="font-inter text-white/80 text-sm lg:text-base leading-relaxed text-center flex-1 drop-shadow-sm">
                     {service.description}
                   </p>
 

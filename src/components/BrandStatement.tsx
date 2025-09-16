@@ -65,7 +65,7 @@ const BrandStatement = () => {
   return (
     <section
       ref={sectionRef}
-      className="px-6 lg:px-12 py-16 lg:py-24 bg-[hsl(var(--bg-section))] relative overflow-hidden"
+      className="px-6 lg:px-12 py-12 lg:py-16 bg-[hsl(var(--bg-section))] relative overflow-hidden"
     >
       {/* Background pattern elements */}
       <div className="absolute inset-0 opacity-5">
@@ -82,7 +82,7 @@ const BrandStatement = () => {
 
             <h2
               ref={titleRef}
-              className="font-playfair font-bold text-4xl lg:text-5xl xl:text-6xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
+              className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
             >
               We create <span className="text-[hsl(var(--gold))] relative">
                 clothes
@@ -94,7 +94,7 @@ const BrandStatement = () => {
 
           <p
             ref={paragraphRef}
-            className="font-inter text-lg lg:text-xl xl:text-2xl text-[hsl(var(--muted-ivory))] leading-[1.6] max-w-lg"
+            className="font-inter text-base lg:text-lg xl:text-xl text-[hsl(var(--muted-ivory))] leading-[1.6] max-w-lg"
           >
             Bright, strong personalities. For <span className="text-[hsl(var(--gold))] font-semibold">real men</span> who want to feel perfect. Our bespoke African tailoring combines traditional craftsmanship with modern elegance, creating pieces that celebrate your heritage while embracing contemporary style.
           </p>
