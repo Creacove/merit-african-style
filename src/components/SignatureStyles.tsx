@@ -77,6 +77,50 @@ const SignatureStyles = () => {
           duration: 0.36,
           ease: "power3.out"
         });
+
+        // Animate title text in active card
+        const title = slide.querySelector('h3');
+        if (title) {
+          gsap.to(title, {
+            opacity: isActive ? 1 : 0.6,
+            scale: isActive ? 1.02 : 1,
+            y: isActive ? -2 : 0,
+            duration: 0.28,
+            ease: "power3.out",
+            css: isActive ? {
+              filter: 'brightness(1.15) contrast(1.05)'
+            } : {
+              filter: 'brightness(1) contrast(1)'
+            }
+          });
+        }
+
+        // Animate description text in active card
+        const desc = slide.querySelector('p');
+        if (desc) {
+          gsap.to(desc, {
+            opacity: isActive ? 1 : 0.4,
+            scale: isActive ? 1.01 : 1,
+            y: isActive ? -1 : 0,
+            duration: 0.32,
+            ease: "power3.out",
+            css: isActive ? {
+              filter: 'brightness(1.1)'
+            } : {
+              filter: 'brightness(1) saturate(1)'
+            }
+          });
+        }
+
+        // Animate gold underline accent
+        const underline = slide.querySelector('.gold-underline');
+        if (underline) {
+          gsap.to(underline, {
+            width: isActive ? '100%' : '0%',
+            duration: 0.44,
+            ease: "power3.out"
+          });
+        }
       });
     });
 
@@ -152,6 +196,24 @@ const SignatureStyles = () => {
           stagger: 0.1,
           ease: "cubic-bezier(.22,.9,.35,1)"
         });
+
+        // Card title text entrance
+        carouselTl.from(".styles-card h3", {
+          opacity: 0,
+          y: 8,
+          duration: 0.36,
+          stagger: 0.12,
+          ease: "power3.out"
+        }, "-=0.5");
+
+        // Card description text entrance
+        carouselTl.from(".styles-card p", {
+          opacity: 0,
+          y: 6,
+          duration: 0.32,
+          stagger: 0.12,
+          ease: "power3.out"
+        }, "-=0.62");
       }, 100);
     }, sectionRef);
 
@@ -177,11 +239,11 @@ const SignatureStyles = () => {
   return (
     <section
       ref={sectionRef}
-      className="styles-section bg-[hsl(var(--bg-section))] px-0 py-12 lg:px-16 lg:py-18"
+      className="styles-section bg-[hsl(var(--bg-section))] px-0 py-12 lg:px-16 lg:py-18 -mx-4 lg:mx-0"
       aria-labelledby="styles-title"
     >
-      <div className="container max-w-[1200px] mx-auto">
-        <div className="text-center mb-12 lg:mb-16 relative">
+        <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12 lg:mb-16 relative px-4 lg:px-0 -mx-4 lg:-mx-0">
           {/* Yellow decorative line over text */}
           <div className="absolute top-[20px] lg:top-[35px] left-1/2 transform -translate-x-1/2 w-[200px] lg:w-[320px] z-10">
             <div className="h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent opacity-80"></div>
@@ -211,7 +273,7 @@ const SignatureStyles = () => {
           <div className="relative z-0 mt-8 lg:mt-12">
             <p
               ref={subtitleRef}
-              className="styles-sub font-inter text-[16px] lg:text-[18px] leading-[1.5] text-[hsl(var(--muted-ivory))] max-w-2xl mx-auto"
+              className="styles-sub font-inter text-[16px] lg:text-[18px] leading-[1.5] text-[hsl(var(--muted-ivory))] max-w-2xl mx-auto px-8 lg:px-16"
             >
               From ceremonial Agbada to modern kaftans — each design is tailored to your posture, your presence, and your life.
             </p>
@@ -219,8 +281,8 @@ const SignatureStyles = () => {
         </div>
 
         <div ref={carouselRef} className="styles-carousel mb-12 lg:mb-16">
-          {/* Constrained centered container */}
-          <div className="max-w-full overflow-hidden mx-auto">
+          {/* Constrained centered container - full width on mobile */}
+          <div className="max-w-full overflow-hidden mx-auto px-4 lg:px-0 -mx-4 lg:-mx-0">
             <Swiper
               modules={[Autoplay, Keyboard, A11y]}
               centeredSlides={true}

@@ -949,16 +949,269 @@ All colors MUST be HSL.
   }
 }
 
-/* ============= FROSTED GLASS CARDS ============= */
+/* ============= MOBILE EDGE-TO-EDGE FIXES ============= */
 
-/* css.glass frosted glass cards */
+/* Force carousel section to be edge-to-edge on mobile */
+.styles-section {
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Responsive title constraint for optimal readability */
+.styles-section .text-center h2,
+.styles-section .text-center p {
+  max-width: min(85%, 500px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mobile-optimized width constraints */
+@media (max-width: 768px) {
+  .styles-section .text-center h2,
+  .styles-section .text-center p {
+    max-width: min(90%, 480px);
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .styles-section .text-center h2,
+  .styles-section .text-center p {
+    max-width: min(95%, 440px);
+  }
+}
+
+/* Desktop restoration */
+@media (min-width: 1024px) {
+  .styles-section {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Reset title constraints on desktop */
+  .styles-section .text-center h2,
+  .styles-section .text-center p {
+    max-width: none;
+  }
+}
+
+/* ============= PREMIUM FROSTED GLASS CARDS ============= */
+
+/* Glass Card Animation Variables */
+@property --glass-card-angle-1 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -75deg;
+}
+
+@property --glass-card-angle-2 {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -45deg;
+}
+
+@property --glass-card-light-pos {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* Base Premium Glass Card - World Class Quality */
 .frosted-glass-card {
-  background: rgba(255, 255, 255, 0.33);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  background:
+    /* Base glass layer */
+    linear-gradient(
+      var(--glass-card-angle-1),
+      hsla(36, 100%, 100%, 0.08),
+      hsla(36, 100%, 100%, 0.15),
+      hsla(36, 100%, 100%, 0.08)
+    ),
+    /* Premium depth layer */
+    radial-gradient(
+      circle at 50% 50%,
+      hsla(42, 100%, 70%, 0.06) 0%,
+      hsla(42, 100%, 70%, 0.03) 25%,
+      transparent 50%
+    ),
+    /* Subtle texture overlay */
+    linear-gradient(
+      45deg,
+      hsla(0, 0%, 100%, 0.02) 25%,
+      transparent 25%,
+      transparent 75%,
+      hsla(0, 0%, 100%, 0.02) 75%
+    );
+  background-size: 100% 100%, 400% 400%, 20px 20px;
+  background-position: 0% 0%, 0% 50%, 0% 0%;
+  border-radius: 20px;
+  box-shadow:
+    /* Outer premium shadows */
+    0 25px 50px hsla(15, 34%, 13%, 0.15),
+    0 10px 30px hsla(15, 34%, 13%, 0.1),
+    /* Inner highlights */
+    inset 0 1px 0 hsla(255, 255, 255, 0.15),
+    inset 0 -1px 0 hsla(42, 65%, 48%, 0.05),
+    /* Subtle gold accent border */
+    0 0 0 1px hsla(42, 65%, 48%, 0.08);
+  backdrop-filter: blur(12px) saturate(180%) contrast(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%) contrast(120%);
+  border: 1px solid hsla(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  animation: glassCardInnerLightShift 12s ease-in-out infinite;
+  will-change: transform, box-shadow, backdrop-filter;
+}
+
+/* Premium Light Sweep Animation */
+@keyframes glassCardInnerLightShift {
+  0%, 100% {
+    background-position: 0% 0%, 0% 50%, 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%, 25% 50%, 10px 0%;
+  }
+  50% {
+    background-position: 100% 100%, 50% 50%, 20px 10px;
+  }
+  75% {
+    background-position: 0% 100%, 75% 50%, 0px 20px;
+  }
+}
+
+/* Glass Card Hover State - Ultra Premium */
+.frosted-glass-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  backdrop-filter: blur(16px) saturate(200%) contrast(130%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%) contrast(130%);
+  box-shadow:
+    /* Enhanced depth shadows */
+    0 35px 70px hsla(15, 34%, 13%, 0.2),
+    0 15px 40px hsla(15, 34%, 13%, 0.15),
+    /* Premium gold highlights */
+    0 0 30px hsla(42, 65%, 48%, 0.1),
+    /* Inner luxury effects */
+    inset 0 1px 0 hsla(255, 255, 255, 0.2),
+    inset 0 -1px 0 hsla(42, 65%, 48%, 0.08),
+    /* Enhanced border glow */
+    0 0 0 2px hsla(42, 65%, 48%, 0.12);
+}
+
+/* Glass Card Active State */
+.frosted-glass-card:active {
+  transform: translateY(-2px) scale(0.98);
+  backdrop-filter: blur(8px) saturate(160%) contrast(110%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%) contrast(110%);
+  transition: all 0.1s ease;
+}
+
+/* Light Sweep Surface Effect */
+.frosted-glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  z-index: 1;
+  background:
+    linear-gradient(
+      45deg,
+      transparent 0%,
+      hsla(42, 100%, 70%, 0.08) 25%,
+      hsla(42, 100%, 70%, 0.12) 50%,
+      hsla(42, 100%, 70%, 0.08) 75%,
+      transparent 100%
+    );
+  background-size: 300% 300%;
+  background-position: var(--glass-card-light-pos) var(--glass-card-light-pos);
+  animation: glassCardLightSweep 8s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.6;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+/* Light Sweep Animation */
+@keyframes glassCardLightSweep {
+  0% {
+    --glass-card-light-pos: 0%;
+  }
+  25% {
+    --glass-card-light-pos: 100%;
+  }
+  50% {
+    --glass-card-light-pos: 100%;
+  }
+  75% {
+    --glass-card-light-pos: 200%;
+  }
+  100% {
+    --glass-card-light-pos: 200%;
+  }
+}
+
+/* Premium Shimmer Effect */
+.frosted-glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  z-index: 2;
+  background: linear-gradient(
+    var(--glass-card-angle-2),
+    hsla(36, 100%, 100%, 0) 0%,
+    hsla(36, 100%, 100%, 0.3) 40% 50%,
+    hsla(36, 100%, 100%, 0) 55%
+  );
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  transition: background-position 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    --glass-card-angle-2 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Shimmer on Hover */
+.frosted-glass-card:hover::after {
+  opacity: 0.8;
+  background-position: 25% 50%;
+}
+
+/* Shimmer on Active */
+.frosted-glass-card:active::after {
+  background-position: 50% 15%;
+  --glass-card-angle-2: -15deg;
+  opacity: 0.6;
+}
+
+/* Performance Optimizations */
+.frosted-glass-card::before,
+.frosted-glass-card::after {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: background-position, opacity;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .frosted-glass-card {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .frosted-glass-card::before,
+  .frosted-glass-card::after {
+    animation: none !important;
+    will-change: auto;
+  }
+
+  .frosted-glass-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 /* ============= CAROUSEL ACTIVE/INACTIVE STYLING ============= */

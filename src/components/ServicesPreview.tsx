@@ -49,9 +49,8 @@ const ServicesPreview = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-          once: false // Allow re-triggering
+          toggleActions: "play none none none",
+          once: true
         }
       });
 
@@ -154,45 +153,7 @@ const ServicesPreview = () => {
             <Card
               key={index}
               ref={el => (cardRefs.current[index] = el)}
-              className="transition-all duration-700 group relative overflow-hidden frosted-glass-card"
-              style={{
-                transform: 'translateY(0)',
-                transformOrigin: 'center',
-                backdropFilter: 'blur(20px) saturate(180%) contrast(120%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%) contrast(120%)'
-              }}
-              onMouseEnter={(e) => {
-                gsap.to(e.currentTarget, {
-                  y: -12,
-                  scale: 1.03,
-                  duration: 0.4,
-                  ease: "power3.out",
-                  backdropFilter: 'blur(16px) saturate(200%)',
-                  boxShadow: `
-                    0 35px 70px hsla(15,34%,13%,0.2),
-                    0 15px 40px hsla(15,34%,13%,0.15),
-                    inset 0 1px 0 hsla(255,255,255,0.2),
-                    inset 0 -1px 0 hsla(42,65%,48%,0.08),
-                    0 0 0 2px hsla(42,65%,48%,0.12)
-                  `
-                });
-              }}
-              onMouseLeave={(e) => {
-                gsap.to(e.currentTarget, {
-                  y: 0,
-                  scale: 1,
-                  duration: 0.4,
-                  ease: "power3.out",
-                  backdropFilter: 'blur(12px) saturate(180%)',
-                  boxShadow: `
-                    0 25px 50px hsla(15,34%,13%,0.15),
-                    0 10px 30px hsla(15,34%,13%,0.1),
-                    inset 0 1px 0 hsla(255,255,255,0.15),
-                    inset 0 -1px 0 hsla(42,65%,48%,0.05),
-                    0 0 0 2px hsla(42,65%,48%,0.08)
-                  `
-                });
-              }}
+              className="group relative overflow-hidden frosted-glass-card"
             >
               <CardContent className="p-6 h-full flex flex-col">
                 {/* Compact icon top section */}
