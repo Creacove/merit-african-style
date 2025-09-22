@@ -239,11 +239,11 @@ const SignatureStyles = () => {
   return (
     <section
       ref={sectionRef}
-      className="styles-section bg-[hsl(var(--bg-section))] px-0 py-12 lg:px-16 lg:py-18 -mx-4 lg:mx-0"
+      className="styles-section bg-[hsl(var(--bg-section))] px-0 py-12 lg:px-16 lg:py-18 mx-0"
       aria-labelledby="styles-title"
     >
         <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 lg:mb-16 relative px-4 lg:px-0 -mx-4 lg:-mx-0">
+        <div className="text-center mb-12 lg:mb-16 relative px-4 lg:px-0 mx-0">
           {/* Yellow decorative line over text */}
           <div className="absolute top-[20px] lg:top-[35px] left-1/2 transform -translate-x-1/2 w-[200px] lg:w-[320px] z-10">
             <div className="h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent opacity-80"></div>
@@ -280,56 +280,57 @@ const SignatureStyles = () => {
           </div>
         </div>
 
-        <div ref={carouselRef} className="styles-carousel mb-12 lg:mb-16">
-          {/* Constrained centered container - full width on mobile */}
-          <div className="max-w-full overflow-hidden mx-auto px-4 lg:px-0 -mx-4 lg:-mx-0">
-            <Swiper
-              modules={[Autoplay, Keyboard, A11y]}
-              centeredSlides={true}
-              slidesPerView={1.4}
-              spaceBetween={16}
-              initialSlide={5} // Start in middle of duplicated items
-              breakpoints={{
-                900: {
-                  slidesPerView: 3,
-                  spaceBetween: 24,
-                  initialSlide: 5  // Start in middle
-                },
-                1200: {
-                  slidesPerView: 3,
-                  spaceBetween: 24,
-                  initialSlide: 5
-                },
-                1600: {
-                  slidesPerView: 3,
-                  spaceBetween: 24,
-                  initialSlide: 5
-                }
-              }}
-              autoplay={{
-                delay: 4200,
-                disableOnInteraction: true,
-                pauseOnMouseEnter: true
-              }}
-              loop={true}
-              loopAdditionalSlides={3}
-              watchOverflow={false}
-              speed={700}
-              keyboard={{
-                enabled: true,
-                onlyInViewport: true
-              }}
-              a11y={{
-                enabled: true
-              }}
-              onInit={handleInit}
-              className="relative w-full"
-              aria-roledescription="carousel"
-              aria-label="Signature style carousel"
-            >
+        {/* Full-width carousel outside constraining container */}
+        <div ref={carouselRef} className="styles-carousel mb-12 lg:mb-16 w-full overflow-hidden">
+          {/* Visual edge-to-edge container - appears full width but contained */}
+          <div className="relative w-[calc(100vw)] mx-0">
+          <Swiper
+            modules={[Autoplay, Keyboard, A11y]}
+            centeredSlides={true}
+            slidesPerView={1.4}
+            spaceBetween={16}
+            initialSlide={5} // Start in middle of duplicated items
+            breakpoints={{
+              900: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+                initialSlide: 5  // Start in middle
+              },
+              1200: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+                initialSlide: 5
+              },
+              1600: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+                initialSlide: 5
+              }
+            }}
+            autoplay={{
+              delay: 4200,
+              disableOnInteraction: true,
+              pauseOnMouseEnter: true
+            }}
+            loop={true}
+            loopAdditionalSlides={3}
+            watchOverflow={false}
+            speed={700}
+            keyboard={{
+              enabled: true,
+              onlyInViewport: true
+            }}
+            a11y={{
+              enabled: true
+            }}
+            onInit={handleInit}
+            className="relative w-full"
+            aria-roledescription="carousel"
+            aria-label="Signature style carousel"
+          >
             {styleCategories.map((category, index) => (
               <SwiperSlide key={`${category.id}-${index}`} className="!h-auto">
-                <div 
+                <div
                   className="styles-card relative aspect-[3/4] bg-[hsl(var(--card-bg))] rounded-[18px] overflow-hidden shadow-[0_18px_40px_rgba(0,0,0,0.45)] cursor-pointer transition-all duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-[3px] focus:ring-[hsl(var(--gold))]/18 focus:outline-offset-[6px] group opacity-86"
                   role="group"
                   aria-label={`${category.title}: ${category.descriptor}`}
@@ -337,7 +338,7 @@ const SignatureStyles = () => {
                   style={{ transform: 'scale(0.88) translateY(0px)' }}
                 >
                   <div className="image-wrap relative w-full h-full overflow-hidden rounded-[18px]">
-                    <img 
+                    <img
                       src={category.image}
                       alt={category.alt}
                       loading="lazy"
@@ -346,7 +347,7 @@ const SignatureStyles = () => {
                     <div className="shimmer-overlay absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   </div>
-                  
+
                   <div className="card-copy absolute bottom-6 left-6 right-6 text-[hsl(var(--ivory))]">
                     {/* Gold line positioned above text */}
                     <div className="gold-underline h-0.5 bg-[hsl(var(--gold))] w-0 group-hover:w-full group-focus:w-full transition-all duration-300 ease-out mb-4"></div>
@@ -365,18 +366,21 @@ const SignatureStyles = () => {
           </div>
         </div>
 
-        <div ref={ctaRef} className="styles-cta text-center">
-          <Button
-            variant="glass"
-            size="xl"
-            className="font-inter mb-4"
-            onClick={handleBookConsultation}
-          >
-            Let's Talk Style →
-          </Button>
-          <p className="micro-note font-inter text-[12px] lg:text-[14px] text-[hsl(var(--muted-ivory))]">
-            Not off-the-rack. Each garment is made-to-measure.
-          </p>
+        {/* CTA section back inside constraining container */}
+        <div className="max-w-7xl mx-auto">
+          <div ref={ctaRef} className="styles-cta text-center">
+            <Button
+              variant="glass"
+              size="xl"
+              className="font-inter mb-4"
+              onClick={handleBookConsultation}
+            >
+              Let's Talk Style →
+            </Button>
+            <p className="micro-note font-inter text-[12px] lg:text-[14px] text-[hsl(var(--muted-ivory))]">
+              Not off-the-rack. Each garment is made-to-measure.
+            </p>
+          </div>
         </div>
       </div>
     </section>

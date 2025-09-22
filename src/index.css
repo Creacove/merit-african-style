@@ -148,8 +148,20 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Prevent horizontal scrolling on all elements */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 
@@ -949,17 +961,10 @@ All colors MUST be HSL.
   }
 }
 
-/* ============= MOBILE EDGE-TO-EDGE FIXES ============= */
+/* ============= MOBILE RESPONSIVE FIXES ============= */
 
-/* Force carousel section to be edge-to-edge on mobile */
-.styles-section {
-  margin-left: -1rem !important;
-  margin-right: -1rem !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* Responsive title constraint for optimal readability */
+/* Remove negative margins that cause horizontal scrolling */
+/* Title and subtitle constraints for optimal readability */
 .styles-section .text-center h2,
 .styles-section .text-center p {
   max-width: min(85%, 500px);
@@ -983,13 +988,8 @@ All colors MUST be HSL.
   }
 }
 
-/* Desktop restoration */
+/* Desktop constraints */
 @media (min-width: 1024px) {
-  .styles-section {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
   /* Reset title constraints on desktop */
   .styles-section .text-center h2,
   .styles-section .text-center p {
@@ -1215,6 +1215,12 @@ All colors MUST be HSL.
 }
 
 /* ============= CAROUSEL ACTIVE/INACTIVE STYLING ============= */
+
+/* Edge-to-edge carousel container - prevents horizontal overflow */
+.styles-carousel .overflow-hidden {
+  /* Ensure content doesn't extend beyond viewport */
+  contain: layout style paint;
+}
 
 /* active/inactive card base styles */
 .styles-card {
