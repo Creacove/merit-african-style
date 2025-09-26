@@ -103,7 +103,7 @@ const TestimonialsSection = () => {
               key={index}
               data-animate
               data-index={index}
-              className={`group bg-white/95 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-[hsl(var(--gold))]/10 transition-all duration-300 ${
+              className={`group bg-[hsl(36,37%,95%)]/95 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-[hsl(var(--gold))]/10 transition-all duration-300 ${
                 visibleCards.has(index)
                   ? 'opacity-100 translate-y-0'
                   : 'opacity-0 translate-y-8'
