@@ -421,6 +421,7 @@ const HeroSection = () => {
                         letterSpacing: '0.05em',
                       }}
                     >
+                      <img src="/logo.png" style={{ width: '24px', height: '24px', marginBottom: '4px', display: 'block', marginLeft: 'auto', marginRight: 'auto', filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.9)) drop-shadow(0 0 3px rgba(0,0,0,0.7))' }} />
                       <span
                         style={{
                           display: 'block',

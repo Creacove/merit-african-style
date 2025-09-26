@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, User, Briefcase, Image, Phone } from "lucide-react";
+import { Menu, X, Home, User, Briefcase, Image, Phone, Ruler } from "lucide-react";
 import { useState } from "react";
 
 const Navigation = () => {
@@ -10,7 +10,7 @@ const Navigation = () => {
   };
 
   const menuItems = [
-    { href: "#", label: "Home", icon: Home, delay: "0ms" },
+    { href: "/", label: "Home", icon: Home, delay: "0ms" },
     { href: "#", label: "About", icon: User, delay: "50ms" },
     { href: "#", label: "Services", icon: Briefcase, delay: "100ms" },
     { href: "#", label: "Gallery", icon: Image, delay: "150ms" },
@@ -25,7 +25,7 @@ const Navigation = () => {
       </div>
 
       {/* Logo with Premium Metallic Sheen */}
-      <div className="flex items-center relative group">
+      <a href="/" className="flex items-center relative group cursor-pointer">
         <div className="absolute inset-0 bg-gradient-to-br from-gold-accent/20 via-transparent to-gold-accent/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform scale-110"></div>
         <img
           src="/logo.png"
@@ -35,7 +35,7 @@ const Navigation = () => {
             filter: 'drop-shadow(0 4px 12px rgba(184, 134, 11, 0.15))',
           }}
         />
-      </div>
+      </a>
 
       {/* Desktop Navigation - Premium Glass Morphism */}
       <div className="hidden md:flex items-center space-x-3">

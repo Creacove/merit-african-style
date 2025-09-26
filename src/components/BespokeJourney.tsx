@@ -1,64 +1,51 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const journeySteps = [
   {
     id: 1,
     title: "Consultation",
     description: "We start with a conversation. Share your ideas, and let us shape them into possibilities.",
-    image: "https://i.ibb.co/GQVbNXY4/1.webp", // Tailor speaking with client
+    image: "https://i.ibb.co/GQVbNXY4/1.webp",
     alt: "Tailor consulting with client over sketchbook and fabric samples",
-    duration: "15–30 mins",
-    icon: "💬"
+    duration: "15–30 mins"
   },
   {
     id: 2,
     title: "Fabric & Design",
     description: "Explore fabrics, colors, and custom details. Every choice reflects your style.",
-    image: "https://i.ibb.co/dJ4vFTQV/2.webp", // Fabric rolls and swatches
-    alt: "Beautiful array of African fabrics, colors, and design elements",
-    icon: "🎨"
+    image: "https://i.ibb.co/dJ4vFTQV/2.webp",
+    alt: "Beautiful array of African fabrics, colors, and design elements"
   },
   {
     id: 3,
     title: "Measurements",
     description: "Precision measurements — the foundation of a perfect fit.",
-    image: "https://i.ibb.co/Txz2DZX7/3-1.webp", // Tailor measuring client
+    image: "https://i.ibb.co/Txz2DZX7/3-1.webp",
     alt: "Tailor taking precise measurements of client's posture and form",
-    duration: "In-studio, home visit, or self-measure guide",
-    icon: "📏"
+    duration: "In-studio, home visit, or self-measure guide"
   },
   {
     id: 4,
     title: "Fitting",
     description: "See your piece come alive. Together, we refine until it's flawless.",
-    image: "https://i.ibb.co/B5M7hhGt/4-1.webp", // Client trying on garment
-    alt: "Client viewing their bespoke garment in mirror during fitting session",
-    icon: "👔"
+    image: "https://i.ibb.co/B5M7hhGt/4-1.webp",
+    alt: "Client viewing their bespoke garment in mirror during fitting session"
   },
   {
     id: 5,
     title: "Delivery",
     description: "Collected in-store or delivered to your door — pressed, packaged, and ready.",
-    image: "https://i.ibb.co/vCL0sF75/5.webp", // Finished garment in bag
+    image: "https://i.ibb.co/vCL0sF75/5.webp",
     alt: "Finished bespoke garment neatly packaged in branded garment bag",
     duration: "Local & nationwide delivery available",
-    guarantee: "Minor adjustments free within 7 days",
-    icon: "📦"
+    guarantee: "Minor adjustments free within 7 days"
   }
 ];
 
 const BespokeJourney = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
 
   const handleStartJourney = () => {
     const phoneNumber = '+2348147480222';
@@ -68,7 +55,6 @@ const BespokeJourney = () => {
   };
 
   const handleViewGuide = () => {
-    // Could link to a measurement guide page or modal
     const phoneNumber = '+2348147480222';
     const message = 'Hello! Could you please share your measurement guide?';
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
@@ -76,99 +62,29 @@ const BespokeJourney = () => {
   };
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    // Respect reduced motion preferences
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setVisibleCards(new Set([0, 1, 2, 3, 4]));
+      return;
+    }
 
-    const ctx = gsap.context(() => {
-      // Entrance animations
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true
+    // Create IntersectionObserver for smooth card reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = parseInt(entry.target.getAttribute('data-step-index') || '0');
+          setTimeout(() => {
+            setVisibleCards(prev => new Set([...prev, index]));
+          }, index * 150); // Staggered entrance
         }
       });
+    }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
 
-      // Title entrance with fabric texture reveal
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out"
-      });
+    // Observe all journey steps
+    const steps = sectionRef.current?.querySelectorAll('[data-step-index]');
+    steps?.forEach((step) => observer.observe(step));
 
-      // Subtitle entrance
-      tl.from(subtitleRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.4");
-
-      // Timeline line "stitching" animation
-      tl.from(".timeline-line", {
-        height: 0,
-        duration: 1.2,
-        ease: "power2.out"
-      }, "-=0.2");
-
-      // Step markers appear with stagger
-      tl.from(".timeline-dot", {
-        scale: 0,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.15,
-        ease: "back.out(1.7)"
-      }, "-=0.8");
-
-      // Step content reveals with scroll trigger
-      stepsRef.current.forEach((stepEl, index) => {
-        if (stepEl) {
-          gsap.from(stepEl, {
-            opacity: 0,
-            x: index % 2 === 0 ? -50 : 50,
-            y: 30,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: stepEl,
-              start: "top 85%",
-              once: true
-            }
-          });
-        }
-      });
-
-      // CTA entrance
-      if (ctaRef.current) {
-        gsap.from(ctaRef.current, {
-          opacity: 0,
-          y: 40,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: "top 90%",
-            once: true
-          }
-        });
-      }
-
-      // Gold shimmer effect on timeline
-      gsap.to(".timeline-line", {
-        background: "linear-gradient(180deg, #d4af37 0%, #f4e87c 50%, #d4af37 100%)",
-        backgroundSize: "200% 200%",
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut"
-      });
-
-    }, sectionRef);
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -183,12 +99,11 @@ const BespokeJourney = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 lg:mb-24">
-          <div className="decorative-line w-32 lg:w-40 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent mb-8 mx-auto"></div>
+        <div className="text-center mb-12 lg:mb-24">
+          <div className="decorative-line w-24 lg:w-40 h-[1px] lg:h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent mb-6 lg:mb-8 mx-auto"></div>
 
           <h2
-            ref={titleRef}
-            className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
+            className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[hsl(var(--ivory))] mb-4 lg:mb-6"
           >
             The <span className="text-[hsl(var(--gold))] relative">
               Bespoke Journey
@@ -197,96 +112,109 @@ const BespokeJourney = () => {
           </h2>
 
           <p
-            ref={subtitleRef}
-            className="font-inter text-lg lg:text-xl text-[hsl(var(--muted-ivory))] max-w-3xl mx-auto leading-relaxed"
+            className="font-inter text-base lg:text-xl text-[hsl(var(--muted-ivory))] max-w-3xl mx-auto leading-relaxed px-4"
           >
             Every stitch tells a story — here's how we bring yours to life.
           </p>
         </div>
 
         {/* Timeline Container */}
-        <div ref={timelineRef} className="relative max-w-6xl mx-auto">
-          {/* Vertical Timeline Line */}
-          <div className="timeline-line absolute left-1/2 transform -translate-x-1/2 w-[2px] bg-gradient-to-b from-[hsl(var(--gold))] to-[hsl(var(--gold))] opacity-80 top-0 bottom-0 hidden lg:block"></div>
+        <div className="relative max-w-6xl mx-auto">
+          {/* Clean Timeline Steps */}
+          <div className="space-y-12 lg:space-y-16 relative">
+            {/* Timeline line for all screen sizes */}
+            <div className="absolute left-3 top-0 bottom-0 w-[1px] bg-[hsl(var(--gold))]/30 lg:left-1/2 lg:w-[2px] lg:-translate-x-1/2"></div>
 
-          {/* Steps */}
-          <div className="space-y-16 lg:space-y-24">
             {journeySteps.map((step, index) => (
-              <div
+              <article
                 key={step.id}
-                ref={el => (stepsRef.current[index] = el)}
-                className={`relative flex flex-col lg:flex-row items-center gap-8 lg:gap-16 ${
-                  index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
+                data-step-index={index}
+                className={`relative transition-all duration-700 ease-out ${
+                  visibleCards.has(index)
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
                 }`}
               >
-                {/* Timeline Dot */}
-                <div className="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[hsl(var(--gold))] rounded-full border-4 border-background shadow-lg z-10 hidden lg:block"></div>
-
-                {/* Image */}
-                <div className={`flex-shrink-0 w-full lg:w-1/2 ${index % 2 === 0 ? 'lg:pr-8' : 'lg:pl-8'}`}>
-                  <div
-                    className="relative aspect-[4/5] lg:aspect-[3/4] bg-gradient-to-br from-[hsl(var(--card-bg))] to-[hsl(var(--deep-chocolate))] rounded-[2.5rem] overflow-hidden shadow-2xl border border-[hsl(var(--gold))]/20 group cursor-pointer hover:scale-105 transition-transform duration-500"
-                    style={{
-                      boxShadow: `
-                        0 25px 50px rgba(0,0,0,0.4),
-                        0 0 0 1px rgba(184,134,11,0.1),
-                        inset 0 1px 0 rgba(255,255,255,0.1)
-                      `
-                    }}
-                  >
-                    {/* Actual Image */}
+                {/* Floating Card with Image Background */}
+                <div className="group relative overflow-hidden rounded-2xl lg:rounded-3xl shadow-2xl transform hover:scale-[1.01] lg:hover:scale-[1.02] transition-all duration-500 ease-out">
+                  {/* Image Background */}
+                  <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[21/9]">
                     <img
                       src={step.image}
                       alt={step.alt}
-                      className="w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 lg:group-hover:scale-110"
+                      loading="lazy"
                     />
 
-                    {/* Hover Shimmer */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[hsl(var(--gold))]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2.5rem]"></div>
+                    {/* Elegant Gradient Overlay - Responsive */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/20 sm:from-black/70 sm:via-black/40 sm:to-transparent lg:from-black/80 lg:via-black/50 lg:to-black/30"></div>
+
+                    {/* Subtle Brand Accent */}
+                    <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-bl from-[hsl(var(--gold))]/20 to-transparent rounded-bl-full opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+
+                    {/* Micro-shimmer effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 -translate-x-full group-hover:translate-x-full"></div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className={`flex-1 text-center lg:text-left ${index % 2 === 0 ? 'lg:pl-8' : 'lg:pr-8'}`}>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
-                      <span className="w-8 h-8 bg-[hsl(var(--gold))]/10 rounded-full flex items-center justify-center text-[hsl(var(--gold))] font-bold text-sm">
-                        {step.id}
-                      </span>
-                      <h3 className="font-playfair font-bold text-2xl lg:text-3xl text-[hsl(var(--ivory))] relative">
-                        {step.title}
-                        <div className="absolute -bottom-1 left-0 w-full h-[1px] bg-[hsl(var(--gold))] opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
-                      </h3>
-                    </div>
-
-                    <p className="font-inter text-base lg:text-lg text-[hsl(var(--muted-ivory))] leading-relaxed">
-                      {step.description}
-                    </p>
-
-                    {/* Duration/Additional Info */}
-                    {(step.duration || step.guarantee) && (
-                      <div className="space-y-1 mt-4">
-                        {step.duration && (
-                          <p className="text-sm text-[hsl(var(--gold))] font-medium">
-                            ⏱ {step.duration}
-                          </p>
-                        )}
-                        {step.guarantee && (
-                          <p className="text-sm text-[hsl(var(--gold))]/80 font-medium bg-[hsl(var(--gold))]/5 px-3 py-1 rounded-full inline-block">
-                            🛡️ {step.guarantee}
-                          </p>
-                        )}
+                  {/* Content Overlay - Mobile Optimized */}
+                  <div className="absolute inset-0 p-4 sm:p-6 lg:p-12 flex items-center">
+                    <div className="w-full max-w-xl lg:max-w-2xl">
+                      {/* Step Indicator with subtle animation */}
+                      <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                        <div className={`w-6 h-6 sm:w-8 sm:h-8 bg-[hsl(var(--gold))] rounded-full flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-[hsl(var(--gold))]/50 ${visibleCards.has(index) ? 'animate-pulse' : ''}`}>
+                          <span className="text-xs sm:text-sm font-bold text-[hsl(var(--deep-chocolate))]">{step.id}</span>
+                        </div>
+                        <div className="w-8 sm:w-12 h-[1px] bg-[hsl(var(--gold))]/60 group-hover:bg-[hsl(var(--gold))]/80 transition-colors duration-300"></div>
                       </div>
-                    )}
+
+                      {/* Title with Elegant Typography */}
+                      <h3 className="font-playfair font-bold text-xl sm:text-2xl lg:text-4xl text-white mb-2 sm:mb-4 leading-tight">
+                        {step.title}
+                        <span className="block text-sm sm:text-lg lg:text-xl font-normal text-[hsl(var(--gold))] mt-1 sm:mt-2 font-inter opacity-90">
+                          Step {step.id} of 5
+                        </span>
+                      </h3>
+
+                      {/* Description - Responsive text */}
+                      <p className="font-inter text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed mb-4 sm:mb-6 max-w-lg">
+                        {step.description}
+                      </p>
+
+                      {/* Duration/Additional Info - Mobile stacked */}
+                      {(step.duration || step.guarantee) && (
+                        <div className="flex flex-wrap gap-2 sm:gap-3">
+                          {step.duration && (
+                            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-white/20 hover:bg-white/15 transition-colors duration-200">
+                              <span className="text-xs">⏱</span>
+                              <span className="text-xs sm:text-sm font-medium text-white">{step.duration}</span>
+                            </div>
+                          )}
+                          {step.guarantee && (
+                            <div className="flex items-center gap-2 bg-[hsl(var(--gold))]/20 backdrop-blur-sm rounded-full px-3 py-1.5 sm:px-4 sm:py-2 border border-[hsl(var(--gold))]/30 hover:bg-[hsl(var(--gold))]/30 transition-colors duration-200">
+                              <span className="text-xs">🛡️</span>
+                              <span className="text-xs sm:text-sm font-medium text-[hsl(var(--gold))]">{step.guarantee}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
+
+                  {/* Floating Timeline Dot */}
+                  <div className="absolute -left-3 top-8 lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 w-6 h-6 bg-[hsl(var(--gold))] rounded-full border-4 border-background shadow-xl z-20">
+                    <div className="w-full h-full bg-[hsl(var(--gold))] rounded-full animate-pulse"></div>
+                  </div>
+
+                  {/* Connecting Line Visual (desktop) */}
+                  <div className="hidden lg:block absolute left-1/2 top-0 w-[2px] h-8 bg-gradient-to-b from-transparent via-[hsl(var(--gold))]/40 to-transparent -translate-x-1/2 -translate-y-8"></div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
 
         {/* CTA Section */}
-        <div ref={ctaRef} className="text-center mt-16 lg:mt-24">
+        <div className="text-center mt-16 lg:mt-24">
           <div className="space-y-6">
             <Button
               variant="glass"
@@ -298,12 +226,12 @@ const BespokeJourney = () => {
             </Button>
 
             <div>
-              <button
-                onClick={handleViewGuide}
-                className="text-[hsl(var(--gold))] hover:text-[hsl(var(--gold))]/80 font-medium text-base underline-offset-4 hover:underline transition-all duration-200"
+              <a
+                href="/measurement-guide"
+                className="text-[hsl(var(--gold))] hover:text-[hsl(var(--gold))]/80 font-medium text-base underline-offset-4 hover:underline transition-all duration-200 inline-block"
               >
                 View Measurement Guide →
-              </button>
+              </a>
             </div>
           </div>
         </div>
