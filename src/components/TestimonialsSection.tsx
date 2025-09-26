@@ -112,7 +112,7 @@ const TestimonialsSection = () => {
               aria-label={`Testimonial from ${testimonial.name} about ${testimonial.context.toLowerCase()} experience`}
             >
               {/* Clean quote */}
-              <blockquote className="font-playfair italic text-lg leading-relaxed text-[hsl(var(--deep-chocolate))] mb-6 group-hover:text-[hsl(15,34%,13%)] transition-colors duration-300">
+              <blockquote className="font-inter text-lg leading-relaxed text-[hsl(var(--deep-chocolate))] mb-6 group-hover:text-[hsl(15,34%,13%)] transition-colors duration-300">
                 "{testimonial.quote}"
               </blockquote>
 
