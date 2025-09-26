@@ -77,15 +77,15 @@ const MeasurementGuide = () => {
       {/* Tools Needed */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-[hsl(42,65%,48%,0.1)] rounded-lg p-8">
+          <div className="bg-[hsl(36,37%,95%)]/95 backdrop-blur-sm rounded-lg p-8 border border-[hsl(var(--gold))]/10">
             <div className="flex items-center mb-4">
-              <Ruler className="h-6 w-6 text-[hsl(42,65%,48%)] mr-3" />
-              <h2 className="text-2xl font-semibold text-[hsl(15,34%,13%)]">What You'll Need</h2>
+              <Ruler className="h-6 w-6 text-[hsl(var(--gold))] mr-3" />
+              <h2 className="text-2xl font-semibold text-[hsl(var(--deep-chocolate))]">What You'll Need</h2>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="font-semibold text-[hsl(15,34%,20%)] mb-2">Required Tools:</h3>
-                <ul className="space-y-2 text-[hsl(15,34%,30%)]">
+                <h3 className="font-semibold text-[hsl(var(--deep-chocolate))] mb-2">Required Tools:</h3>
+                <ul className="space-y-2 text-[hsl(var(--deep-chocolate))]">
                   <li className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-600 mr-2" />
                     Flexible measuring tape
@@ -101,18 +101,18 @@ const MeasurementGuide = () => {
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold text-[hsl(15,34%,20%)] mb-2">Tips:</h3>
-                <ul className="space-y-2 text-[hsl(15,34%,30%)]">
+                <h3 className="font-semibold text-[hsl(var(--deep-chocolate))] mb-2">Tips:</h3>
+                <ul className="space-y-2 text-[hsl(var(--deep-chocolate))]">
                   <li className="flex items-start">
-                    <AlertTriangle className="h-4 w-4 text-[hsl(42,65%,48%)] mr-2 mt-0.5" />
+                    <AlertTriangle className="h-4 w-4 text-[hsl(var(--gold))] mr-2 mt-0.5" />
                     Wear form-fitting clothes
                   </li>
                   <li className="flex items-start">
-                    <AlertTriangle className="h-4 w-4 text-[hsl(42,65%,48%)] mr-2 mt-0.5" />
+                    <AlertTriangle className="h-4 w-4 text-[hsl(var(--gold))] mr-2 mt-0.5" />
                     Keep tape snug but not tight
                   </li>
                   <li className="flex items-start">
-                    <AlertTriangle className="h-4 w-4 text-[hsl(42,65%,48%)] mr-2 mt-0.5" />
+                    <AlertTriangle className="h-4 w-4 text-[hsl(var(--gold))] mr-2 mt-0.5" />
                     Stand naturally, breathe normally
                   </li>
                 </ul>
