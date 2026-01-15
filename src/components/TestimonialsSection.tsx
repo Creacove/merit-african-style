@@ -70,7 +70,7 @@ const TestimonialsSection = () => {
         <header className="text-center mb-16">
           <h2
             id="worn-with-pride-heading"
-            className="font-playfair font-bold text-4xl sm:text-5xl lg:text-6xl text-[hsl(var(--ivory))] mb-6"
+            className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl text-[hsl(var(--ivory))] mb-6"
           >
             Worn With Pride
           </h2>
