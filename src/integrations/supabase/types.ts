@@ -14,13 +14,177 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      consultations: {
+        Row: {
+          created_at: string
+          customer_name: string
+          email: string | null
+          id: string
+          message: string | null
+          phone: string
+          preferred_date: string | null
+          product_interest: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_name: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          phone: string
+          preferred_date?: string | null
+          product_interest?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_name?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          phone?: string
+          preferred_date?: string | null
+          product_interest?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          delivery_date: string | null
+          id: string
+          items: Json
+          measurements: Json | null
+          order_type: string | null
+          paystack_reference: string | null
+          shipping_address: Json | null
+          status: string | null
+          total_amount: number
+          tracking_token: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          delivery_date?: string | null
+          id?: string
+          items?: Json
+          measurements?: Json | null
+          order_type?: string | null
+          paystack_reference?: string | null
+          shipping_address?: Json | null
+          status?: string | null
+          total_amount?: number
+          tracking_token?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          delivery_date?: string | null
+          id?: string
+          items?: Json
+          measurements?: Json | null
+          order_type?: string | null
+          paystack_reference?: string | null
+          shipping_address?: Json | null
+          status?: string | null
+          total_amount?: number
+          tracking_token?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          images: string[] | null
+          is_hybrid: boolean | null
+          is_published: boolean | null
+          model_stats: string | null
+          price: number
+          production_time: string | null
+          stock_levels: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_hybrid?: boolean | null
+          is_published?: boolean | null
+          model_stats?: string | null
+          price: number
+          production_time?: string | null
+          stock_levels?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_hybrid?: boolean | null
+          is_published?: boolean | null
+          model_stats?: string | null
+          price?: number
+          production_time?: string | null
+          stock_levels?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          is_admin: boolean | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          is_admin?: boolean | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          is_admin?: boolean | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
