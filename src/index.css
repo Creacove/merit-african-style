@@ -1453,6 +1453,28 @@ All colors MUST be HSL.
   }
 }
 
+/* Full width glass button override */
+.glass-button-full-width .glass-button-wrap {
+  width: 100% !important;
+}
+
+/* Compact glass button styling */
+.glass-button-compact .glass-button-wrap {
+  width: 100% !important;
+}
+
+.glass-button-compact .glass-button {
+  width: 100% !important;
+  padding: 0 !important;
+  min-height: 48px !important;
+}
+
+.glass-button-compact .glass-button span {
+  padding: 0.75rem 1rem !important;
+  padding-inline: 1rem !important;
+  padding-block: 0.75rem !important;
+}
+
 /* ============= CAROUSEL ACTIVE/INACTIVE STYLING ============= */
 
 /* Edge-to-edge carousel container - prevents horizontal overflow */

@@ -90,9 +90,16 @@ const ProductModal = ({ product, onClose, formatPrice }: ProductModalProps) => {
             <h2 className="font-playfair text-2xl md:text-3xl font-bold text-[hsl(var(--warm-ivory))] mb-4">
               {product.title}
             </h2>
-            <p className="text-3xl font-bold text-[hsl(var(--warm-ivory))] mb-6">
-              {formatPrice(product.price)}
-            </p>
+            <div className="mb-6">
+              <p className="text-3xl font-bold text-[hsl(var(--warm-ivory))] mb-1">
+                {formatPrice(product.price)}
+              </p>
+              {product.compare_at_price && (
+                <p className="text-lg text-[hsl(var(--muted-foreground))] line-through">
+                  {formatPrice(product.compare_at_price)}
+                </p>
+              )}
+            </div>
 
             {product.description && (
               <p className="text-[hsl(var(--muted-foreground))] mb-6 leading-relaxed">
@@ -104,6 +111,53 @@ const ProductModal = ({ product, onClose, formatPrice }: ProductModalProps) => {
               <p className="text-[hsl(var(--muted-foreground))] text-sm mb-6 italic">
                 {product.model_stats}
               </p>
+            )}
+
+            {/* Colors */}
+            {product.colors && product.colors.length > 0 && (
+              <div className="mb-6">
+                <label className="text-[hsl(var(--warm-ivory))] font-medium mb-4 block">
+                  Available Colors
+                </label>
+                <div className="flex flex-wrap gap-4">
+                  {product.colors.map((color) => {
+                    // Color mapping for visual swatches
+                    const colorMap: Record<string, string> = {
+                      "White": "#FFFFFF",
+                      "Black": "#000000",
+                      "Navy": "#1e3a5f",
+                      "Brown": "#8B4513",
+                      "Burgundy": "#722F37",
+                      "Gold": "#D4AF37",
+                      "Cream": "#FFFDD0",
+                      "Green": "#228B22",
+                      "Blue": "#0066CC",
+                      "Red": "#CC0000",
+                    };
+
+                    const hexColor = colorMap[color] || "#808080"; // Default gray for unknown colors
+
+                    return (
+                      <div
+                        key={color}
+                        className="flex flex-col items-center gap-2 group"
+                      >
+                        <div
+                          className="w-12 h-12 rounded-full border-2 border-[hsl(var(--gold-accent))]/30 shadow-lg ring-2 ring-transparent group-hover:ring-[hsl(var(--gold-accent))]/20 transition-all duration-300 cursor-pointer"
+                          style={{
+                            backgroundColor: hexColor,
+                            boxShadow: hexColor === "#FFFFFF" ? "inset 0 0 0 1px rgba(0,0,0,0.1)" : undefined
+                          }}
+                          title={color}
+                        />
+                        <span className="text-xs text-[hsl(var(--warm-ivory))] font-medium text-center max-w-16 truncate">
+                          {color}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             )}
 
             {/* Mode Toggle (Stock vs Bespoke) */}
@@ -225,33 +279,48 @@ const ProductModal = ({ product, onClose, formatPrice }: ProductModalProps) => {
 
             {/* Add to Cart Button */}
             <Button
+              variant="glass"
               onClick={handleAddToCart}
-              className="w-full bg-[hsl(var(--gold-accent))] text-[hsl(var(--deep-chocolate))] hover:bg-[hsl(var(--gold-accent))]/90 py-6 rounded-2xl font-semibold text-lg mb-4"
+              className="w-full glass-button-compact"
             >
-              {isBespokeMode ? (
-                <>
-                  <Scissors className="w-5 h-5 mr-2" />
-                  Order Bespoke - {formatPrice(product.price * quantity)}
-                </>
-              ) : (
-                <>
-                  <ShoppingBag className="w-5 h-5 mr-2" />
-                  Add to Cart - {formatPrice(product.price * quantity)}
-                </>
-              )}
+              <div className="flex items-center justify-center gap-3 w-full">
+                {isBespokeMode ? (
+                  <>
+                    <Scissors className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-center font-semibold">Order Bespoke - {formatPrice(product.price * quantity)}</span>
+                  </>
+                ) : (
+                  <>
+                    <ShoppingBag className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-center font-semibold">Add to Cart - {formatPrice(product.price * quantity)}</span>
+                  </>
+                )}
+              </div>
             </Button>
+
+            {/* Spacer between buttons */}
+            {isBespokeMode && <div className="h-3" />}
 
             {/* Help Me Measure Button */}
             {isBespokeMode && (
-              <a
-                href={`https://wa.me/2348000000000?text=${encodeURIComponent(whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border border-green-600 text-green-500 hover:bg-green-600/10 transition-colors font-medium"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Help Me Measure (WhatsApp)
-              </a>
+              <div className="w-full">
+                <Button
+                  variant="outline"
+                  className="w-full bg-green-600/10 border-green-600 text-green-400 hover:bg-green-600/20 hover:border-green-500 transition-all duration-300 px-6 py-4 min-h-[56px]"
+                  asChild
+                >
+                  <a
+                    href={`https://wa.me/2348000000000?text=${encodeURIComponent(whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="flex items-center justify-center gap-3 w-full">
+                      <MessageCircle className="w-5 h-5 flex-shrink-0" />
+                      <span className="text-center font-semibold">Help Me Measure (WhatsApp)</span>
+                    </div>
+                  </a>
+                </Button>
+              </div>
             )}
           </div>
         </div>

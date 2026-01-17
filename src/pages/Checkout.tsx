@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { ArrowLeft, Scissors, ShoppingBag, Loader2, Check } from 'lucide-react';
 import { z } from 'zod';
+import { scrollToTop } from '@/lib/utils';
 
 const emailSchema = z.string().email('Please enter a valid email');
 const phoneSchema = z.string().min(10, 'Please enter a valid phone number');
@@ -83,6 +84,7 @@ const Checkout = () => {
     } else {
       setStep('confirm');
     }
+    scrollToTop();
   };
 
   const handlePlaceOrder = async () => {
@@ -213,12 +215,19 @@ const Checkout = () => {
     <div className="min-h-screen bg-[hsl(var(--deep-chocolate))]">
       <Navigation />
 
-      <div className="pt-24 pb-24 px-6">
+      <div className="pt-8 pb-24 px-6">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <Button
             variant="ghost"
-            onClick={() => (step === 'info' ? navigate('/shop') : setStep('info'))}
+            onClick={() => {
+              if (step === 'info') {
+                navigate('/shop');
+              } else {
+                setStep('info');
+                scrollToTop();
+              }
+            }}
             className="text-[hsl(var(--warm-ivory))] hover:text-[hsl(var(--gold-accent))] mb-6"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -379,7 +388,10 @@ const Checkout = () => {
                   </div>
 
                   <Button
-                    onClick={() => setStep('confirm')}
+                    onClick={() => {
+                      setStep('confirm');
+                      scrollToTop();
+                    }}
                     className="w-full mt-6 bg-[hsl(var(--gold-accent))] text-[hsl(var(--deep-chocolate))] py-6 rounded-2xl font-semibold"
                   >
                     Review Order

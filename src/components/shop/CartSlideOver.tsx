@@ -24,7 +24,7 @@ const CartSlideOver = () => {
     <>
       {/* Backdrop */}
       <div
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={closeCart}
@@ -32,7 +32,7 @@ const CartSlideOver = () => {
 
       {/* Slide-over Panel */}
       <div
-        className={`fixed top-0 right-0 h-full w-full max-w-md bg-[hsl(var(--deep-chocolate))] z-50 transform transition-transform duration-300 ease-out ${
+        className={`fixed top-0 right-0 h-full w-full max-w-md bg-[hsl(var(--deep-chocolate))] z-[60] transform transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -52,9 +52,9 @@ const CartSlideOver = () => {
             </div>
             <button
               onClick={closeCart}
-              className="p-2 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--warm-ivory))] transition-colors"
+              className="p-3 rounded-full bg-[hsl(var(--bg-section))] border border-[hsl(var(--gold-accent))]/10 hover:border-[hsl(var(--gold-accent))]/30 hover:bg-[hsl(var(--gold-accent))]/5 text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--warm-ivory))] transition-all duration-200"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 

@@ -1,9 +1,10 @@
+import { useEffect, useRef } from 'react';
 import { Order } from '@/types/database';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { format } from 'date-fns';
-import { Package, MapPin, Phone, Mail, Ruler, Calendar, CreditCard, Scissors, ShoppingBag } from 'lucide-react';
+import { Package, MapPin, Phone, Mail, Ruler, Calendar, CreditCard, Scissors, ShoppingBag, X } from 'lucide-react';
+import { scrollElementToTop } from '@/lib/utils';
 
 interface OrderDetailsModalProps {
   order: Order | null;
@@ -22,17 +23,40 @@ const statusColors: Record<string, string> = {
 };
 
 export const OrderDetailsModal = ({ order, onClose, formatPrice }: OrderDetailsModalProps) => {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (order && contentRef.current) {
+      // Small delay to ensure modal is fully rendered
+      setTimeout(() => scrollElementToTop(contentRef.current), 100);
+    }
+  }, [order]);
+
   if (!order) return null;
 
   return (
-    <Dialog open={!!order} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-2xl bg-[hsl(var(--bg-section))] border-[hsl(var(--gold-accent))]/20 text-[hsl(var(--warm-ivory))] max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="font-playfair text-xl flex items-center gap-3">
-            <Package className="w-5 h-5 text-[hsl(var(--gold-accent))]" />
-            Order Details
-          </DialogTitle>
-        </DialogHeader>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[hsl(var(--bg-section))] rounded-3xl border border-[hsl(var(--gold-accent))]/20 shadow-2xl">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 p-2 bg-[hsl(var(--bg-section))] rounded-full text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--warm-ivory))] transition-colors"
+        >
+          <X className="w-6 h-6" />
+        </button>
+
+        <div ref={contentRef} className="p-6 text-[hsl(var(--warm-ivory))]">
+          <div className="flex items-center gap-3 mb-6">
+            <Package className="w-6 h-6 text-[hsl(var(--gold-accent))]" />
+            <h2 className="font-playfair text-2xl font-bold">Order Details</h2>
+          </div>
 
         <div className="space-y-6">
           {/* Order Header */}
@@ -186,7 +210,8 @@ export const OrderDetailsModal = ({ order, onClose, formatPrice }: OrderDetailsM
             </div>
           )}
         </div>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </div>
+    </div>
   );
 };
