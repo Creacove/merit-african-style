@@ -107,10 +107,12 @@ export type Database = {
       products: {
         Row: {
           category: string
+          compare_at_price: number | null
           created_at: string
           description: string | null
           id: string
           images: string[] | null
+          is_featured: boolean | null
           is_hybrid: boolean | null
           is_published: boolean | null
           model_stats: string | null
@@ -122,10 +124,12 @@ export type Database = {
         }
         Insert: {
           category: string
+          compare_at_price?: number | null
           created_at?: string
           description?: string | null
           id?: string
           images?: string[] | null
+          is_featured?: boolean | null
           is_hybrid?: boolean | null
           is_published?: boolean | null
           model_stats?: string | null
@@ -137,10 +141,12 @@ export type Database = {
         }
         Update: {
           category?: string
+          compare_at_price?: number | null
           created_at?: string
           description?: string | null
           id?: string
           images?: string[] | null
+          is_featured?: boolean | null
           is_hybrid?: boolean | null
           is_published?: boolean | null
           model_stats?: string | null
