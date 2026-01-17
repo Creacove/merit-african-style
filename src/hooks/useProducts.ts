@@ -32,6 +32,7 @@ export function useProducts(category?: string) {
         return {
           ...p,
           images: p.images || [],
+          colors: (product.colors as string[]) || [],
           is_hybrid: p.is_hybrid ?? true,
           is_published: p.is_published ?? false,
           is_featured: (product.is_featured as boolean) ?? false,
@@ -66,6 +67,7 @@ export function useProduct(id: string) {
       return {
         ...data,
         images: data.images || [],
+        colors: (product.colors as string[]) || [],
         is_hybrid: data.is_hybrid ?? true,
         is_published: data.is_published ?? false,
         is_featured: (product.is_featured as boolean) ?? false,
@@ -98,6 +100,7 @@ export function useAdminProducts() {
         return {
           ...p,
           images: p.images || [],
+          colors: (product.colors as string[]) || [],
           is_hybrid: p.is_hybrid ?? true,
           is_published: p.is_published ?? false,
           is_featured: (product.is_featured as boolean) ?? false,
@@ -122,6 +125,7 @@ export function useCreateProduct() {
         description: product.description,
         price: product.price,
         images: product.images,
+        colors: product.colors,
         category: product.category,
         is_hybrid: product.is_hybrid,
         stock_levels: product.stock_levels as unknown as Json,
@@ -165,6 +169,7 @@ export function useUpdateProduct() {
       if (updates.description !== undefined) updateData.description = updates.description;
       if (updates.price !== undefined) updateData.price = updates.price;
       if (updates.images !== undefined) updateData.images = updates.images;
+      if (updates.colors !== undefined) updateData.colors = updates.colors;
       if (updates.category !== undefined) updateData.category = updates.category;
       if (updates.is_hybrid !== undefined) updateData.is_hybrid = updates.is_hybrid;
       if (updates.stock_levels !== undefined) updateData.stock_levels = updates.stock_levels as unknown as Json;
