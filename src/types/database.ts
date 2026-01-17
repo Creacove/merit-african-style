@@ -14,6 +14,7 @@ export interface Product {
   is_published: boolean;
   is_featured: boolean;
   compare_at_price: number | null;
+  colors: string[];
   created_at: string;
   updated_at: string;
 }

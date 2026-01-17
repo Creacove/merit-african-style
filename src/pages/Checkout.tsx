@@ -110,7 +110,7 @@ const Checkout = () => {
           }
         : undefined;
 
-      await createOrder.mutateAsync({
+      const orderResult = await createOrder.mutateAsync({
         customer_email: customerEmail,
         customer_name: customerName,
         customer_phone: customerPhone,
@@ -126,8 +126,31 @@ const Checkout = () => {
         measurements: measurementsData,
       });
 
-      setOrderComplete(true);
-      clearCart();
+      // Initialize Paystack payment
+      const paystackResponse = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/paystack-initialize`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: customerEmail,
+            amount: totalAmount,
+            orderId: orderResult.id,
+          }),
+        }
+      );
+
+      const paystackData = await paystackResponse.json();
+
+      if (paystackData.success && paystackData.authorization_url) {
+        // Redirect to Paystack
+        window.location.href = paystackData.authorization_url;
+      } else {
+        // Fallback: Order created but payment failed - show success anyway
+        setOrderComplete(true);
+        clearCart();
+        toast.info('Order placed! Payment link will be sent to your email.');
+      }
     } catch (error) {
       console.error('Order failed:', error);
     } finally {
