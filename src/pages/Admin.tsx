@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useOrders, useUpdateOrderStatus, useSetDeliveryDate } from '@/hooks/useOrders';
@@ -8,7 +8,10 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Package, ShoppingBag, Users, Calendar, Loader2, LogOut, Eye, EyeOff } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { ProductForm } from '@/components/admin/ProductForm';
+import { Product } from '@/types/database';
+import { ArrowLeft, Package, ShoppingBag, Users, Calendar, Loader2, LogOut, Eye, EyeOff, Plus, Pencil, Star } from 'lucide-react';
 import { format } from 'date-fns';
 
 const Admin = () => {
@@ -19,6 +22,8 @@ const Admin = () => {
   const updateOrderStatus = useUpdateOrderStatus();
   const setDeliveryDate = useSetDeliveryDate();
   const updateProduct = useUpdateProduct();
+  const [editingProduct, setEditingProduct] = useState<Product | undefined>(undefined);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
 
   useEffect(() => {
     if (!authLoading && (!user || !isAdmin)) {
@@ -156,6 +161,24 @@ const Admin = () => {
 
           {/* Products Tab */}
           <TabsContent value="products">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl text-[hsl(var(--warm-ivory))] font-playfair">Product Inventory</h2>
+              <Dialog open={isProductModalOpen} onOpenChange={setIsProductModalOpen}>
+                <DialogTrigger asChild>
+                  <Button onClick={() => setEditingProduct(undefined)} className="bg-[hsl(var(--gold-accent))] text-black hover:bg-[hsl(var(--gold-accent))]/90">
+                    <Plus className="w-4 h-4 mr-2" /> Add Product
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl bg-[hsl(var(--bg-section))] border-[hsl(var(--gold-accent))]/20 p-0 text-[hsl(var(--warm-ivory))]">
+                  <ProductForm
+                    product={editingProduct}
+                    onSuccess={() => setIsProductModalOpen(false)}
+                    onCancel={() => setIsProductModalOpen(false)}
+                  />
+                </DialogContent>
+              </Dialog>
+            </div>
+
             <div className="bg-[hsl(var(--bg-section))] rounded-2xl border border-[hsl(var(--gold-accent))]/10 p-6">
               {productsLoading ? (
                 <div className="p-12 text-center"><Loader2 className="w-6 h-6 animate-spin mx-auto text-[hsl(var(--gold-accent))]" /></div>
@@ -163,22 +186,44 @@ const Admin = () => {
                 <div className="space-y-4">
                   {products?.map((product) => (
                     <div key={product.id} className="flex items-center gap-4 p-4 bg-[hsl(var(--deep-chocolate))] rounded-xl">
-                      <div className="w-16 h-20 rounded-lg overflow-hidden bg-[hsl(var(--deep-burgundy))]/30">
+                      <div className="w-16 h-20 rounded-lg overflow-hidden bg-[hsl(var(--deep-burgundy))]/30 relative">
                         {product.images?.[0] && <img src={product.images[0]} alt="" className="w-full h-full object-cover" />}
+                        {product.is_featured && <div className="absolute top-1 right-1"><Star className="w-3 h-3 text-[hsl(var(--gold-accent))] fill-[hsl(var(--gold-accent))]" /></div>}
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-[hsl(var(--warm-ivory))] font-medium">{product.title}</h3>
-                        <p className="text-[hsl(var(--muted-foreground))] text-sm">{product.category} • {formatPrice(product.price)}</p>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-[hsl(var(--warm-ivory))] font-medium">{product.title}</h3>
+                          {product.is_featured && <Badge variant="outline" className="text-[hsl(var(--gold-accent))] border-[hsl(var(--gold-accent))]/30 text-[10px] py-0 h-5">Featured</Badge>}
+                        </div>
+                        <div className="flex items-center gap-2 text-[hsl(var(--muted-foreground))] text-sm">
+                          <span>{product.category}</span>
+                          <span>•</span>
+                          <span className={product.compare_at_price ? "text-red-400" : ""}>{formatPrice(product.price)}</span>
+                          {product.compare_at_price && <span className="line-through opacity-60 text-xs">{formatPrice(product.compare_at_price)}</span>}
+                        </div>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => updateProduct.mutate({ id: product.id, is_published: !product.is_published })}
-                        className="text-[hsl(var(--warm-ivory))]"
-                      >
-                        {product.is_published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                        {product.is_published ? 'Published' : 'Draft'}
-                      </Button>
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => {
+                            setEditingProduct(product);
+                            setIsProductModalOpen(true);
+                          }}
+                          className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--gold-accent))]"
+                        >
+                          <Pencil className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => updateProduct.mutate({ id: product.id, is_published: !product.is_published })}
+                          className="text-[hsl(var(--warm-ivory))]"
+                        >
+                          {product.is_published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+                          <span className="ml-2 hidden sm:inline">{product.is_published ? 'Published' : 'Draft'}</span>
+                        </Button>
+                      </div>
                     </div>
                   ))}
                 </div>

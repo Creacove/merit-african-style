@@ -8,56 +8,9 @@ const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
+  // Animations removed for immediate visibility
   useEffect(() => {
-    if (!footerRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Entrance animations
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 90%",
-          once: true
-        }
-      });
-
-      // Decorative line entrance
-      tl.from(".footer-decorative-line", {
-        width: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      });
-
-      // Title entrance
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 15,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.3");
-
-      // Content sections staggered entrance
-      tl.from(".footer-section", {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out"
-      }, "-=0.4");
-
-      // Bottom copyright entrance
-      tl.from(".footer-copyright", {
-        opacity: 0,
-        y: 10,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.2");
-    }, footerRef);
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+    // No-op
   }, []);
 
   return (

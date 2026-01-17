@@ -1,40 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const TestimonialsSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set());
-
-  useEffect(() => {
-    // Respect prefers-reduced-motion
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setVisibleCards(new Set([0, 1, 2, 3]));
-      return;
-    }
-
-    // Create IntersectionObserver for staggered animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            setVisibleCards(prev => new Set([...prev, parseInt(entry.target.getAttribute('data-index') || '0')]));
-          }, index * 150); // Stagger by 150ms
-        }
-      });
-    }, { threshold: 0.1 });
-
-    // Observe all testimonial cards
-    const cards = sectionRef.current?.querySelectorAll('[data-animate]');
-    cards?.forEach((card, index) => {
-      card.setAttribute('data-index', index.toString());
-      observer.observe(card);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
   const testimonials = [
     {
       name: "Chidi",
@@ -60,14 +26,13 @@ const TestimonialsSection = () => {
 
   return (
     <section
-      ref={sectionRef}
       id="worn-with-pride"
       aria-labelledby="worn-with-pride-heading"
       className="px-6 lg:px-12 py-16 lg:py-20 bg-[hsl(var(--bg-section))]"
     >
       <div className="max-w-7xl mx-auto">
         {/* Clean Header */}
-        <header className="text-center mb-16">
+        <header className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both">
           <h2
             id="worn-with-pride-heading"
             className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl text-[hsl(var(--ivory))] mb-6"
@@ -101,13 +66,8 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <figure
               key={index}
-              data-animate
-              data-index={index}
-              className={`group bg-[hsl(36,37%,95%)]/95 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-[hsl(var(--gold))]/10 transition-all duration-300 ${
-                visibleCards.has(index)
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
-              } hover:shadow-lg hover:border-[hsl(var(--gold))]/20`}
+              style={{ animationDelay: `${index * 100}ms` }}
+              className="group bg-[hsl(36,37%,95%)]/95 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-[hsl(var(--gold))]/10 hover:shadow-lg hover:border-[hsl(var(--gold))]/20 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4 fill-mode-both"
               role="group"
               aria-label={`Testimonial from ${testimonial.name} about ${testimonial.context.toLowerCase()} experience`}
             >

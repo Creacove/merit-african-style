@@ -32,6 +32,8 @@ export function useProducts(category?: string) {
         images: p.images || [],
         is_hybrid: p.is_hybrid ?? true,
         is_published: p.is_published ?? false,
+        is_featured: p.is_featured ?? false,
+        compare_at_price: p.compare_at_price ?? null,
         production_time: p.production_time || '2 Weeks',
         stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
       })) as Product[];
@@ -62,6 +64,8 @@ export function useProduct(id: string) {
         images: data.images || [],
         is_hybrid: data.is_hybrid ?? true,
         is_published: data.is_published ?? false,
+        is_featured: data.is_featured ?? false,
+        compare_at_price: data.compare_at_price ?? null,
         production_time: data.production_time || '2 Weeks',
         stock_levels: (data.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
       } as Product;
@@ -90,6 +94,8 @@ export function useAdminProducts() {
         images: p.images || [],
         is_hybrid: p.is_hybrid ?? true,
         is_published: p.is_published ?? false,
+        is_featured: p.is_featured ?? false,
+        compare_at_price: p.compare_at_price ?? null,
         production_time: p.production_time || '2 Weeks',
         stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
       })) as Product[];
@@ -116,6 +122,8 @@ export function useCreateProduct() {
           production_time: product.production_time,
           model_stats: product.model_stats,
           is_published: product.is_published,
+          is_featured: product.is_featured,
+          compare_at_price: product.compare_at_price,
         })
         .select()
         .single();
@@ -142,7 +150,7 @@ export function useUpdateProduct() {
   return useMutation({
     mutationFn: async ({ id, ...updates }: Partial<Product> & { id: string }) => {
       const updateData: Record<string, unknown> = {};
-      
+
       if (updates.title !== undefined) updateData.title = updates.title;
       if (updates.description !== undefined) updateData.description = updates.description;
       if (updates.price !== undefined) updateData.price = updates.price;
@@ -153,6 +161,8 @@ export function useUpdateProduct() {
       if (updates.production_time !== undefined) updateData.production_time = updates.production_time;
       if (updates.model_stats !== undefined) updateData.model_stats = updates.model_stats;
       if (updates.is_published !== undefined) updateData.is_published = updates.is_published;
+      if (updates.is_featured !== undefined) updateData.is_featured = updates.is_featured;
+      if (updates.compare_at_price !== undefined) updateData.compare_at_price = updates.compare_at_price;
 
       const { data, error } = await supabase
         .from('products')

@@ -12,6 +12,8 @@ export interface Product {
   production_time: string;
   model_stats: string | null;
   is_published: boolean;
+  is_featured: boolean;
+  compare_at_price: number | null;
   created_at: string;
   updated_at: string;
 }

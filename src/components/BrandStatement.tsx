@@ -1,70 +1,6 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 const BrandStatement = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      // Entrance animations
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          once: true
-        }
-      });
-
-      // Decorative line entrance
-      tl.from(".decorative-line", {
-        width: 0,
-        duration: 0.8,
-        ease: "power2.out"
-      });
-
-      // Title entrance
-      tl.from(titleRef.current, {
-        opacity: 0,
-        y: 25,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.3");
-
-      // Paragraph entrance
-      tl.from(paragraphRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.2");
-
-      // Image entrance
-      tl.from(imageRef.current, {
-        opacity: 0,
-        scale: 0.9,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out"
-      }, "-=0.4");
-    }, sectionRef);
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       className="px-6 lg:px-12 py-12 lg:py-16 bg-[hsl(var(--bg-section))] relative overflow-hidden"
     >
       {/* Background pattern elements */}
@@ -75,13 +11,12 @@ const BrandStatement = () => {
       </div>
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
-        <div className="space-y-8">
+        <div className="space-y-8 animate-in fade-in slide-in-from-left-6 duration-700 fill-mode-both">
           <div className="relative">
             {/* Decorative line above title */}
-            <div className="decorative-line w-24 lg:w-32 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent mb-8 mx-auto lg:mx-0"></div>
+            <div className="decorative-line w-24 lg:w-32 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--gold))] to-transparent mb-8 mx-auto lg:mx-0 animate-in slide-in-from-left duration-1000"></div>
 
             <h2
-              ref={titleRef}
               className="font-playfair font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.02] text-[hsl(var(--ivory))] mb-6"
             >
               We create <span className="text-[hsl(var(--gold))] relative">
@@ -93,16 +28,14 @@ const BrandStatement = () => {
           </div>
 
           <p
-            ref={paragraphRef}
             className="font-inter text-base lg:text-lg xl:text-xl text-[hsl(var(--muted-ivory))] leading-[1.6] max-w-lg"
           >
             Bright, strong personalities. For <span className="text-[hsl(var(--gold))] font-semibold">real men</span> who want to feel perfect. Our bespoke African tailoring combines traditional craftsmanship with modern elegance, creating pieces that celebrate your heritage while embracing contemporary style.
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative animate-in fade-in slide-in-from-right-6 duration-700 delay-200 fill-mode-both">
           <div
-            ref={imageRef}
             className="aspect-[4/5] bg-gradient-to-br from-[hsl(var(--card-bg))] to-[hsl(var(--deep-chocolate))] rounded-[2.5rem] shadow-2xl overflow-hidden border border-[hsl(var(--gold))]/20 relative"
             style={{
               boxShadow: `
