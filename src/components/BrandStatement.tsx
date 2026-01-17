@@ -1,6 +1,6 @@
 const BrandStatement = () => {
   return (
-    <section
+    <section id="about"
       className="px-6 lg:px-12 py-12 lg:py-16 bg-[hsl(var(--bg-section))] relative overflow-hidden"
     >
       {/* Background pattern elements */}

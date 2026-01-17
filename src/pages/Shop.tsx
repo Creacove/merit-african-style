@@ -8,7 +8,6 @@ import { useCart } from '@/contexts/CartContext';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ShoppingBag, Scissors, Filter, X, MessageCircle, Loader2 } from 'lucide-react';
-import CartSlideOver from '@/components/shop/CartSlideOver';
 import ProductModal from '@/components/shop/ProductModal';
 
 const Shop = () => {
@@ -28,19 +27,6 @@ const Shop = () => {
   return (
     <div className="min-h-screen bg-[hsl(var(--deep-chocolate))]">
       <Navigation />
-      
-      {/* Cart Button - Fixed */}
-      <button
-        onClick={openCart}
-        className="fixed right-6 bottom-6 z-40 bg-[hsl(var(--gold-accent))] text-[hsl(var(--deep-chocolate))] p-4 rounded-full shadow-2xl hover:scale-110 transition-transform"
-      >
-        <ShoppingBag className="w-6 h-6" />
-        {totalItems > 0 && (
-          <span className="absolute -top-2 -right-2 bg-[hsl(var(--deep-burgundy))] text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
-            {totalItems}
-          </span>
-        )}
-      </button>
 
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-6 lg:px-12">
@@ -61,11 +47,10 @@ const Shop = () => {
             <Button
               variant={!selectedCategory ? 'default' : 'outline'}
               onClick={() => setSelectedCategory(undefined)}
-              className={`rounded-full ${
-                !selectedCategory
+              className={`rounded-full ${!selectedCategory
                   ? 'bg-[hsl(var(--gold-accent))] text-[hsl(var(--deep-chocolate))]'
                   : 'border-[hsl(var(--gold-accent))]/30 text-[hsl(var(--warm-ivory))] hover:bg-[hsl(var(--gold-accent))]/10'
-              }`}
+                }`}
             >
               All Styles
             </Button>
@@ -74,11 +59,10 @@ const Shop = () => {
                 key={category}
                 variant={selectedCategory === category ? 'default' : 'outline'}
                 onClick={() => setSelectedCategory(category)}
-                className={`rounded-full ${
-                  selectedCategory === category
+                className={`rounded-full ${selectedCategory === category
                     ? 'bg-[hsl(var(--gold-accent))] text-[hsl(var(--deep-chocolate))]'
                     : 'border-[hsl(var(--gold-accent))]/30 text-[hsl(var(--warm-ivory))] hover:bg-[hsl(var(--gold-accent))]/10'
-                }`}
+                  }`}
               >
                 {category}
               </Button>
@@ -130,9 +114,6 @@ const Shop = () => {
         <MessageCircle className="w-6 h-6" />
         <span className="hidden sm:inline text-sm font-medium">Help Me Measure</span>
       </a>
-
-      {/* Cart Slide-over */}
-      <CartSlideOver />
 
       {/* Product Modal */}
       {selectedProduct && (

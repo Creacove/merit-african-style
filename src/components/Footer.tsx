@@ -58,9 +58,11 @@ const Footer = () => {
               <div className="w-12 h-[1px] bg-[hsl(var(--gold))]/60 mt-3"></div>
             </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Our Services</a></li>
-              <li><a href="#" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Signature Styles</a></li>
-              <li><a href="#" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Contact</a></li>
+              <li><a href="/#home" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Home</a></li>
+              <li><a href="/shop" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Shop</a></li>
+              <li><a href="/#bespoke-journey" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Bespoke Journey</a></li>
+              <li><a href="/measurement-guide" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300">Measurement Guide</a></li>
+              <li><a href="/admin" className="font-inter text-[hsl(var(--muted-ivory))]/40 hover:text-[hsl(var(--gold))] transition-colors duration-300 text-xs">Admin Access</a></li>
             </ul>
           </div>
 
@@ -71,7 +73,7 @@ const Footer = () => {
               <div className="w-12 h-[1px] bg-[hsl(var(--gold))]/60 mt-3"></div>
             </h4>
             <div className="space-y-3">
-              <a href="#" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300 block">
+              <a href="tel:+2348147480222" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300 block">
                 +234 814 748 0222
               </a>
               <a href="mailto:info@meritgold.com" className="font-inter text-[hsl(var(--muted-ivory))]/90 hover:text-[hsl(var(--gold))] transition-colors duration-300 block">
@@ -86,9 +88,18 @@ const Footer = () => {
           {/* Social & CTA */}
           <div className="footer-section text-center md:text-right">
             <h4 className="font-playfair font-bold text-lg text-[hsl(var(--ivory))] mb-6 relative">
-              Follow
+              Signature Styles
               <div className="w-12 h-[1px] bg-[hsl(var(--gold))]/60 mt-3"></div>
             </h4>
+
+            <div className="space-y-4 mb-6">
+              <p className="font-inter text-[hsl(var(--muted-ivory))]/80 text-sm italic">
+                “Clothing is the first step in the building of a character.”
+              </p>
+              <a href="/#shop-preview" className="block font-inter text-[hsl(var(--gold))] hover:text-[hsl(var(--ivory))] transition-colors duration-300 text-sm">
+                View Collection →
+              </a>
+            </div>
 
             {/* Social media icons */}
             <div className="flex gap-3 justify-center md:justify-end mb-6">
@@ -103,7 +114,10 @@ const Footer = () => {
               </div>
             </div>
 
-            <button className="font-inter text-[hsl(var(--gold))] hover:text-[hsl(var(--ivory))] transition-colors duration-300 text-sm underline underline-offset-4">
+            <button
+              onClick={() => window.open('https://wa.me/+2348147480222?text=Hello!%20I%20would%20like%20to%20discuss%20my%20style%20preferences%20for%20bespoke%20tailoring.', '_blank')}
+              className="font-inter text-[hsl(var(--gold))] hover:text-[hsl(var(--ivory))] transition-colors duration-300 text-sm underline underline-offset-4"
+            >
               Book Consultation →
             </button>
           </div>

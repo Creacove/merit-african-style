@@ -163,7 +163,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-12 lg:py-16 pb-24 overflow-hidden bg-background">
+    <section id="home" ref={heroRef} className="relative min-h-screen px-6 lg:px-12 py-12 lg:py-16 pb-24 overflow-hidden bg-background">
       {/* Subtle gold ambient background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-32 h-32 rounded-full bg-gradient-to-r from-[hsl(var(--gold))] to-transparent blur-3xl"></div>
@@ -213,7 +213,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Hero Image Composition */}
           <div className="lg:col-span-5 relative order-2 w-full">
             <div className="hero-composition relative w-full h-[470px] sm:h-[520px] md:h-[580px] lg:h-[700px] mx-auto max-w-sm sm:max-w-md lg:max-w-none">
@@ -271,7 +271,7 @@ const HeroSection = () => {
               </div>
 
 
-              
+
               {/* Circular Navigation CTA - Desktop Only */}
               <div className="absolute -left-6 lg:-left-8 top-1/2 transform -translate-y-1/2 z-[3] hidden lg:block">
                 <Button
@@ -356,8 +356,8 @@ const HeroSection = () => {
                           fill="none"
                           strokeLinecap="round"
                         />
-                        <circle cx="18" cy="28" r="1" fill="#FFD700" opacity="0.8"/>
-                        <circle cx="15" cy="32" r="0.5" fill="#FFD700" opacity="0.6"/>
+                        <circle cx="18" cy="28" r="1" fill="#FFD700" opacity="0.8" />
+                        <circle cx="15" cy="32" r="0.5" fill="#FFD700" opacity="0.6" />
                       </svg>
 
                       {/* Right laurel branch */}
@@ -377,8 +377,8 @@ const HeroSection = () => {
                           fill="none"
                           strokeLinecap="round"
                         />
-                        <circle cx="22" cy="28" r="1" fill="#FFD700" opacity="0.8"/>
-                        <circle cx="25" cy="32" r="0.5" fill="#FFD700" opacity="0.6"/>
+                        <circle cx="22" cy="28" r="1" fill="#FFD700" opacity="0.8" />
+                        <circle cx="25" cy="32" r="0.5" fill="#FFD700" opacity="0.6" />
                       </svg>
                     </div>
 

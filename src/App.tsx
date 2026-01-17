@@ -13,6 +13,8 @@ import Admin from "./pages/Admin";
 import MeasurementGuide from "./pages/MeasurementGuide";
 import NotFound from "./pages/NotFound";
 
+import CartSlideOver from "@/components/shop/CartSlideOver";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -23,6 +25,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BrowserRouter>
+            <CartSlideOver />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/shop" element={<Shop />} />

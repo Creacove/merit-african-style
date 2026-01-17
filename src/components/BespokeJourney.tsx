@@ -48,7 +48,7 @@ const BespokeJourney = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 bg-[hsl(var(--bg-section))] border-t border-[hsl(var(--gold-accent))]/10">
+    <section id="bespoke-journey" ref={sectionRef} className="py-16 bg-[hsl(var(--bg-section))] border-t border-[hsl(var(--gold-accent))]/10">
       <div className="container mx-auto px-4 text-center">
         <h2 className="font-playfair font-bold text-3xl lg:text-4xl text-[hsl(var(--ivory))] mb-12">
           The Bespoke <span className="text-[hsl(var(--gold-accent))]">Journey</span>

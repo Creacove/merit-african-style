@@ -18,7 +18,7 @@ const FeaturedCollection = () => {
     if (newArrivals.length === 0) return null;
 
     return (
-        <section className="py-16 px-4 bg-[hsl(var(--deep-chocolate))]">
+        <section id="shop-preview" className="py-16 px-4 bg-[hsl(var(--deep-chocolate))]">
             <div className="container mx-auto max-w-7xl">
                 <div className="flex justify-between items-end mb-10">
                     <div>
