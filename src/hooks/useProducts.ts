@@ -27,16 +27,19 @@ export function useProducts(category?: string) {
       }
 
       // Transform data to match our Product type
-      return (data || []).map((p) => ({
-        ...p,
-        images: p.images || [],
-        is_hybrid: p.is_hybrid ?? true,
-        is_published: p.is_published ?? false,
-        is_featured: p.is_featured ?? false,
-        compare_at_price: p.compare_at_price ?? null,
-        production_time: p.production_time || '2 Weeks',
-        stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
-      })) as Product[];
+      return (data || []).map((p) => {
+        const product = p as Record<string, unknown>;
+        return {
+          ...p,
+          images: p.images || [],
+          is_hybrid: p.is_hybrid ?? true,
+          is_published: p.is_published ?? false,
+          is_featured: (product.is_featured as boolean) ?? false,
+          compare_at_price: (product.compare_at_price as number | null) ?? null,
+          production_time: p.production_time || '2 Weeks',
+          stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
+        };
+      }) as Product[];
     },
   });
 }
@@ -59,13 +62,14 @@ export function useProduct(id: string) {
 
       if (!data) return null;
 
+      const product = data as Record<string, unknown>;
       return {
         ...data,
         images: data.images || [],
         is_hybrid: data.is_hybrid ?? true,
         is_published: data.is_published ?? false,
-        is_featured: data.is_featured ?? false,
-        compare_at_price: data.compare_at_price ?? null,
+        is_featured: (product.is_featured as boolean) ?? false,
+        compare_at_price: (product.compare_at_price as number | null) ?? null,
         production_time: data.production_time || '2 Weeks',
         stock_levels: (data.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
       } as Product;
@@ -89,16 +93,19 @@ export function useAdminProducts() {
         throw error;
       }
 
-      return (data || []).map((p) => ({
-        ...p,
-        images: p.images || [],
-        is_hybrid: p.is_hybrid ?? true,
-        is_published: p.is_published ?? false,
-        is_featured: p.is_featured ?? false,
-        compare_at_price: p.compare_at_price ?? null,
-        production_time: p.production_time || '2 Weeks',
-        stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
-      })) as Product[];
+      return (data || []).map((p) => {
+        const product = p as Record<string, unknown>;
+        return {
+          ...p,
+          images: p.images || [],
+          is_hybrid: p.is_hybrid ?? true,
+          is_published: p.is_published ?? false,
+          is_featured: (product.is_featured as boolean) ?? false,
+          compare_at_price: (product.compare_at_price as number | null) ?? null,
+          production_time: p.production_time || '2 Weeks',
+          stock_levels: (p.stock_levels as Record<string, number>) || { S: 0, M: 0, L: 0, XL: 0, XXL: 0 },
+        };
+      }) as Product[];
     },
   });
 }
@@ -109,22 +116,25 @@ export function useCreateProduct() {
 
   return useMutation({
     mutationFn: async (product: Omit<Product, 'id' | 'created_at' | 'updated_at'>) => {
+      // Use type assertion for fields that may not be in generated types yet
+      const insertData = {
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        images: product.images,
+        category: product.category,
+        is_hybrid: product.is_hybrid,
+        stock_levels: product.stock_levels as unknown as Json,
+        production_time: product.production_time,
+        model_stats: product.model_stats,
+        is_published: product.is_published,
+        is_featured: product.is_featured,
+        compare_at_price: product.compare_at_price,
+      } as Record<string, unknown>;
+
       const { data, error } = await supabase
         .from('products')
-        .insert({
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          images: product.images,
-          category: product.category,
-          is_hybrid: product.is_hybrid,
-          stock_levels: product.stock_levels as unknown as Json,
-          production_time: product.production_time,
-          model_stats: product.model_stats,
-          is_published: product.is_published,
-          is_featured: product.is_featured,
-          compare_at_price: product.compare_at_price,
-        })
+        .insert(insertData as never)
         .select()
         .single();
 
@@ -166,7 +176,7 @@ export function useUpdateProduct() {
 
       const { data, error } = await supabase
         .from('products')
-        .update(updateData)
+        .update(updateData as never)
         .eq('id', id)
         .select()
         .single();
